@@ -7,8 +7,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/round_radius_medium"
+        app:cardElevation="@dimen/_1sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:background="@color/transparent"
-        android:layout_marginTop="@dimen/_10sdp">
+        android:layout_marginBottom="@dimen/_10sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_container"
@@ -26,29 +29,41 @@
                 android:textSize="@dimen/text_size_medium"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:fontFamily="@font/hanimation_arabic_medium"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_22ssp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/price_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:fontFamily="@font/hanimation_arabic_light"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp"
-                app:layout_constraintVertical_bias="@id/tv_price"
-                android:text="جنية / للفرد"
-                android:layout_marginStart="@dimen/_5sdp"
-                app:layout_constraintStart_toEndOf="@id/tv_price"
-                app:layout_constraintTop_toBottomOf="@id/tv_name" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_name"
+                >
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_22ssp"
+                    android:layout_centerVertical="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:fontFamily="@font/hanimation_arabic_light"
+                    android:textColor="@color/black"
+                    android:layout_toEndOf="@id/tv_price"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_centerVertical="true"
+                    android:text="جنية / للفرد"
+                    />
+
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/tv_description"
@@ -58,7 +73,7 @@
                 android:fontFamily="@font/hanimation_arabic_light"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small"
-                app:layout_constraintTop_toBottomOf="@id/tv_price" />
+                app:layout_constraintTop_toBottomOf="@id/price_container" />
 
             <ImageView
                 android:layout_width="wrap_content"

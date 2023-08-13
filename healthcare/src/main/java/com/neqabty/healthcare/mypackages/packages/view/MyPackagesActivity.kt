@@ -49,10 +49,10 @@ class MyPackagesActivity : BaseActivity<ActivityProfileBinding>() {
                 }
                 Status.SUCCESS -> {
                     binding.progressCircular.visibility = View.GONE
-                    if (resource.data!!.status){
-                        mAdapter.submitList(resource.data.data!!.subscribedPackages)
+                    if (resource.data!!.status && resource.data.data!!.subscribedPackages.isNotEmpty()){
+                        mAdapter.submitList(resource.data.data.subscribedPackages)
                     }else{
-                        Toast.makeText(this@MyPackagesActivity, resource.data.message, Toast.LENGTH_LONG).show()
+                        binding.emptyContainer.visibility = View.VISIBLE
                     }
                 }
                 Status.ERROR ->{

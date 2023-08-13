@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".common.mypackages.subscriptiondetails.view.SubscriptionDetailsActivity">
+    tools:context=".mypackages.subscriptiondetails.view.SubscriptionDetailsActivity">
 
     <include
         android:id="@+id/layout_toolbar"
@@ -17,10 +17,11 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/main_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="none"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
 
         <LinearLayout
@@ -43,6 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:layout_marginEnd="@dimen/_1sdp"
                 android:background="@color/transparent"
                 app:cardCornerRadius="@dimen/round_radius_medium"
                 app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
@@ -51,7 +54,6 @@
                     android:id="@+id/cl_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/prz_bg"
                     android:padding="@dimen/margin_medium">
 
                     <TextView
@@ -61,20 +63,44 @@
                         android:layout_margin="@dimen/margin_medium"
                         android:fontFamily="@font/hanimation_regular"
                         android:text="باقة البرونزية"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tv_price"
-                        android:layout_width="match_parent"
+                    <RelativeLayout
+                        android:id="@+id/price_container"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_medium"
-                        android:fontFamily="@font/hanimation_arabic_light"
-                        android:text="300 جنية / للفرد"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_name"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_medium"
+                            android:fontFamily="@font/hanimation_arabic_medium"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_22ssp"
+                            android:layout_centerVertical="true"
+                            app:layout_constraintStart_toStartOf="parent"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_medium"
+                            android:fontFamily="@font/hanimation_arabic_light"
+                            android:textColor="@color/black"
+                            android:layout_toEndOf="@id/tv_price"
+                            android:textSize="@dimen/_15ssp"
+                            android:layout_centerVertical="true"
+                            android:text="جنية / للفرد"
+                            />
+
+
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/tv_description"
@@ -82,10 +108,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_medium"
                         android:fontFamily="@font/hanimation_arabic_light"
-                        android:text="20 الف جنية وثيقة حوادث شخصية لكل فرد من الاسرة (٣ افراد)"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp"
-                        app:layout_constraintTop_toBottomOf="@id/tv_price" />
+                        app:layout_constraintTop_toBottomOf="@id/price_container" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -183,7 +208,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <TextView
-                android:id="@+id/add_follower_btn"
+                android:id="@+id/ok_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"

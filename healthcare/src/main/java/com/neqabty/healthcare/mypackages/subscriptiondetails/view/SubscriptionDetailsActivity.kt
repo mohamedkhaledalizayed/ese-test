@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.text.Html
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -101,6 +102,7 @@ class SubscriptionDetailsActivity : BaseActivity<ActivitySubscriptionDetailsBind
                 addFollower(intent.getStringExtra("packageId") ?: "", intent.getStringExtra("subscriberId") ?: "")
             }
         }
+        binding.okBtn.setOnClickListener { finish() }
 
         subscriptionDetailsViewModel.followerStatus.observe(this){
             it.let { resource ->
@@ -129,24 +131,13 @@ class SubscriptionDetailsActivity : BaseActivity<ActivitySubscriptionDetailsBind
     }
 
     private fun handlePackageResources() {
-        binding.clContainer.setBackgroundResource(
-            when (packageInfo.extension) {
-                "AMA" -> R.drawable.ama_bg
-                "PRZ" -> R.drawable.prz_bg
-                "SLV" -> R.drawable.slv_bg
-                "PLT" -> R.drawable.plt_bg
-                "GLD" -> R.drawable.gold_bg
-                else -> R.drawable.prz_bg
-            }
-        )
-
         binding.tvName.text = packageInfo.name
-        binding.tvPrice.text = "${packageInfo.packagePrice?.toInt()} جنيه - للفرد"
+        binding.tvPrice.text = "${packageInfo.packagePrice?.toInt()}"
         binding.tvDescription.text = packageInfo.descriptionAr
 
         var details = ""
         for (item in packageInfo.details){
-            details += "${item.title} : ${item.description}"
+            details += "${item.title} <br> ${item.description}<br><br>"
         }
         binding.details.text = Html.fromHtml(details)
     }

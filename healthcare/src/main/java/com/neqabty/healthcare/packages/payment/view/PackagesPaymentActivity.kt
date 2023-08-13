@@ -33,6 +33,7 @@ import team.opay.business.cashier.sdk.pay.PaymentTask
 @AndroidEntryPoint
 class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), CallbackPaymentInterface {
     private var paymentMethod = ""
+    private var productNme = ""
     private var deliveryMethod = 0
     private var deliveryFees = 0.0
     private var totalAmount = 0
@@ -50,6 +51,7 @@ class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Call
 
         setupToolbar(title = "دفع الاشتراك")
 
+        productNme = intent.getStringExtra("name") ?: "باقة"
         totalAmount = intent.getDoubleExtra("price", 0.0).toInt()
         vat = intent.getDoubleExtra("vat", 0.0).toInt()
         total = intent.getDoubleExtra("total", 0.0).toInt()
@@ -78,7 +80,6 @@ class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Call
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         binding.llContent.visibility = View.VISIBLE
-//                        createRadioButton(resource.data!!.paymentMethods)
                         deliveryMethod = resource.data!!.deliveryMethods.id
                         deliveryFees = resource.data.deliveryMethods.price
                         mAdapter.submitList(resource.data.paymentMethods)
@@ -124,41 +125,6 @@ class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Call
             }
 
         }
-
-
-//        binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
-//            if (b) {
-//                paymentMethod = "card"
-//                binding.ivCard.visibility = View.VISIBLE
-//                binding.llChannels.visibility = View.GONE
-//                binding.ivFawry.visibility = View.GONE
-//            }
-//        }
-//        binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
-//            if (b) {
-//                paymentMethod = "code"
-//                binding.llChannels.visibility = View.VISIBLE
-//                binding.ivCard.visibility = View.GONE
-//                binding.ivFawry.visibility = View.GONE
-//            }
-//        }
-//        binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
-//            if (b) {
-//                paymentMethod = "fawry"
-//                binding.ivFawry.visibility = View.VISIBLE
-//                binding.llChannels.visibility = View.GONE
-//                binding.ivCard.visibility = View.GONE
-//            }
-//        }
-//
-//        binding.tvChannels.setOnClickListener {
-//            startActivity(
-//                Intent(
-//                    Intent.ACTION_VIEW,
-//                    Uri.parse("https://cashier.opaycheckout.com/map")
-//                )
-//            )
-//        }
 
         binding.btnNext.setOnClickListener {
 
@@ -226,8 +192,8 @@ class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Call
             countryCode = "EG", // uppercase
             currency = "EGP", // uppercase
             payAmount = (paymentEntity.total_amount!!.toDouble() * 100).toLong(),
-            productName = "${intent.getStringExtra("name")}",
-            productDescription = "${intent.getStringExtra("name")}",
+            productName = productNme,
+            productDescription = productNme,
             callbackUrl = paymentEntity.callBackURL ?: "",
             userClientIP = "110.246.160.183",
             expireAt = (paymentEntity.expireAt ?: "30").toInt(),
