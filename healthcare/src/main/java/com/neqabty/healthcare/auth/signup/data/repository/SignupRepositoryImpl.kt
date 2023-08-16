@@ -2,6 +2,7 @@ package com.neqabty.healthcare.auth.signup.data.repository
 
 
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
+import com.neqabty.healthcare.auth.signup.data.model.UpgradeMemberBody
 import com.neqabty.healthcare.auth.signup.data.model.neqabtymember.NeqabtyMemberModel
 import com.neqabty.healthcare.auth.signup.data.model.syndicatemember.UserModel
 import com.neqabty.healthcare.auth.signup.data.model.syndicates.EntityModel
@@ -15,8 +16,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class SignupRepositoryImpl @Inject constructor(private val signupDS: SignupDS) : SignupRepository {
-    override fun signup(signupParams: Any): Flow<Response<UserModel>> {
-        return flow { emit(signupDS.signup(signupParams)) }
+    override fun upgradeMember(signupParams: UpgradeMemberBody): Flow<UserEntity> {
+        return flow { emit(signupDS.upgradeMember(signupParams).toUserEntity()) }
     }
 
     override fun signupMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity> {

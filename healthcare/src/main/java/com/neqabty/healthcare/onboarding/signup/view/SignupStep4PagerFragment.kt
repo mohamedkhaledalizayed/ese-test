@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
+import com.neqabty.healthcare.auth.signup.data.model.UpgradeMemberBody
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.NEQABTY_CODE
 import com.neqabty.healthcare.core.utils.Status
@@ -184,18 +185,28 @@ class SignupStep4PagerFragment : Fragment() {
     fun signup() {
         if(!isValidData())
             return
-        activity.signupViewModel.generalUserSignup(
-            NeqabtySignupBody(
-                email = binding.etEmail.text.toString(),
-                fullname = binding.etName.text.toString(),
-                entityCode = if(SignupData.syndicateID == NEQABTY_CODE) "" else SignupData.syndicateID,
-                mobile = activity.sharedPreferences.mobile,
-                nationalId = binding.etNationalId.text.toString(),
-                membershipId = binding.etMembershipNumber.text.toString(),
-                password = binding.etPassword.text.toString(),
-                token = (requireActivity() as SignupActivity).sharedPreferences.firebaseToken
+        if(activity.intent.getBooleanExtra("isSyndicate",false) && SignupData.syndicateID != "e07"){
+            activity.signupViewModel.upgradeMember(
+                UpgradeMemberBody(
+                    entityCode = if (SignupData.syndicateID == NEQABTY_CODE) "" else SignupData.syndicateID,
+                    nationalId = binding.etNationalId.text.toString(),
+                    membershipId = binding.etMembershipNumber.text.toString()
+                )
             )
-        )
+        }else {
+            activity.signupViewModel.generalUserSignup(
+                NeqabtySignupBody(
+                    email = binding.etEmail.text.toString(),
+                    fullname = binding.etName.text.toString(),
+                    entityCode = if (SignupData.syndicateID == NEQABTY_CODE) "" else SignupData.syndicateID,
+                    mobile = activity.sharedPreferences.mobile,
+                    nationalId = binding.etNationalId.text.toString(),
+                    membershipId = binding.etMembershipNumber.text.toString(),
+                    password = binding.etPassword.text.toString(),
+                    token = (requireActivity() as SignupActivity).sharedPreferences.firebaseToken
+                )
+            )
+        }
     }
 
     private fun isValidData(): Boolean {

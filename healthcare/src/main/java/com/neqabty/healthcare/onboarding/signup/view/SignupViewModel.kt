@@ -8,6 +8,7 @@ import com.neqabty.healthcare.auth.otp.data.model.SendOTPBody
 import com.neqabty.healthcare.auth.otp.domain.entity.sendotp.OTPEntity
 import com.neqabty.healthcare.auth.otp.domain.usecases.VerifyPhoneUseCase
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
+import com.neqabty.healthcare.auth.signup.data.model.UpgradeMemberBody
 import com.neqabty.healthcare.auth.signup.domain.interactors.SignupUseCase
 import com.neqabty.healthcare.auth.signup.presentation.model.UserUIModel
 import com.neqabty.healthcare.auth.signup.presentation.model.mappers.toUserUIModel
@@ -79,6 +80,19 @@ class SignupViewModel @Inject constructor(
 
     val generalUser = MutableLiveData<Resource<UserUIModel>>()
     fun generalUserSignup(data: NeqabtySignupBody) {
+        generalUser.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                signupUseCase.build(data).collect {
+                    generalUser.postValue(Resource.success(data = it.toUserUIModel()))
+                }
+            } catch (e: Throwable) {
+                generalUser.postValue(Resource.error(data = null, message = handleError(e)))
+            }
+        }
+    }
+
+    fun upgradeMember(data: UpgradeMemberBody) {
         generalUser.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
