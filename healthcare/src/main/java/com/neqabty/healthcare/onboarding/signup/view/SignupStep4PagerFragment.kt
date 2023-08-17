@@ -118,7 +118,7 @@ class SignupStep4PagerFragment : Fragment() {
         if(activity.sharedPreferences.email.isNotEmpty())
             binding.etEmail.isEnabled = false
 
-        if(activity.intent.getBooleanExtra("isSyndicate",false) && SignupData.syndicateID != "e07"){
+        if(activity.intent.getBooleanExtra("isSyndicate",false)){
             binding.clPassword.visibility = View.GONE
             binding.clPasswordConfirmation.visibility = View.GONE
             binding.tvPasswordReset.visibility = View.GONE
@@ -185,7 +185,7 @@ class SignupStep4PagerFragment : Fragment() {
     fun signup() {
         if(!isValidData())
             return
-        if(activity.intent.getBooleanExtra("isSyndicate",false) && SignupData.syndicateID != "e07"){
+        if(activity.intent.getBooleanExtra("isSyndicate",false)){
             activity.signupViewModel.upgradeMember(
                 UpgradeMemberBody(
                     entityCode = if (SignupData.syndicateID == NEQABTY_CODE) "" else SignupData.syndicateID,
@@ -226,7 +226,7 @@ class SignupStep4PagerFragment : Fragment() {
             Toast.makeText(requireActivity(), getString(R.string.enter_correct_email), Toast.LENGTH_LONG).show()
             return false
         }
-        if(activity.intent.getBooleanExtra("isSyndicate",false) && SignupData.syndicateID != "e07") {
+        if(activity.intent.getBooleanExtra("isSyndicate",false)) {
             return true
         }
         if(binding.clPassword.isVisible && (binding.etPassword.text.toString().isNullOrEmpty() || binding.etPasswordConfirmation.text.toString().isNullOrEmpty())){
