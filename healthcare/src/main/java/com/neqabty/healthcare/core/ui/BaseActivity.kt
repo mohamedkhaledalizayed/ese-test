@@ -17,7 +17,6 @@ import android.provider.Settings
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -31,9 +30,7 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.cart.CartActivity
 import com.neqabty.healthcare.chefaa.home.view.ChefaaHomeActivity
-import com.neqabty.healthcare.contactus.NumbersDialog
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
@@ -238,20 +235,6 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         override fun onDestroyActionMode(p0: ActionMode?) {
 
         }
-    }
-
-    protected fun updateCartOptionsMenu(cartMenuItem: MenuItem){
-        cartMenuItem.actionView.setOnClickListener {
-            startActivity(Intent(this, CartActivity::class.java))
-        }
-        cartMenuItem.actionView.findViewById<TextView>(R.id.tv_count).visibility =
-            if (Constants.cart.size == 0 ) View.INVISIBLE else View.VISIBLE
-        cartMenuItem.actionView.findViewById<TextView>(R.id.tv_count).text =
-            getCartCounter()
-    }
-
-    private fun getCartCounter(): String{
-        return Constants.cart.getChildrenCounter().toString()
     }
 
     protected fun reLaunchHomeActivity(context: Context){

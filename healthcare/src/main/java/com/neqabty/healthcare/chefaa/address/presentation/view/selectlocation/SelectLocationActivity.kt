@@ -76,7 +76,7 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>(), On
             binding.select.visibility = View.VISIBLE
         }
         val geocoder = Geocoder(this, Locale.getDefault())
-        val addresses: List<Address> = geocoder.getFromLocation(latitude, longitude, 1)
+        val addresses: List<Address> = geocoder.getFromLocation(latitude, longitude, 1) as List<Address>
         try{
             district = addresses[0].locality
             city = addresses[0].subAdminArea

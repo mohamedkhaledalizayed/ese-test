@@ -13,7 +13,7 @@ if (getGradle().getStartParameter().getTaskRequests().toString().contains("Hms")
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     signingConfigs {
         config {
@@ -29,9 +29,9 @@ android {
     defaultConfig {
         applicationId "com.neqabty.healthcare"
         minSdk 24
-        targetSdk 31
-        versionCode 547
-        versionName "8.9"
+        targetSdk 33
+        versionCode 550
+        versionName "9.0"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
