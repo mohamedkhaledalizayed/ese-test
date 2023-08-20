@@ -282,7 +282,7 @@ class InquiryDetailsFragment : BaseFragment() {
             merchantName = Constants.OPAY_MERCHANT_NAME,
             reference = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
             countryCode = "EG", // uppercase
-            payAmount = 5L,
+            payAmount = (newAmount * 100).toLong(),
             currency = "EGP", // uppercase
             productName = "annualSubscription",
             productDescription = "android",
@@ -337,7 +337,7 @@ class InquiryDetailsFragment : BaseFragment() {
         //order id
         intent.putExtra(CowpayConstantKeys.MerchantReferenceId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
         //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, "5".toString())
+        intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
         //user data
         intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPayment.paymentItem?.amount.toString())
         intent.putExtra(CowpayConstantKeys.CustomerName, params.number)

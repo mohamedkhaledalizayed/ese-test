@@ -49,15 +49,15 @@ class SwipeLockableViewPager(context: Context, attrs: AttributeSet) : ViewPager(
                 pager.fakeDragBy(value.toFloat())
             }
             animator.addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
                     animFactor = 1
                 }
 
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     pager.endFakeDrag()
                 }
 
-                override fun onAnimationRepeat(animation: Animator?) {
+                override fun onAnimationRepeat(animation: Animator) {
                     animFactor = -1
                 }
             })
