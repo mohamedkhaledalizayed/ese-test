@@ -94,7 +94,7 @@ class AppModule {
         if(!BuildConfig.DEBUG) {val certificatePinner : CertificatePinner = CertificatePinner.Builder()
             .add(
                 BuildConfig.URL,
-                "sha256/wXZC2ha/p2JrCefGhfb5AgcXlitrNJCs9rGINg16qGw="
+                "sha256/OHBR6iUv0VI2PGqJSnQGP8SiLphZ1zCJcpQC0Dis/8E="
             )
             .add(
                 "*.neqabty.com",
