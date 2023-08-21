@@ -15,7 +15,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -209,15 +208,6 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
                 Toast.makeText(this, "لم يتم اختيار اى صورة.", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_cart, menu)
-
-        val cartItem = menu.findItem(R.id.menu_item_cart)
-        updateCartOptionsMenu(cartItem)
-
-        return super.onCreateOptionsMenu(menu)
     }
 
     private fun addImageToCart(photoUI: PhotoUI){

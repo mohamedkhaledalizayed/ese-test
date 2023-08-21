@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.Menu
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -150,12 +149,4 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_cart, menu)
-
-        val cartItem = menu.findItem(R.id.menu_item_cart)
-        updateCartOptionsMenu(cartItem)
-
-        return super.onCreateOptionsMenu(menu)
-    }
 }

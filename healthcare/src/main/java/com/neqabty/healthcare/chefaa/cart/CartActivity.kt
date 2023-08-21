@@ -3,6 +3,7 @@ package com.neqabty.healthcare.chefaa.cart
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.neqabty.healthcare.chefaa.address.presentation.view.adressscreen.AddressesActivity
 import com.neqabty.healthcare.core.data.Constants.cart
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -23,6 +24,10 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
         binding.backBtn.setOnClickListener { finish() }
 
         binding.continueBtn.setOnClickListener {
+            if (totalPrice < 300.0){
+                Toast.makeText(this@CartActivity, "طلبك يجب ان لا يقل عن 300 جنيه.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             startActivity(Intent(this, AddressesActivity::class.java))
         }
 
