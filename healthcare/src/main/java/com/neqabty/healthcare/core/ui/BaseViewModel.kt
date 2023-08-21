@@ -14,7 +14,12 @@ open class BaseViewModel @Inject constructor(): ViewModel() {
         return if (throwable is HttpException) {
             when (throwable.code()) {
                 400 -> {
-                    JSONObject(throwable.response()?.errorBody()?.string()).getString("error")
+                    val errorObj = JSONObject(throwable.response()?.errorBody()?.string())
+                    try {
+                        errorObj.getString("error")
+                    } catch (e: Exception){
+                        errorObj.getString("message")
+                    }
                 }
                 401 -> {
                     "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"

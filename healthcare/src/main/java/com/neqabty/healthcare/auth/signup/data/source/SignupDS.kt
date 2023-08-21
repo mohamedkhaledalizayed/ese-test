@@ -15,11 +15,11 @@ import javax.inject.Inject
 class SignupDS @Inject constructor(private val signupApi: SignupApi, private val preferencesHelper: PreferencesHelper) {
 
     suspend fun upgradeMember(body: UpgradeMemberBody): NeqabtyMemberModel {
-        return signupApi.upgradeMember("Token " + preferencesHelper.token, body)
+        return signupApi.upgradeMember("Token " + preferencesHelper.token, body).data!!
     }
 
     suspend fun signupMember(body: NeqabtySignupBody): NeqabtyMemberModel {
-        return signupApi.signupMember(body)
+        return signupApi.signupMember(body).data!!
     }
 
     suspend fun getSyndicates(): List<EntityModel> {
