@@ -253,7 +253,8 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
     }
 
     private fun getContactMemberStatus() {
-        syndicatesHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
+        if(!sharedPreferences.nationalId.isNullOrBlank())
+            syndicatesHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
     }
 
     private fun observeOnCheckMemberStatus() {

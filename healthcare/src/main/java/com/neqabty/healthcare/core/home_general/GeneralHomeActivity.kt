@@ -216,7 +216,8 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
     }
 
     private fun getContactMemberStatus() {
-        generalHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
+        if(!sharedPreferences.nationalId.isNullOrBlank())
+            generalHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
     }
 
     private fun observeOnCheckMemberStatus() {

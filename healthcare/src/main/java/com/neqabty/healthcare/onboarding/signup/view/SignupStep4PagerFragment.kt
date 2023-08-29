@@ -159,7 +159,7 @@ class SignupStep4PagerFragment : Fragment() {
                             activity.sharedPreferences.syndicateName = resource.data.entityName
                             activity.sharedPreferences.image = resource.data.entityImage ?: ""
                             activity.sharedPreferences.code = SignupData.syndicateID
-                            activity.sharedPreferences.membershipId = resource.data.id.toString()
+                            activity.sharedPreferences.membershipId = binding.etMembershipNumber.text.toString()
                             navigate()
                         } else {
                             Toast.makeText(
