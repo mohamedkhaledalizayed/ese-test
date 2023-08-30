@@ -49,7 +49,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
 
         setupToolbar(title = "", show = false)
         observeOnCheckMemberStatus()
-        if(sharedPreferences.isAuthenticated)
+        if(sharedPreferences.isAuthenticated && !sharedPreferences.nationalId.isNullOrBlank())
             getContactMemberStatus()
         observeOnClinidoURL()
         initializeViews()
@@ -66,6 +66,11 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
             startActivity(Intent(this, NotificationsActivity::class.java))
         }
 
+        binding.tvRegister.visibility = if(sharedPreferences.isAuthenticated) View.INVISIBLE else View.VISIBLE
+        binding.tvRegister.setOnClickListener {
+            sharedPreferences.isSkippedToHome = false
+            startActivity(Intent(this, getTheNextActivityFromIntro()))
+        }
 //        renderContactCard(null)
 
         binding.ivContactSubscribe.setOnClickListener {
@@ -216,8 +221,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
     }
 
     private fun getContactMemberStatus() {
-        if(!sharedPreferences.nationalId.isNullOrBlank())
-            generalHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
+        generalHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
     }
 
     private fun observeOnCheckMemberStatus() {

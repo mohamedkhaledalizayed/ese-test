@@ -66,6 +66,18 @@
         app:layout_constraintTop_toTopOf="@id/iv_syndicate_logo"
         android:visibility="invisible"/>
 
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:text="@string/signup_title"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_welcome_in" />
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_main"
         android:layout_width="match_parent"

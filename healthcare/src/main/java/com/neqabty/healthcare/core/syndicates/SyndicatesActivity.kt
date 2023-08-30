@@ -10,6 +10,7 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySyndicatesBinding
 import com.neqabty.healthcare.invoices.view.InvoicesActivity
+import com.neqabty.healthcare.onboarding.signup.data.SignupData
 import com.neqabty.healthcare.onboarding.signup.view.SignupActivity
 import com.neqabty.healthcare.onboarding.signup.view.SyndicatesAdapter
 import com.neqabty.healthcare.pharmacy.PharmacyTermsBottomSheet
@@ -43,6 +44,8 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
         syndicatesAdapter.onItemClickListener = object :
             SyndicatesAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: SyndicateEntity) {
+                SignupData.syndicateID = item.code
+                SignupData.syndicateName = item.name
                 bottomSheetFragment = SyndicateServiceBottomSheet.newInstance(item)
                 bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
             }
@@ -92,6 +95,7 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
                     Status.SUCCESS -> {
                         hideProgressDialog()
                         syndicatesAdapter.submitList(resource.data!!.toMutableList())
+                        SignupData.syndicatesList = resource.data!!.toMutableList()
                         initializeViews()
                     }
                     Status.ERROR -> {
@@ -118,7 +122,7 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
         }else{
             sharedPreferences.isSkippedToHome = false
             val intent = Intent(this, SignupActivity::class.java)
-            if(sharedPreferences.isAuthenticated)
+            if(!sharedPreferences.mobile.isNullOrBlank())
                 intent.putExtra("isSyndicate", true)
             startActivity(intent)
             finishAffinity()

@@ -58,7 +58,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
 
         setupToolbar(title = "", show = false)
         observeOnCheckMemberStatus()
-        if(sharedPreferences.isAuthenticated)
+        if(sharedPreferences.isAuthenticated && !sharedPreferences.nationalId.isNullOrBlank())
             getContactMemberStatus()
         observeOnClinidoURL()
         observeOnSyndicateServices()
@@ -72,6 +72,12 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
 
         binding.ivNotification.setOnClickListener {
             startActivity(Intent(this, NotificationsActivity::class.java))
+        }
+
+        binding.tvRegister.visibility = if(sharedPreferences.isAuthenticated) View.INVISIBLE else View.VISIBLE
+        binding.tvRegister.setOnClickListener {
+            sharedPreferences.isSkippedToHome = false
+            startActivity(Intent(this, getTheNextActivityFromIntro()))
         }
 
 //        renderContactCard(null)
@@ -253,8 +259,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
     }
 
     private fun getContactMemberStatus() {
-        if(!sharedPreferences.nationalId.isNullOrBlank())
-            syndicatesHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
+        syndicatesHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
     }
 
     private fun observeOnCheckMemberStatus() {

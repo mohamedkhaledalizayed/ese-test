@@ -41,11 +41,14 @@ class SignupStep4PagerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         activity = requireActivity() as SignupActivity
+
+        initializeViews()
+        initializeObservers()
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
+        if (isVisibleToUser && this::binding.isInitialized) {
             initializeViews()
             initializeObservers()
         }

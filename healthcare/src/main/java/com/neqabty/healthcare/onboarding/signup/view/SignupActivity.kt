@@ -121,6 +121,10 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
             navigate()
         }
 
+        if(intent.getBooleanExtra("isSyndicate",false)){
+            movePagertoNext()
+            movePagertoNext()
+        }
 //        if(sharedPreferences.isPhoneVerified){
 //            movePagertoNext()
 //            movePagertoNext()
@@ -152,10 +156,6 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                     }
                     Status.SUCCESS ->{
                         hideProgressDialog()
-                        if(intent.getBooleanExtra("isSyndicate",false)){
-                            movePagertoNext()
-                            return@observe
-                        }
 
                         if (resource.data == "Found"){
                             val intent = Intent(this, LoginActivity::class.java)
