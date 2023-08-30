@@ -16,6 +16,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityClinidoBinding
@@ -61,9 +63,13 @@ class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
                     if (it.data!!.status) {
                         binding.webView.loadUrl(it.data.url)
                         initWebView()
-                    } else {
+                    } else if (it.data.status_code == 405) {
+                        Constants.mobileNumber = sharedPreferences.mobile
+                        startActivity(Intent(this, VerifyUserActivity::class.java))
                         Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
                         finish()
+                    } else{
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
                     }
                 }
                 Status.ERROR -> {
