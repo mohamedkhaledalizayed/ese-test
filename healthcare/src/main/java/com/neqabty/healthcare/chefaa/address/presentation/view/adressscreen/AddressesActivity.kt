@@ -77,6 +77,7 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>(), Locati
         mAdapter.onItemClickListener = object :
             AddressAdapter.OnItemClickListener {
             override fun setOnItemClickListener(addressItem: AddressEntity) {
+                requestPermissions()
                 Constants.selectedAddress = addressItem
                 startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
                 finish()
