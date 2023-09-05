@@ -77,7 +77,10 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>(), Locati
         mAdapter.onItemClickListener = object :
             AddressAdapter.OnItemClickListener {
             override fun setOnItemClickListener(addressItem: AddressEntity) {
-                requestPermissions()
+                if (!checkGPS()){
+                    buildAlertMessageNoGps()
+                    return
+                }
                 Constants.selectedAddress = addressItem
                 startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
                 finish()
