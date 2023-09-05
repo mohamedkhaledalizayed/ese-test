@@ -14,14 +14,14 @@ object Constants {
     //TODO move this to gradle
     //Very Important Before Publishing
     //Seha
-    const val BASE_URL_DEV = "https://staging-community.neqabty.com/healthcare/api/v1/"
+    const val BASE_URL_DEV = "https://dev-community.neqabty.com/healthcare/api/v1/"
     const val BASE_URL_STAGING = "https://staging-community.neqabty.com/healthcare/api/v1/"
-    const val BASE_URL_PRO = "https://seha.neqabty.com/public/api/v1/"
+    const val BASE_URL_PRO = "https://community.neqabty.com/healthcare/api/v1/"
 
     //Chefaa
-    const val BASE_URL_DEV_CHEFAA = "http://3.131.229.146:7777/api/v1/chefaa/"
+    const val BASE_URL_DEV_CHEFAA = "http://dev-community.neqabty.com/healthcare/api/v1/chefaa/"
     const val BASE_URL_STAGING_CHEFAA = "https://staging-community.neqabty.com/healthcare/api/v1/chefaa/"
-    const val BASE_URL_PRO_CHEFAA = "https://seha.neqabty.com/public/api/v1/chefaa/"
+    const val BASE_URL_PRO_CHEFAA = "https://community.neqabty.com/healthcare/api/v1/chefaa/"
 
     //Syndicates
     const val BASE_URL_DEV_SYNDICATE = "https://dev-community.neqabty.com/api/"
@@ -31,7 +31,7 @@ object Constants {
     //Retirement
     const val BASE_URL_RETIREMENT = "https://edupen.neqabty.com/api/"
     //News
-    const val BASE_URL_DEV_NEWS = "https://news.et3.co/api/"
+    const val BASE_URL_DEV_NEWS = "https://dev-community.neqabty.com/api/"
     const val BASE_URL_STAGING_NEWS = "https://staging-community.neqabty.com/api/"
     const val BASE_URL_PRO_NEWS = "https://community.neqabty.com/api/"
 
