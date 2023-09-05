@@ -329,7 +329,8 @@
     <!--    <string name="please_wait">من فضلك انتظر</string>-->
     <!--    <string name="order_status">حالة الطلب</string>-->
     <string name="order_by_note">الطلب بالكتابة</string>
-
+    <string name="facebook_app_id">2276751609173055</string>
+    <string name="facebook_client_token">6ca398d94761e4f93afefb0ce6e88a90</string>
     <!--    <string name="select">اكمل بإستخدام..</string>-->
     <string name="select_file">اختار صورة</string>
     <string name="add_to_cart">أضف الى العربة</string>
