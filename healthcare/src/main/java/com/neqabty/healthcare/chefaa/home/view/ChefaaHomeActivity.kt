@@ -150,6 +150,10 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
         }
 
         binding.writeOrderContainer.setOnClickListener {
+            if (cart.productList.isNotEmpty()){
+                showWarning("فى حالة كتابة طلب سوف يتم حذف المنتجات من عربة التسوق.")
+                return@setOnClickListener
+            }
             startActivity(Intent(this, OrderByNoteActivity::class.java))
         }
 

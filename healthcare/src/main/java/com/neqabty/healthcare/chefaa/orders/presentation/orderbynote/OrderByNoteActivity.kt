@@ -2,6 +2,7 @@ package com.neqabty.healthcare.chefaa.orders.presentation.orderbynote
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.address.presentation.view.adressscreen.AddressesActivity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
@@ -33,26 +34,36 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>() {
             }
         }
 
-        binding.saveBtn.setOnClickListener {
-            startActivity(Intent(this, AddressesActivity::class.java))
-        }
-
         binding.noteTv.customSelectionActionModeCallback = actionMode
         cart.note?.let { binding.noteTv.setText(it.note) }
-//        binding.saveBtn.setOnClickListener {
-//            if (binding.noteTv.text.toString().isNullOrBlank())
-//                return@setOnClickListener
-//            cart.note = OrderItemsEntity(
-//                type = Constants.ITEMTYPES.NOTE.typeName,
-//                quantity = 1,
-//                image = "",
-//                note = binding.noteTv.text.toString(),
-//                productId = -1,
-//                productEntity = null,
-//                imageUri = null
-//            )
-//            finish()
-//        }
+        binding.saveBtn.setOnClickListener {
+            if (binding.noteTv.text.toString().isNullOrBlank() && cart.imageList.isEmpty()){
+                Toast.makeText(this@OrderByNoteActivity, "من فضلك اضف روشتة او اكتب طلبك اولا.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            addNote()
+            startActivity(Intent(this, AddressesActivity::class.java))
+            finish()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (binding.noteTv.text.toString().isNotEmpty()){
+            addNote()
+        }
+    }
+
+    private fun addNote(){
+        cart.note = OrderItemsEntity(
+            type = Constants.ITEMTYPES.NOTE.typeName,
+            quantity = 1,
+            image = "",
+            note = binding.noteTv.text.toString(),
+            productId = -1,
+            productEntity = null,
+            imageUri = null
+        )
     }
 
     override fun getViewBinding() = ActivityOrderByNoteBinding.inflate(layoutInflater)
