@@ -77,9 +77,6 @@ object Constants {
     const val NEQABTY_PHONE = "٠٢٣٥٣٥٦٨٦٨"
     const val NEQABTY_ADDRESS = "٥٤ محي الدين ابو العز الدقي الجيزة"
 
-    var GENERAL_NEWS = 1
-    var SYNDICATE_NEWS = 2
-
     var DOCTORS_RESERVATION_URL = ""
     var MEDICINE_URL = ""
     var CHEFAA_SUPPORT_NUMBER = "0221294341"
