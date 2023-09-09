@@ -32,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
-    private lateinit var profileEntity: ProfileEntity
+    private var profileEntity: ProfileEntity? = null
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun getViewBinding() = ActivityProfileMegaBinding.inflate(layoutInflater)
 
@@ -105,6 +105,9 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
         binding.headerContainer.setOnClickListener { finish() }
 
         binding.profile.setOnClickListener {
+            if (profileEntity == null)
+                return@setOnClickListener
+
             if (sharedPreferences.isAuthenticated){
                 val intent = Intent(this, PersonalInfoActivity::class.java)
                 intent.putExtra("data", profileEntity)

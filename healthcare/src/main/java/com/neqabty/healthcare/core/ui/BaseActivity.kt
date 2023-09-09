@@ -290,7 +290,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     fun hideProgressDialog() {
         if (progressDialog!!.isShowing)
-            progressDialog!!.hide()
+            progressDialog!!.dismiss()
     }
     //endregion
 

@@ -68,6 +68,8 @@ class SubscriptionDetailsActivity : BaseActivity<ActivitySubscriptionDetailsBind
                             mInsuranceAdapter.submitList(packageInfo.insuranceDocs)
                             if (mAdapter.itemCount == maxFollower){
                                 binding.addFollowers.visibility = View.GONE
+                            }else{
+                                binding.addFollowers.visibility = View.VISIBLE
                             }
                         }else{
 
