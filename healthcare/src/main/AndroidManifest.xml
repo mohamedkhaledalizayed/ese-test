@@ -309,6 +309,7 @@
             android:exported="false" />
         <activity
             android:name=".chefaa.orders.presentation.orderbynote.OrderByNoteActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 
         <provider

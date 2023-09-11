@@ -74,71 +74,86 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintTop_toBottomOf="@id/header_container"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chefaa_info_container">
 
-    <TextView
-        android:id="@+id/order_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:text="@string/write_order"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:textColor="#001e2f"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycler_view" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
 
-    <TextView
-        android:fontFamily="@font/hanimation_regular"
-        android:id="@+id/order_more_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:text="اكتب هنا اسم الدواء المنتج"
-        android:textColor="#959698"
-        android:textSize="@dimen/_10ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/order_text" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintTop_toBottomOf="@id/header_container"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <EditText
-        android:id="@+id/noteTv"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_130sdp"
-        android:background="@drawable/chefaa_orders_bg"
-        android:hint="@string/note_des"
-        android:inputType="textMultiLine"
-        android:maxLength="255"
-        android:padding="@dimen/_10sdp"
-        android:layout_margin="@dimen/_15sdp"
-        android:scrollbars="vertical"
-        android:textAlignment="center"
-        android:textColorHint="#959698"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_10ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/order_more_text" />
+            <TextView
+                android:id="@+id/order_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/write_order"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:textColor="#001e2f"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view" />
 
-    <TextView
-        android:id="@+id/saveBtn"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_36sdp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:background="@drawable/add_address_btn_bg"
-        android:text="التالي"
-        android:layout_margin="@dimen/_15sdp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:id="@+id/order_more_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:text="اكتب هنا اسم الدواء المنتج"
+                android:textColor="#959698"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_text" />
+
+            <EditText
+                android:id="@+id/noteTv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:background="@drawable/chefaa_orders_bg"
+                android:hint="@string/note_des"
+                android:inputType="textMultiLine"
+                android:maxLength="255"
+                android:padding="@dimen/_10sdp"
+                android:layout_margin="@dimen/_15sdp"
+                android:scrollbars="vertical"
+                android:textAlignment="center"
+                android:textColorHint="#959698"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_more_text" />
+
+            <TextView
+                android:id="@+id/saveBtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:background="@drawable/add_address_btn_bg"
+                android:text="التالي"
+                android:layout_margin="@dimen/_15sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
