@@ -133,6 +133,34 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/chefaa_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/chefaa_info_bg"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/items_details">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chefaa_info_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/hanimation_regular"
+                android:text="سيتم تطبيق الخصم وفقة الشروط و الاحكام."
+                android:textColor="#6a6a6a"
+                android:textSize="@dimen/_10ssp" />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/continue_btn"
             android:layout_width="match_parent"
@@ -144,7 +172,7 @@
             android:layout_margin="@dimen/_16sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintTop_toBottomOf="@id/items_details"
+            app:layout_constraintTop_toBottomOf="@id/chefaa_info_container"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <LinearLayout
