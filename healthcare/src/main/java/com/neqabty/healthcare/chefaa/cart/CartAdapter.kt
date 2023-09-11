@@ -85,6 +85,10 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
             onItemClickListener?.setOnItemClickListener()
         }
 
+        viewHolder.binding.removeItem.setOnClickListener {
+            onItemClickListener?.setOnDeleteClickListener(position)
+        }
+
     }
 
     override fun getItemCount() = cart.productList.size
@@ -95,6 +99,7 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun setOnItemClickListener()
+        fun setOnDeleteClickListener(position: Int)
     }
 
     class ViewHolder(val binding: CartLayoutItemBinding) :

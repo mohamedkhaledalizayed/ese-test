@@ -143,6 +143,7 @@
             android:background="@drawable/chefaa_info_bg"
             android:orientation="horizontal"
             android:padding="@dimen/_10sdp"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/items_details">
 
             <ImageView

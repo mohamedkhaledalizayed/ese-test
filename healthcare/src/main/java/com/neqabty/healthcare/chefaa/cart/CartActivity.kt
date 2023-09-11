@@ -39,6 +39,14 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
                 handleCart()
                 updatePrice()
             }
+
+            override fun setOnDeleteClickListener(position: Int) {
+                val index = cart.productList.indexOf(cart.productList[position])
+                cart.productList.removeAt(index)
+                mAdapter.notifyDataSetChanged()
+                mItemsAdapter.notifyDataSetChanged()
+                handleCart()
+            }
         }
     }
 
@@ -53,11 +61,13 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
             binding.recyclerView.visibility = View.GONE
             binding.itemsDetails.visibility = View.GONE
             binding.continueBtn.visibility = View.GONE
+            binding.chefaaInfoContainer.visibility = View.GONE
             binding.cartEmpty.visibility = View.VISIBLE
         }else{
             binding.recyclerView.visibility = View.VISIBLE
             binding.itemsDetails.visibility = View.VISIBLE
             binding.continueBtn.visibility = View.VISIBLE
+            binding.chefaaInfoContainer.visibility = View.VISIBLE
             binding.cartEmpty.visibility = View.GONE
         }
     }
