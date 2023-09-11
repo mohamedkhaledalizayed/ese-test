@@ -75,7 +75,12 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
     }
 
     private fun addToCart(productItem: ProductEntity) {
-        cart.productList.addOrIncrement(productItem)
+        val index = cart.productList.addOrIncrement(productItem)
+        if(index < 0){
+            binding.quantity.text = "1"
+        }else{
+            binding.quantity.text = "${cart.productList[index].quantity}"
+        }
     }
 
     private fun getIndexInProductsPair(productItem: ProductEntity): Int {
