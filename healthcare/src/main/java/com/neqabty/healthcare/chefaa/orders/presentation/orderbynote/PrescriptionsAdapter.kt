@@ -35,7 +35,6 @@ class PrescriptionsAdapter : RecyclerView.Adapter<PrescriptionsAdapter.ViewHolde
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val order = items[position]
         viewHolder.binding.delete.setOnClickListener { onItemClickListener?.setOnDeleteClickListener(position) }
     }
 

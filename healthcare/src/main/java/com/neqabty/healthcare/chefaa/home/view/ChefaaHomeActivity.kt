@@ -226,6 +226,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
                 imageUri = photoUI.uri
             )
         )
+        startActivity(Intent(this, OrderByNoteActivity::class.java))
     }
 
     //region photos
