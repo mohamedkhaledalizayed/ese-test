@@ -219,6 +219,23 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/pharmacy_mart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pharmacy Mart"
+        android:padding="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textColor="#5d81d4"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/back_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/_20sdp"
+        android:background="@drawable/back_btn_bg"
+        android:textSize="@dimen/_12ssp"
+        android:fontFamily="@font/hanimation_regular"/>
+
+    <TextView
         android:id="@+id/back_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

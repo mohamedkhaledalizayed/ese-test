@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.chefaa.orders.presentation.orderbynote
+package com.neqabty.healthcare.pharmacymart.home.ui
 
 import android.Manifest
 import android.app.Activity
@@ -13,118 +13,147 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.address.presentation.view.adressscreen.AddressesActivity
 import com.neqabty.healthcare.chefaa.home.view.IMediaSelection
 import com.neqabty.healthcare.chefaa.home.view.PickUpImageBottomSheet
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
+import com.neqabty.healthcare.chefaa.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import com.neqabty.healthcare.core.data.Constants
-import com.neqabty.healthcare.core.data.Constants.cart
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.PhotoUI
-import com.neqabty.healthcare.databinding.ActivityOrderByNoteBinding
+import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.healthcare.databinding.ActivityPharmacyMartHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 @AndroidEntryPoint
-class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>(), IMediaSelection {
+class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>(), IMediaSelection {
 
-    private val REQUEST_CAMERA = 0
     private val SELECT_FILE = 1
     private var photoFileName = ""
+    private val REQUEST_CAMERA = 0
     lateinit var photoFileURI: Uri
+    private lateinit var dialog: AlertDialog
+    private val viewModel: PharmacyMartHomeViewModel by viewModels()
     private lateinit var  bottomSheetFragment: PickUpImageBottomSheet
-    private val mAdapter = PrescriptionsAdapter()
+    private var mAdapter: PharmacyMartOrdersAdapter = PharmacyMartOrdersAdapter()
+    override fun getViewBinding() = ActivityPharmacyMartHomeBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(R.string.order_by_note)
-
-
-        binding.backBtn.setOnClickListener { finish() }
-        binding.recyclerView.adapter = mAdapter
-        mAdapter.submitList(cart.imageList)
-
-        mAdapter.onItemClickListener = object : PrescriptionsAdapter.OnItemClickListener{
-            override fun setOnDeleteClickListener(position: Int) {
-                cart.imageList.removeAt(position)
-                mAdapter.notifyDataSetChanged()
-            }
-        }
-
-        binding.noteTv.customSelectionActionModeCallback = actionMode
-        cart.note?.let { binding.noteTv.setText(it.note) }
-        binding.saveBtn.setOnClickListener {
-            if (binding.noteTv.text.toString().isNullOrBlank() && cart.imageList.isEmpty()){
-                Toast.makeText(this@OrderByNoteActivity, "من فضلك اضف روشتة او اكتب طلبك اولا.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            addNote()
-            startActivity(Intent(this, AddressesActivity::class.java))
-            finish()
-        }
 
         binding.addPrescription.setOnClickListener {
-            if (cart.productList.isNotEmpty()){
-                showWarning("فى حالة اضافة روشتة سوف يتم حذف المنتجات من عربة التسوق.")
-                return@setOnClickListener
-            }
-            if (cart.imageList.size >= 5){
-                Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
             addPhoto()
         }
+
+        dialog = SpotsDialog.Builder()
+            .setContext(this)
+            .setCancelable(false)
+            .setMessage(getString(R.string.please_wait))
+            .build()
+
+        viewModel.getOrders()
+        viewModel.orders.observe(this){
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                    }
+                    Status.SUCCESS -> {
+                        if (resource.data!!.status){
+                            mAdapter.submitList(resource.data.data)
+                        }else{
+                            binding.noPreviousOrders.visibility = View.VISIBLE
+                            binding.noPreviousOrdersText.visibility = View.VISIBLE
+                            Toast.makeText(this@PharmacyMartHomeActivity, resource.data.message, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(this@PharmacyMartHomeActivity, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+
+        binding.ordersRecycler.adapter = mAdapter
+        mAdapter.onItemClickListener = object :
+            PharmacyMartOrdersAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(orderEntity: OrderEntity) {
+//                val intent = Intent(this@PharmacyMartHomeActivity, OrderDetailsActivity::class.java)
+//                intent.putExtra("orderId", orderEntity.id)
+//                startActivity(intent)
+            }
+
+            override fun setOnCallClickListener() {
+                AppUtils().call(this@PharmacyMartHomeActivity, Constants.CHEFAA_SUPPORT_NUMBER)
+            }
+        }
+
+        viewModel.registerUser()
+        viewModel.userRegistered.observe(this) {
+            when(it.status){
+                Status.LOADING ->{
+                    dialog.show()
+                }
+                Status.SUCCESS ->{
+                    dialog.hide()
+                    if (!it.data!!.status){
+                        Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                }
+                Status.ERROR ->{
+                    dialog.hide()
+                }
+            }
+        }
+
     }
 
-
-    private fun showWarning(message: String, title: String = getString(R.string.alert_title)) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(title)
-        builder.setCancelable(false)
-        builder.setMessage(message)
-        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
-            cart.productList.clear()
-            Toast.makeText(this, "تم حذف جميع المنتجات من عربة التسوق بنجاخ.", Toast.LENGTH_LONG).show()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton(getString(R.string.no_btn)) { dialog, _ ->
-            dialog.dismiss()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (binding.noteTv.text.toString().isNotEmpty()){
-            addNote()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (resultCode) {
+            Activity.RESULT_OK -> {
+                if (requestCode == SELECT_FILE)
+                    data?.let { onSelectFromGalleryResult(data) }
+                else if (requestCode == REQUEST_CAMERA)
+                    onCaptureImageResult()
+            }
+            ImagePicker.RESULT_ERROR -> {
+                Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Toast.makeText(this, "لم يتم اختيار اى صورة.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun addNote(){
-        cart.note = OrderItemsEntity(
-            type = Constants.ITEMTYPES.NOTE.typeName,
-            quantity = 1,
-            image = "",
-            note = binding.noteTv.text.toString(),
-            productId = -1,
-            productEntity = null,
-            imageUri = null
+    private fun addImageToCart(photoUI: PhotoUI){
+        Constants.cart.imageList.add(
+            OrderItemsEntity(
+                image = photoUI.uri?.path!!,
+                quantity = 1,
+                type = Constants.ITEMTYPES.IMAGE.typeName,
+                note = "",
+                productId = -1,
+                productEntity = null,
+                imageUri = photoUI.uri
+            )
         )
     }
 
-    override fun getViewBinding() = ActivityOrderByNoteBinding.inflate(layoutInflater)
-
     private fun addPhoto() {
-        bottomSheetFragment = PickUpImageBottomSheet.newInstance(1)
+        bottomSheetFragment = PickUpImageBottomSheet.newInstance(0)
         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
     }
 
@@ -254,37 +283,4 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>(), IMediaSe
         bottomSheetFragment.dismiss()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (resultCode) {
-            Activity.RESULT_OK -> {
-                if (requestCode == SELECT_FILE)
-                    data?.let { onSelectFromGalleryResult(data) }
-                else if (requestCode == REQUEST_CAMERA)
-                    onCaptureImageResult()
-            }
-            ImagePicker.RESULT_ERROR -> {
-                Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-            }
-            else -> {
-                Toast.makeText(this, "لم يتم اختيار اى صورة.", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun addImageToCart(photoUI: PhotoUI){
-        cart.imageList.add(
-            OrderItemsEntity(
-                image = photoUI.uri?.path!!,
-                quantity = 1,
-                type = Constants.ITEMTYPES.IMAGE.typeName,
-                note = "",
-                productId = -1,
-                productEntity = null,
-                imageUri = photoUI.uri
-            )
-        )
-        mAdapter.clear()
-        mAdapter.submitList(cart.imageList)
-    }
 }

@@ -48,6 +48,18 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".PharmacyMartCartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pharmacymart.orders.ui.orderdetails.PharmacyMartOrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pharmacymart.orders.ui.orderlist.PharmacyMartOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pharmacymart.home.ui.PharmacyMartHomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".retirement.view.RetirementActivity"
             android:exported="false" />
         <activity
@@ -207,8 +219,8 @@
             android:exported="false" />
         <activity
             android:name=".suggestions.presentation.SuggestionsActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity"
             android:exported="false" />
@@ -256,9 +268,8 @@
         <activity
             android:name=".auth.login.view.LoginActivity"
             android:configChanges="screenSize"
-            android:windowSoftInputMode="adjustResize"
             android:exported="true"
-            />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".auth.otp.view.VerifyPhoneActivity"
             android:exported="false" />
@@ -309,8 +320,8 @@
             android:exported="false" />
         <activity
             android:name=".chefaa.orders.presentation.orderbynote.OrderByNoteActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -322,8 +333,12 @@
                 android:resource="@xml/file_path" />
         </provider>
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
     </application>
 
 </manifest>

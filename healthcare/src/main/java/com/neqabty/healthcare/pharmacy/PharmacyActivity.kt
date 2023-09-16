@@ -7,6 +7,7 @@ import com.neqabty.healthcare.chefaa.home.view.ChefaaHomeActivity
 import com.neqabty.healthcare.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityPharmacyBinding
+import com.neqabty.healthcare.pharmacymart.home.ui.PharmacyMartHomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +22,9 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
 
         binding.circularProgress.setProgress(60.0, 100.0)
         binding.backBtnHeader.setOnClickListener { finish() }
+        binding.pharmacyMart.setOnClickListener {
+            startActivity(Intent(this@PharmacyActivity, PharmacyMartHomeActivity::class.java))
+        }
         binding.backBtn.setOnClickListener { finish() }
         binding.clinido.setOnClickListener {
             clickedItem = "clinido"
