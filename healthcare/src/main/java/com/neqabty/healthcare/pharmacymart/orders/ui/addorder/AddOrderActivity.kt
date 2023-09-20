@@ -21,7 +21,9 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.core.data.Cart
 import com.neqabty.healthcare.core.data.Constants.cart
+import com.neqabty.healthcare.core.data.Constants.pharmacyMartCart
 import com.neqabty.healthcare.core.data.Constants.selectedAddressPharmacyMart
+import com.neqabty.healthcare.core.data.PharmacyMartCart
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityAddOrderBinding
@@ -74,7 +76,7 @@ class AddOrderActivity : BaseActivity<ActivityAddOrderBinding>(), LocationListen
                         when (resource.data?.statusCode) {
                             200 -> {
                                 Toast.makeText(this, getString(R.string.order_is_placed), Toast.LENGTH_LONG).show()
-                                cart = Cart()
+                                pharmacyMartCart = PharmacyMartCart()
                                 reLaunchHomeActivityPharmacyMart(this)
                             }
                             405 -> {
@@ -123,9 +125,9 @@ class AddOrderActivity : BaseActivity<ActivityAddOrderBinding>(), LocationListen
 
         val list = mutableListOf<String>()
         lifecycleScope.launch(Dispatchers.IO) {
-             cart.imageList.map {
+             pharmacyMartCart.pharmacyMartImageList.map {
                 list.add("data:image/png;base64," + Base64.encodeToString(
-                    File(it.imageUri?.path).readBytes(),
+                    File(it?.path).readBytes(),
                     Base64.DEFAULT
                 ))
             }
@@ -137,7 +139,7 @@ class AddOrderActivity : BaseActivity<ActivityAddOrderBinding>(), LocationListen
                 currentLocation = currentLocation,
                 deliveryNote = binding.noteContent.text.toString(),
                 deliveryMobile = binding.deliveryPhone.text.toString(),
-                orderByText = cart.note?.note ?: ""
+                orderByText = pharmacyMartCart.orderByText
             )
         }
         binding.completeBtn.visibility = View.GONE

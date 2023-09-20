@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.cart
 import com.neqabty.healthcare.databinding.PrescriptionLayoutItemBinding
 
@@ -39,7 +40,7 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
 
     }
 
-    override fun getItemCount() = cart.imageList.size
+    override fun getItemCount() = Constants.pharmacyMartCart.pharmacyMartImageList.size
 
     fun submitList() {
         notifyDataSetChanged()

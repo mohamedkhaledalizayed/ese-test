@@ -3,7 +3,6 @@ package com.neqabty.healthcare.pharmacymart.orders.ui.uploadprescription
 
 import android.Manifest
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -21,9 +20,8 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.view.IMediaSelection
 import com.neqabty.healthcare.chefaa.home.view.PickUpImageBottomSheet
-import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
-import com.neqabty.healthcare.chefaa.orders.presentation.orderbynote.PrescriptionsAdapter
 import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.data.Constants.pharmacyMartCart
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.PhotoUI
 import com.neqabty.healthcare.databinding.ActivityPharmacyMartCartBinding
@@ -52,19 +50,19 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
 
         binding.backBtn.setOnClickListener { finish() }
         binding.recyclerView.adapter = mAdapter
-        mAdapter.submitList(Constants.cart.imageList)
+        mAdapter.submitList(pharmacyMartCart.pharmacyMartImageList)
 
         mAdapter.onItemClickListener = object : PrescriptionsAdapter.OnItemClickListener{
             override fun setOnDeleteClickListener(position: Int) {
-                Constants.cart.imageList.removeAt(position)
+                pharmacyMartCart.pharmacyMartImageList.removeAt(position)
                 mAdapter.notifyDataSetChanged()
             }
         }
 
         binding.noteTv.customSelectionActionModeCallback = actionMode
-        Constants.cart.note?.let { binding.noteTv.setText(it.note) }
+        pharmacyMartCart.orderByText.let { binding.noteTv.setText(it) }
         binding.saveBtn.setOnClickListener {
-            if (binding.noteTv.text.toString().isNullOrBlank() && Constants.cart.imageList.isEmpty()){
+            if (binding.noteTv.text.toString().isNullOrBlank() && pharmacyMartCart.pharmacyMartImageList.isEmpty()){
                 Toast.makeText(this@PharmacyMartCartActivity, "من فضلك اضف روشتة او اكتب طلبك اولا.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
@@ -74,33 +72,12 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
         }
 
         binding.addPrescription.setOnClickListener {
-            if (Constants.cart.productList.isNotEmpty()){
-                showWarning("فى حالة اضافة روشتة سوف يتم حذف المنتجات من عربة التسوق.")
-                return@setOnClickListener
-            }
-            if (Constants.cart.imageList.size >= 5){
+            if (pharmacyMartCart.pharmacyMartImageList.size >= 5){
                 Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
             addPhoto()
         }
-    }
-
-    private fun showWarning(message: String, title: String = getString(R.string.alert_title)) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(title)
-        builder.setCancelable(false)
-        builder.setMessage(message)
-        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
-            Constants.cart.productList.clear()
-            Toast.makeText(this, "تم حذف جميع المنتجات من عربة التسوق بنجاخ.", Toast.LENGTH_LONG).show()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton(getString(R.string.no_btn)) { dialog, _ ->
-            dialog.dismiss()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
     }
 
     override fun onPause() {
@@ -111,15 +88,16 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
     }
 
     private fun addNote(){
-        Constants.cart.note = OrderItemsEntity(
-            type = Constants.ITEMTYPES.NOTE.typeName,
-            quantity = 1,
-            image = "",
-            note = binding.noteTv.text.toString(),
-            productId = -1,
-            productEntity = null,
-            imageUri = null
-        )
+        pharmacyMartCart.orderByText = binding.noteTv.text.toString()
+//        Constants.cart.note = OrderItemsEntity(
+//            type = Constants.ITEMTYPES.NOTE.typeName,
+//            quantity = 1,
+//            image = "",
+//            note = binding.noteTv.text.toString(),
+//            productId = -1,
+//            productEntity = null,
+//            imageUri = null
+//        )
     }
 
     private fun addPhoto() {
@@ -272,18 +250,8 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
     }
 
     private fun addImageToCart(photoUI: PhotoUI){
-        Constants.cart.imageList.add(
-            OrderItemsEntity(
-                image = photoUI.uri?.path!!,
-                quantity = 1,
-                type = Constants.ITEMTYPES.IMAGE.typeName,
-                note = "",
-                productId = -1,
-                productEntity = null,
-                imageUri = photoUI.uri
-            )
-        )
+        pharmacyMartCart.pharmacyMartImageList.add(photoUI.uri)
         mAdapter.clear()
-        mAdapter.submitList(Constants.cart.imageList)
+        mAdapter.submitList(pharmacyMartCart.pharmacyMartImageList)
     }
 }

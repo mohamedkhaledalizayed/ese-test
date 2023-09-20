@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.pharmacymart.orders.ui.uploadprescription
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -14,7 +15,7 @@ import java.util.*
 
 class PrescriptionsAdapter : RecyclerView.Adapter<PrescriptionsAdapter.ViewHolder>() {
 
-    private val items: MutableList<OrderItemsEntity> = ArrayList()
+    private val items: MutableList<Uri?> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -38,9 +39,9 @@ class PrescriptionsAdapter : RecyclerView.Adapter<PrescriptionsAdapter.ViewHolde
         viewHolder.binding.delete.setOnClickListener { onItemClickListener?.setOnDeleteClickListener(position) }
     }
 
-    override fun getItemCount() = Constants.cart.imageList.size
+    override fun getItemCount() = Constants.pharmacyMartCart.pharmacyMartImageList.size
 
-    fun submitList(newItems: List<OrderItemsEntity>?) {
+    fun submitList(newItems: List<Uri?>?) {
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()

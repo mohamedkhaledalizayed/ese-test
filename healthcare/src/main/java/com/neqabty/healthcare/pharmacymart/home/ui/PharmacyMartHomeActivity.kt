@@ -22,7 +22,6 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.view.IMediaSelection
 import com.neqabty.healthcare.chefaa.home.view.PickUpImageBottomSheet
-import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -54,7 +53,7 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
         setContentView(binding.root)
 
         binding.addPrescription.setOnClickListener {
-            if (Constants.cart.imageList.size >= 5){
+            if (Constants.pharmacyMartCart.pharmacyMartImageList.size >= 5){
                 Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
@@ -147,17 +146,18 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
     }
 
     private fun addImageToCart(photoUI: PhotoUI){
-        Constants.cart.imageList.add(
-            OrderItemsEntity(
-                image = photoUI.uri?.path!!,
-                quantity = 1,
-                type = Constants.ITEMTYPES.IMAGE.typeName,
-                note = "",
-                productId = -1,
-                productEntity = null,
-                imageUri = photoUI.uri
-            )
-        )
+        Constants.pharmacyMartCart.pharmacyMartImageList.add(photoUI.uri)
+//        Constants.cart.imageList.add(
+//            OrderItemsEntity(
+//                image = photoUI.uri?.path!!,
+//                quantity = 1,
+//                type = Constants.ITEMTYPES.IMAGE.typeName,
+//                note = "",
+//                productId = -1,
+//                productEntity = null,
+//                imageUri = photoUI.uri
+//            )
+//        )
         startActivity(Intent(this, PharmacyMartCartActivity::class.java))
     }
 
