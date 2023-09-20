@@ -161,7 +161,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         binding.tvRetry.visibility = View.GONE
         if (sharedPreferences.isContactActiveSubscriber) {
             binding.tvContactName.text = clientInfo?.name
-            if(clientInfo?.availableBalance.toString().isNullOrBlank()){
+            if(clientInfo?.availableBalance == null){
                 binding.tvBalance.visibility = View.INVISIBLE
                 binding.tvRetry.visibility = View.VISIBLE
                 binding.tvRetry.text = getString(R.string.contact_show_balance)
