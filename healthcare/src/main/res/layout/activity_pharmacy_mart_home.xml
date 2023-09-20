@@ -45,14 +45,7 @@
                 android:fontFamily="@font/hanimation_arabic_medium"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:textSize="@dimen/_14ssp"
-                android:text="شفاء"/>
-
-            <ImageView
-                android:id="@+id/cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                />
+                android:text="صيدلية WLCARE"/>
 
         </RelativeLayout>
 
@@ -66,35 +59,74 @@
             app:layout_constraintTop_toBottomOf="@id/header_container"
             android:layout_margin="@dimen/_10sdp"/>
 
-        <RelativeLayout
-            android:id="@+id/add_prescription"
+        <LinearLayout
+            android:id="@+id/chefaa_main_functions_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/info"
-            android:padding="@dimen/_10sdp"
-            android:layout_margin="@dimen/_10sdp"
-            android:background="@drawable/chefaa_icons_bg"
-            >
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:weightSum="3">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/add_prescription"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="إضافة روشتة"
-                android:layout_centerVertical="true"
-                android:maxLength="30"
-                android:layout_alignParentStart="true"
-                />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/chefaa_icons_bg"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_20sdp"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/delete"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:src="@drawable/chefaa_prescription_icon"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="اضف الروشتة"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/hanimation_regular"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/write_order_container"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/add_icon_chefaa"
-                android:layout_alignParentEnd="true"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/chefaa_icons_bg"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_20sdp"
+                android:orientation="vertical">
 
+                <ImageView
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:src="@drawable/chefaa_write_icon"
+                    />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="اكتب طلبك"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/hanimation_regular"/>
 
-        </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/chefaa_previous_order"
@@ -102,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
             android:text="الطلبات السابقة"
-            app:layout_constraintTop_toBottomOf="@id/add_prescription"
+            app:layout_constraintTop_toBottomOf="@id/chefaa_main_functions_container"
             android:fontFamily="@font/hanimation_arabic_medium"
             android:textSize="@dimen/_12ssp"
             android:textColor="#6A6A6A"/>

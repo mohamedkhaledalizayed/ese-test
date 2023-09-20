@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color">
+
+        <RelativeLayout
+            android:id="@+id/header_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_toolbar_arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toEndOf="@id/back_btn"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:text="العنوان"
+                android:textColor="#001e2f"
+                android:textSize="@dimen/_14ssp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/current_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="العنوان المسجل"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#6b6b6b"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_container"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            />
+
+        <com.vlonjatg.progressactivity.ProgressRelativeLayout
+            android:id="@+id/progressActivity"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:emptyImageHeight="@dimen/_200sdp"
+            app:emptyImageWidth="@dimen/_200sdp"
+            app:emptyTitleTextColor="@color/black"
+            app:emptyTitleTextSize="@dimen/_5ssp"
+            app:errorButtonBackgroundColor="@color/colorPrimary"
+            app:errorButtonTextColor="#FFF"
+            app:errorImageHeight="@dimen/_200sdp"
+            app:errorImageWidth="@dimen/_200sdp"
+            app:errorTitleTextColor="@color/colorPrimary"
+            app:errorTitleTextSize="@dimen/_5ssp"
+            app:layout_constraintBottom_toTopOf="@id/add_address_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/current_address"
+            app:loadingProgressBarColor="@color/colorPrimary">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/address_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@+id/add_address"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/address_layout_item" />
+
+        </com.vlonjatg.progressactivity.ProgressRelativeLayout>
+
+        <TextView
+            android:id="@+id/add_address_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/add_address_btn_bg"
+            android:text="أضف عنوان جديد"
+            android:layout_margin="@dimen/_16sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintTop_toBottomOf="@id/progressActivity"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

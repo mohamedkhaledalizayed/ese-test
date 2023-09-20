@@ -39,6 +39,7 @@ import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.onboarding.contact.view.ContactCheckMemberActivity
 import com.neqabty.healthcare.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.onboarding.signup.view.SignupActivity
+import com.neqabty.healthcare.pharmacymart.home.ui.PharmacyMartHomeActivity
 import javax.inject.Inject
 
 
@@ -248,6 +249,13 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         val intent = Intent(context, ChefaaHomeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.putExtras(bundle)
+        startActivity(intent)
+        finish()
+    }
+
+    protected fun reLaunchHomeActivityPharmacyMart(context: Context){
+        val intent = Intent(context, PharmacyMartHomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
         finish()
     }

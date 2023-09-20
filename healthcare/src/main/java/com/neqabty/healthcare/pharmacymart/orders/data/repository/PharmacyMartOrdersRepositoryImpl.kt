@@ -3,12 +3,12 @@ package com.neqabty.healthcare.pharmacymart.orders.data.repository
 
 
 import com.neqabty.healthcare.chefaa.orders.data.model.OrderRequestBody
-import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
-import com.neqabty.healthcare.chefaa.orders.domain.entities.PlaceOrderResult
 import com.neqabty.healthcare.pharmacymart.orders.data.datasource.PharmacyMartOrdersDS
+import com.neqabty.healthcare.pharmacymart.orders.data.model.addorder.AddOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderStatusModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrdersListModel
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.addorder.AddOrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderStatusEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrdersEntityList
@@ -76,13 +76,32 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
     }
 
     override fun placeOrder(
-        items: List<OrderItemsEntity>,
+        items: List<String>,
         addressId: Int,
         deliveryNote: String,
+        deliveryMobile: String,
+        orderByText: String,
         deviceInfo: String,
         currentLocation: String
-    ): Flow<PlaceOrderResult> {
-        TODO("Not yet implemented")
+    ): Flow<AddOrderEntity> {
+        return flow {
+            emit(ordersDS.placeOrder(
+                items = items,
+                addressId = addressId,
+                deliveryNote = deliveryNote,
+                deliveryMobile = deliveryMobile,
+                orderByText = orderByText,
+                deviceInfo = deviceInfo,
+                currentLocation = currentLocation
+            ).toAddOrderEntity())
+        }
     }
 
+    private fun AddOrderModel.toAddOrderEntity(): AddOrderEntity{
+        return AddOrderEntity(
+            status = status,
+            statusCode = status_code,
+            message = message
+        )
+    }
 }

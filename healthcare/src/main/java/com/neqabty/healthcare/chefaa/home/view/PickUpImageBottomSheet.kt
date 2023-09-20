@@ -3,15 +3,14 @@ package com.neqabty.healthcare.chefaa.home.view
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.orders.presentation.orderbynote.OrderByNoteActivity
-import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.FragmentPickUpImageBottomSheetBinding
+import com.neqabty.healthcare.pharmacymart.orders.ui.uploadprescription.PharmacyMartCartActivity
 import com.neqabty.healthcare.pharmacymart.home.ui.PharmacyMartHomeActivity
 
 
@@ -58,6 +57,9 @@ class PickUpImageBottomSheet : BottomSheetDialogFragment() {
             }
             1 -> {
                 requireActivity() as OrderByNoteActivity
+            }
+            2 -> {
+                requireActivity() as PharmacyMartCartActivity
             }
             else -> {
                 requireActivity() as ChefaaHomeActivity

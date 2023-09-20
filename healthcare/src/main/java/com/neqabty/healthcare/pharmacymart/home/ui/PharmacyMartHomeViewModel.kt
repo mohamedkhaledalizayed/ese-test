@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.pharmacymart.home.domain.entity.RegistrationEntity
-import com.neqabty.healthcare.chefaa.home.domain.entities.orders.OrdersListEntity
-import com.neqabty.healthcare.chefaa.orders.domain.usecases.GetOrdersUseCase
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.pharmacymart.home.domain.usecases.RegisterUseCase

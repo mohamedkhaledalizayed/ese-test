@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.neqabty.healthcare.chefaa.address.domain.entities.AddressEntity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 import com.neqabty.healthcare.packages.subscription.data.model.Followers
+import com.neqabty.healthcare.pharmacymart.address.domain.entity.PharmacyMartAddressEntity
 
 
 object Constants {
@@ -19,7 +20,7 @@ object Constants {
     const val BASE_URL_PRO = "https://community.neqabty.com/healthcare/api/v1/"
 
     //Chefaa
-    const val BASE_URL_DEV_CHEFAA = "http://dev-community.neqabty.com/healthcare/api/v1/chefaa/"
+    const val BASE_URL_DEV_CHEFAA = "https://dev-community.neqabty.com/healthcare/api/v1/chefaa/"
     const val BASE_URL_STAGING_CHEFAA = "https://staging-community.neqabty.com/healthcare/api/v1/chefaa/"
     const val BASE_URL_PRO_CHEFAA = "https://community.neqabty.com/healthcare/api/v1/chefaa/"
 
@@ -81,6 +82,7 @@ object Constants {
     var MEDICINE_URL = ""
     var CHEFAA_SUPPORT_NUMBER = "0221294341"
     var selectedAddress: AddressEntity? = null
+    var selectedAddressPharmacyMart: PharmacyMartAddressEntity? = null
     var userNumber: String = ""
     var mobileNumber: String = ""
     var countryCode: String = ""

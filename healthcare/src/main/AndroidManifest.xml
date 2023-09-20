@@ -48,7 +48,19 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
-            android:name=".PharmacyMartCartActivity"
+            android:name=".pharmacymart.orders.ui.addorder.AddOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pharmacymart.address.ui.selectlocation.PharmacyMartSelectLocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pharmacymart.address.ui.addaddress.PharmacyMartAddAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pharmacymart.address.ui.addresseslist.AddressesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pharmacymart.orders.ui.uploadprescription.PharmacyMartCartActivity"
             android:exported="false" />
         <activity
             android:name=".pharmacymart.orders.ui.orderdetails.PharmacyMartOrderDetailsActivity"
