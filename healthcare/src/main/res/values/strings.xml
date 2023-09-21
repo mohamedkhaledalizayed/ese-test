@@ -1,371 +1,343 @@
 <resources>
 
-    <string name="done">تم دفع</string>
-    <string name="search_in">ابحث في الشبكة الطبية</string>
-    <string name="recommended">يوصي لك</string>
-    <string name="filter">تنقية</string>
-    <string name="city_">المنطقة</string>
-    <string name="government_">المحافظة</string>
-    <string name="internet_message">لا يوجد اتصال بالانترنت برجاء التحقق من الاتصال بالانترنت.</string>
-    <string name="internet_title">لا يوجد اتصال</string>
-
-    <string name="national_id_">الرقم القومى</string>
-    <string name="job">الوظيفة</string>
-    <string name="address">العنوان</string>
-    <string name="birth_date">تاريخ الميلاد</string>
-    <string name="phone">رقم الهاتف</string>
-    <string name="add">أضف</string>
-    <string name="add_new_member">إضافة فرد جديد</string>
-    <string name="email">البريد الالكترونى</string>
-    <string name="confirm_password">تاكيد كلمة المرور</string>
-    <string name="medical_search">البحث في الشبكة الطبية..</string>
-    <string name="add_review">اضف تقييم</string>
-    <string name="profission">التخصص</string>
-    <string name="provider_type">نوع مقدم الخدمة</string>
-    <string name="send">إرسال</string>
-    <string name="content">اكتب رسالتك هنا</string>
-    <string name="degree">الدرجة العلمية</string>
-    <string name="syndicates">النقابات</string>
-    <string name="suggestions">الشكاوي والمقترحات</string>
-    <string name="settings">إعدادات الحساب</string>
-    <string name="search_result">نتائج البحث</string>
-    <string name="confirm">تأكيد</string>
-    <string name="enter_phone">من فضلك ادخل رقم الهاتف</string>
-    <string name="please_wait">من فضلك انتظر...</string>
-
-
-    <string name="exit">هل تريد الخروج!</string>
-
-    <string name="category">اختر الفئة</string>
-    <string name="done_">لقد تم تسجيل طلبكم بنجاح رقم الشكوي / المقترح </string>
-    <string name="no_more">لا يمكن إضافة اكثر من 3 صور.</string>
-    <string name="please_enter_name">من فضلك ادخل الاسم</string>
-    <string name="content_">من فضلك ادخل محتوي الشكوي.</string>
-    <string name="select_category">من فضلك إختر الفئة.</string>
-    <string name="attach_image">إرفاق صورة</string>
-    <string name="welcome">مرحبا بك فى نقابتى</string>
-    <string name="price_delivery">سيتم سداد رسوم الشحن عند الاستلام</string>
-    <string name="subscription">تسجيل الاشتراك</string>
-    <string name="delivery_phone">رقم التوصيل</string>
-
-
-    <string name="no_news">عفوا لا يوجد اخبار</string>
-    <string name="error">حدث خطا</string>>
-    <string name="source">الحدث : </string>>
-
-
-    <string name="login">تسجيل الدخول</string>
-    <string name="password">كلمة المرور</string>
-    <string name="something_wrong">عفوا، يوجد خطأ في البيانات</string>
-
-
-    <string name="payments">المدفوعات</string>
-
+    <string name="done">Done</string>
+    <string name="search_in">Search in Medical Network</string>
+    <string name="recommended">Recommended for You</string>
+    <string name="filter">Filter</string>
+    <string name="city_">City</string>
+    <string name="government_">Governorate</string>
+    <string name="internet_message">No internet connection. Please check your internet connection.</string>
+    <string name="internet_title">No Connection</string>
+    <string name="national_id_">National ID</string>
+    <string name="job">Job</string>
+    <string name="address">Address</string>
+    <string name="birth_date">Date of Birth</string>
+    <string name="phone">Phone Number</string>
+    <string name="add">Add</string>
+    <string name="add_new_member">Add New Member</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="medical_search">Search in Medical Network...</string>
+    <string name="add_review">Add Review</string>
+    <string name="profission">Profession</string>
+    <string name="provider_type">Provider Type</string>
+    <string name="send">Send</string>
+    <string name="content">Type your message here</string>
+    <string name="degree">Degree</string>
+    <string name="syndicates">Syndicates</string>
+    <string name="suggestions">Complaints and Suggestions</string>
+    <string name="settings">Account Settings</string>
+    <string name="search_result">Search Results</string>
+    <string name="confirm">Confirm</string>
+    <string name="enter_phone">Please enter a phone number</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="exit">Do you want to exit?</string>
+    <string name="category">Choose Category</string>
+    <string name="done_">Your request has been successfully registered. Complaint/Proposal number: </string>
+    <string name="no_more">You cannot add more than 3 images.</string>
+    <string name="please_enter_name">Please enter the name</string>
+    <string name="content_">Please enter the content of the complaint.</string>
+    <string name="select_category">Please select the category.</string>
+    <string name="attach_image">Attach Image</string>
+    <string name="welcome">Welcome to My Syndicate</string>
+    <string name="price_delivery">Delivery charges will be paid upon delivery</string>
+    <string name="subscription">Subscription</string>
+    <string name="delivery_phone">Delivery Phone Number</string>
+    <string name="no_news">Sorry, there is no news</string>
+    <string name="error">An error occurred</string>
+    <string name="source">Event: </string>
+    <string name="login">Log In</string>
+    <string name="password">Password</string>
+    <string name="something_wrong">Sorry, there is an error in the data</string>
+    <string name="payments">Payments</string>
 
     <string name="app_name">Neqabty</string>
-    <string name="news_title">أخبار النقابة</string>
-    <string name="payments_title">المدفوعات</string>
-    <string name="settings_title">الإعدادات</string>
-    <string name="contactus_title">تواصل معنا</string>
-    <string name="aboutapp_title">عن نقابتي</string>
-    <string name="about_app_content">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات النقابة بطريقة مميكنة مدعمة بوسائل مختلفة للدفع الالكتروني لتسيهل الحصول علي الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود ،نقابتي صحة مستدامة هي شبكة طبية متخصصة متوفرة لدي العديد من الجهات العلاجية ذات التخصصات المختلفة والمنتشرة في جميع المحافظات.</string>
-    <string name="neqabty_mega">نقابتي</string>
-    <string name="payment_reference">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك \n
-        كود الدفع:</string>
-    <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
-    <string name="alert_title">تنبيه</string>
-    <string name="ok_btn">تأكيد</string>
-    <string name="no_btn">لا</string>
-    <string name="next">التالى</string>
-    <string name="services">خدمات النقابة</string>
-    <string name="doctor">حجز اطباء</string>
-    <string name="medicine">العلاج الشهري</string>
-    <string name="copy_text">نسخ</string>
-    <string name="alert">تنبيه</string>
-    <string name="service_unavailable">سيتم تفعيل الخدمة قريباً</string>
-    <string name="new_update">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
-    <string name="total_pric">الاجمالي</string>
-    <string name="successful_payment">عملية ناجحة</string>
-    <string name="successful_pay">تم الدفع بنجاح.</string>
-    <string name="receipt">الفاتورة</string>
-    <string name="personal_info">البيانات الشخصية</string>
-    <string name="name">الاسم :</string>
-    <string name="membership_number">رقم العضوية :</string>
-    <string name="phone_number">رقم الهاتف </string>
-    <string name="receipt_info">بيانات الفاتورة</string>
-    <string name="syndicate">النقابة :</string>
-    <string name="service_name">اسم الخدمة :</string>
-    <string name="receipt_number">رقم الفاتورة :</string>
-    <string name="receipt_date">تاريخ الفاتورة :</string>
-    <string name="net_amount">المبلغ الصافى :</string>
-    <string name="total_fees">الرسوم الكلية :</string>
-    <string name="pdf">تحميل الفاتورة Pdf</string>
-    <string name="profile">الملف الشخصى</string>
-    <string name="user_name">الاسم</string>
-    <string name="membership">رقم العضوية</string>
-    <string name="cardrenewal">طلب تجديد كارنية العضوية.</string>
-    <string name="year">السنة</string>
-    <string name="personal_photo">صورة شخصية</string>
-    <string name="send_order">إرسال الطلب</string>
-    <string name="ministry_license">تحديث صورة ترخيص الوزارة.</string>
+    <string name="news_title">Syndicate News</string>
+    <string name="payments_title">Payments</string>
+    <string name="settings_title">Settings</string>
+    <string name="contactus_title">Contact Us</string>
+    <string name="aboutapp_title">About Neqabty</string>
+    <string name="about_app_content">Neqabty is an interactive platform aimed at providing syndicate services in an accessible way, supported by various electronic payment methods to facilitate access to services and track payments with minimal time and effort. Neqabty\'s Sustainable Health is a specialized medical network available to many healthcare providers with different specialties spread across all governorates.</string>
+    <string name="neqabty_mega">Neqabty</string>
+    <string name="payment_reference">You can now pay at the nearest payment outlet until your subscription renewal is confirmed. Payment Code:</string>
+    <string name="payment_canceled">Payment has been canceled</string>
+    <string name="alert_title">Alert</string>
+    <string name="ok_btn">Confirm</string>
+    <string name="no_btn">No</string>
+    <string name="next">Next</string>
+    <string name="services">Syndicate Services</string>
+    <string name="doctor">Doctor Appointment</string>
+    <string name="medicine">Monthly Medication</string>
+    <string name="copy_text">Copy</string>
+    <string name="alert">Alert</string>
+    <string name="service_unavailable">This service will be activated soon</string>
+    <string name="new_update">Please update the app to the latest version to use the application.</string>
+    <string name="total_pric">Total</string>
+    <string name="successful_payment">Successful Payment</string>
+    <string name="successful_pay">Payment Successful.</string>
+    <string name="receipt">Receipt</string>
+    <string name="personal_info">Personal Information</string>
+    <string name="name">Name:</string>
+    <string name="membership_number">Membership Number:</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="receipt_info">Receipt Information</string>
+    <string name="syndicate">Syndicate:</string>
+    <string name="service_name">Service Name:</string>
+    <string name="receipt_number">Receipt Number:</string>
+    <string name="receipt_date">Receipt Date:</string>
+    <string name="net_amount">Net Amount:</string>
+    <string name="total_fees">Total Fees:</string>
+    <string name="pdf">Download Receipt PDF</string>
+    <string name="profile">Profile</string>
+    <string name="user_name">Name</string>
+    <string name="membership">Membership Number</string>
+    <string name="cardrenewal">Request Membership Card Renewal.</string>
+    <string name="year">Year</string>
+    <string name="personal_photo">Personal Photo</string>
+    <string name="send_order">Send Order</string>
+    <string name="ministry_license">Update Ministry License Photo.</string>
 
-    <string name="agree">موافق</string>
-    <string name="disagree">لا اوافق</string>
-    <string name="rooted">هذا الجهاز غير أمن لا يمكنك إستخدام هذا التطبيق.</string>
-    <string name="unsuccessfull_payment">عملية فاشلة.</string>
-    <string name="un_paid">لم يتم دفع الفاتورة.</string>
+    <string name="agree">Agree</string>
+    <string name="disagree">Disagree</string>
+    <string name="rooted">This device is not secure; you cannot use this application.</string>
+    <string name="unsuccessfull_payment">Unsuccessful Payment.</string>
+    <string name="un_paid">The bill has not been paid.</string>
 
-    <string name="member_id">رقم العضوية : %s</string>
-    <string name="egp">جنيه</string>
+    <string name="member_id">Membership Number: %s</string>
+    <string name="egp">EGP</string>
 
-
-    <string name="select_branch">إختر النقابة الفرعية</string>
-    <string name="enter_add">من فضلك ادخل العنوان</string>
-    <string name="confirm_phone">برجاء تاكيد رقم الموبايل قبل الدفع</string>
-    <string name="no_reciept">لا توجد اي فواتير مستحقه للسداد في الوقت الحالي</string>
-    <string name="update_data">تحديث البيانات</string>
-    <string name="order_sent">تم إرسال الطلب بنجاح.</string>
-    <string name="order_not_sent">حدث خطاء أثناء إرسال الطلب.</string>
-    <string name="select_licence_pic">من فضلك اختر صورة الترخيص.</string>
-    <string name="image_uploaded">تم تحميل الصورة بنجاح.</string>
-    <string name="share">مشاركة</string>
-    <string name="print">طباعة</string>
+    <string name="select_branch">Select Subsidiary Syndicate</string>
+    <string name="enter_add">Please enter the address</string>
+    <string name="confirm_phone">Please confirm your mobile number before payment</string>
+    <string name="no_reciept">There are no outstanding bills to pay at the moment</string>
+    <string name="update_data">Update Data</string>
+    <string name="order_sent">Order sent successfully.</string>
+    <string name="order_not_sent">An error occurred while sending the order.</string>
+    <string name="select_licence_pic">Please select the license picture.</string>
+    <string name="image_uploaded">The image has been uploaded successfully.</string>
+    <string name="share">Share</string>
+    <string name="print">Print</string>
     <string name="api_key">AIzaSyBOZv4riqvG1mthHKFZ5jUkdvLMzin4Bns</string>
-    <string name="packa">باقاتى</string>
-    <string name="telephone">التليفون</string>
-    <string name="our_location">موقعنا علي الخريطة</string>
-
-
-    <string name="signup">تسجيل إشتراك</string>
-    <string name="full_name">الأسم بالكامل</string>
-    <string name="neqabty_auth">نقابتى</string>
-    <string name="enter_num">برجاء ادخال رقم الهاتف المطلوب لتسجيل الحساب </string>
-    <string name="enter_num_code">برجاء تاكيد رقم الهاتف المحمول لتاكيد حسابك الخاص</string>
-    <string name="confirm_message">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من الرقم القومى الخاص بك.</string>
-    <string name="confirm_message_agri">لقد تم إنشاء حسابك بنجاح.</string>
-    <string name="password_not_matched">كلمة السر غير متطابقة.</string>
-    <string name="there_is_no_syndicates">لا يوجد نقابات</string>
-    <string name="select_syndicates">اختر النقابة</string>
-    <string name="enter_correct_phone">من فضلك ادخل رقم صحيح</string>
-    <string name="enter_email">من فضلك ادخل البريد الالكترونى</string>
-    <string name="enter_correct_email">من فضلك ادخل البريد الالكترونى بشكل صحيح.</string>
-    <string name="enter_national_id">من فضلك ادخل الرقم القومى بشكل صحيح.</string>
-    <string name="enter_marital_status">من فضلك اختر الحالة الإجتماعية.</string>
-    <string name="enter_dependants_number">من فضلك اختر الأفراد المسؤولة منك.</string>
-    <string name="enter_reference_name">من فضلك ادخل الأسم.</string>
-    <string name="enter_name">من فضلك ادخل الأسم</string>
-    <string name="enter_company_name">من فضلك ادخل اسم الشركة</string>
-    <string name="enter_field">من فضلك ادخل المجال</string>
-    <string name="enter_address">من فضلك ادخل العنوان</string>
-    <string name="enter_title">من فضلك ادخل المسمى الوظيفي</string>
-    <string name="enter_years">من فضلك ادخل عدد السنين</string>
-    <string name="enter_salary">من فضلك ادخل المرتب</string>
-    <string name="phone_confirmed">تم تاكيد رقم الهاتف بنجاح.</string>
-    <string name="client_submitted">تم الاشتراك في كونتكت بنجاح.</string>
-    <string name="enter_code">برجاء إدخال الكود الذى تم إرساله الى رقم الهاتف :</string>
-    <string name="enter_code_">من فضلك ادخل الكود</string>
-    <string name="serial_number">مسلسل الكمبيوتر</string>
-    <string name="old_password">كلمة السر الحالية</string>
-    <string name="new_password">كلمة سر جديدة</string>
-    <string name="change_password">تغيير</string>
-    <string name="resend">إرسال الكود</string>
-    <string name="medical_network">الشبكة الطبية</string>
-    <string name="ph_online">صيدلية اونلاين</string>
+    <string name="packa">My Packages</string>
+    <string name="telephone">Telephone</string>
+    <string name="our_location">Our Location on Map</string>
+    <string name="signup">Sign Up</string>
+    <string name="full_name">Full Name</string>
+    <string name="neqabty_auth">Neqabty</string>
+    <string name="enter_num">Please enter the required phone number to register the account</string>
+    <string name="enter_num_code">Please confirm your mobile phone number to verify your account</string>
+    <string name="confirm_message">Your account has been successfully created. Please note that your password is the last 4 digits of your national ID.</string>
+    <string name="confirm_message_agri">Your account has been successfully created.</string>
+    <string name="password_not_matched">Passwords do not match.</string>
+    <string name="there_is_no_syndicates">No syndicates available</string>
+    <string name="select_syndicates">Select Syndicate</string>
+    <string name="enter_correct_phone">Please enter a valid phone number</string>
+    <string name="enter_email">Please enter your email</string>
+    <string name="enter_correct_email">Please enter a valid email address.</string>
+    <string name="enter_national_id">Please enter a valid national ID.</string>
+    <string name="enter_marital_status">Please select marital status.</string>
+    <string name="enter_dependants_number">Please select the number of dependents.</string>
+    <string name="enter_reference_name">Please enter a name.</string>
+    <string name="enter_name">Please enter the name</string>
+    <string name="enter_company_name">Please enter the company name</string>
+    <string name="enter_field">Please enter the field</string>
+    <string name="enter_address">Please enter the address</string>
+    <string name="enter_title">Please enter the job title</string>
+    <string name="enter_years">Please enter the number of years</string>
+    <string name="enter_salary">Please enter the salary</string>
+    <string name="phone_confirmed">Phone number confirmed successfully.</string>
+    <string name="client_submitted">Subscribed to Contact successfully.</string>
+    <string name="enter_code">Please enter the code sent to your phone number:</string>
+    <string name="enter_code_">Please enter the code</string>
+    <string name="serial_number">Computer Serial Number</string>
+    <string name="old_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="change_password">Change</string>
+    <string name="resend">Resend Code</string>
+    <string name="medical_network">Medical Network</string>
+    <string name="ph_online">Pharmacy Online</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="terms">
 
-        - خصم على الادوية المستوردة  12%\n
-        - خصم على الادوية المحلي   22%\n
-        - يجب ان لا يقل سعر الطلب عن 200 جنيه \n ويتم اضافة سعر التوصيل 15 جنية.\n
-        - التوصيل مجاني في حالة وصول الطلب \n الي 750 جنيه او اكثر.\n
-        - يتم توصيل الطلب داخل القاهره الكبري في خلال 48 ساعة.
+    - 12% discount on imported medicines
+    - 22% discount on local medicines
+    - The order price should not be less than 200 EGP
+    - A delivery fee of 15 EGP will be added
+    - Free delivery for orders over 750 EGP
+    - Delivery within Greater Cairo within 48 hours
 
-    </string>
+</string>
     <string name="chefaa_terms">
 
-        -  نسبه تغطية تصل الي 20٪ علي احتياجاتك من الصيدلية.\n
-        -  خدمة التوصيل مجانية داخل القاهرة والجيزة\n
+    - Up to 20% coverage of your pharmacy needs
+    - Free delivery within Cairo and Giza
 
-    </string>
+</string>
 
-    <string name="password_conditions">كلمة المرور يجب ألا تقل عن 8 حروف وتحتوى على حروف و ارقام و رموز مثل # @ ...</string>
-    <string name="city">المدينة</string>
-    <string name="no_result">لا يوجد نتائج.</string>
-    <string name="tour_guid_numbers">25899882 -25890438 - 01144300335</string>
-    <string name="confirm_pass">تاكيد كلمة المرور</string>
+    <string name="password_conditions">The password must be at least 8 characters long and contain letters, numbers, and symbols like # @ ...</string>
+    <string name="city">City</string>
+    <string name="no_result">No results found.</string>
+    <string name="tour_guid_numbers">25899882 - 25890438 - 01144300335</string>
+    <string name="confirm_pass">Confirm Password</string>
 
 
     <!--/////////////////////////////Intro/////////////////////////////////////////-->
-
-    <string name="skip">تخطي</string>
-    <string name="intro_one">تسهيل السداد الالكتروني لجميع الخدمات النقابية</string>
-    <string name="intro_two">خدمات الصيدلية اونلاين بخصومات تصل الي ٢٠٪</string>
-    <string name="intro_three">سدد خدماتك النقابية و الغير نقابية دلوقتي بالتقسيط</string>
+    <string name="skip">Skip</string>
+    <string name="intro_one">Facilitating electronic payment for all syndicate services</string>
+    <string name="intro_two">Pharmacy Online services with discounts up to 20%</string>
+    <string name="intro_three">Pay your syndicate and non-syndicate services now in installments</string>
 
     <!--/////////////////////////////Signup/////////////////////////////////////////-->
-    <string name="signup_title">تسجيل حساب</string>
-    <string name="choose_sim">برجاء اختيار رقم الهاتف المطلوب لتسجيل الحساب</string>
+    <string name="signup_title">Account Registration</string>
+    <string name="choose_sim">Please select the required phone number to register the account</string>
     <string name="sim_one">SIM 1</string>
     <string name="sim_two">SIM 2</string>
-    <string name="enter_otp">برجاء ادخال كود التعريف  الذي تم ارساله علي الهاتف المسجل</string>
-    <string name="otp_resend">اذا لم تقم باستلام كود التعريف، اعد الارسال مرة اخري</string>
-    <string name="resend_otp">الارسال</string>
-    <string name="otp_sent">تم إرسال الكود</string>
-    <string name="wrong_otp">كود التفعيل غير صحيح</string>
-    <string name="are_you_syndicate_member">هل انت عضو نقابة؟</string>
-    <string name="yes">نعم</string>
-    <string name="no">لا</string>
-    <string name="register_in">انشاء حساب في </string>
-    <string name="enter_password">برجاء ادخال كلمة المرور </string>
-    <string name="membership_id">رقم العضوية</string>
-    <string name="enter_membership_id">من فضلك ادخل رقم العضوية</string>
-    <string name="national_id">الرقم القومي</string>
-    <string name="enter_nat_id">رجاء ادخل رقمك القومي</string>
-    <string name="password_rules">شروط كلمة المرور</string>
-    <string name="reset_password">اعادة ضبط الرقم السري</string>
-    <string name="go_to_home">الصفحة الرئيسية</string>
-    <string name="complete_profile">استكمال بيانات الحساب</string>
-    <string name="subscribe_in_contact">الاشتراك في خدمة التقسيط</string>
-    <string name="activate_contact_subscription">تفعيل الاشتراك</string>
-    <string name="activate_contact_steps">فعل رصيدك من خلال خطوات بسيطة\n
-1- زيارة اقرب فرع لكونتاكت او قم بالاتصال بنا لترتيب زيارة منزلية\n
-2- امضاء العقد\n
-3- سنقوم بالاتصال بك لارسال كود لتفعيل الخدمة علي رقم الموبايل الخاص بك
-    </string>
-    <string name="enter_id_front">برجاء ادخال صورة البطاقة الامامية</string>
-    <string name="enter_id_back">برجاء ادخال صورة البطاقة من الخلف</string>
-    <string name="request_sent">لقد تم ارسال الطلب بنجاح. من فضلك انتظر حتى تتم مراجعته.</string>
-    <string name="review_your_data">راجع بياناتك الشخصية</string>
-    <string name="residence">محل الاقامة</string>
-    <string name="residence_status">ماهي حالة محل الاقامة</string>
-    <string name="residence_owned">مملوكة بالكامل</string>
-    <string name="residence_rent">إيجار</string>
-    <string name="residence_family">بيت عائلة</string>
-    <string name="dependants">الأفراد</string>
-    <string name="dependants_num">كم عدد الأفراد المسؤولة منك؟</string>
-    <string name="reference_number">رقم آخر</string>
-    <string name="enter_reference_number">برجاء ادخال رقم اخر</string>
-    <string name="employment_details">تفاصيل الوظيفة</string>
-    <string name="employment_type">نوع الوظيفة</string>
-    <string name="employment_employee">موظف</string>
-    <string name="employment_private">عمل خاص</string>
-    <string name="employment_freelance">عمل حر</string>
-    <string name="employment_none">لايعمل</string>
-    <string name="company_name">اسم الشركة</string>
-    <string name="company_field">المجال</string>
-    <string name="employment_title">المسمى الوظيفي</string>
-    <string name="company_years">عدد السنين</string>
-    <string name="company_salary">المرتب</string>
-
+    <string name="enter_otp">Please enter the verification code sent to the registered phone number</string>
+    <string name="otp_resend">If you did not receive the verification code, please resend</string>
+    <string name="resend_otp">Resend</string>
+    <string name="otp_sent">The code has been sent</string>
+    <string name="wrong_otp">Incorrect verification code</string>
+    <string name="are_you_syndicate_member">Are you a syndicate member?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="register_in">Create an account in</string>
+    <string name="enter_password">Please enter the password</string>
+    <string name="membership_id">Membership ID</string>
+    <string name="enter_membership_id">Please enter your membership ID</string>
+    <string name="national_id">National ID</string>
+    <string name="enter_nat_id">Please enter your national ID</string>
+    <string name="password_rules">Password Requirements</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="go_to_home">Home Page</string>
+    <string name="complete_profile">Complete Account Information</string>
+    <string name="subscribe_in_contact">Subscribe to the installment service</string>
+    <string name="activate_contact_subscription">Activate Subscription</string>
+    <string name="activate_contact_steps">Activate your balance through simple steps:\n
+1- Visit the nearest Contact branch or contact us to arrange a home visit.\n
+2- Sign the contract.\n
+3- We will contact you to send a code to activate the service on your mobile number.</string>
+    <string name="enter_id_front">Please upload the front side of your ID card</string>
+    <string name="enter_id_back">Please upload the back side of your ID card</string>
+    <string name="request_sent">Your request has been successfully sent. Please wait for it to be reviewed.</string>
+    <string name="review_your_data">Review your personal data</string>
+    <string name="residence">Residence</string>
+    <string name="residence_status">What is the status of your residence?</string>
+    <string name="residence_owned">Fully Owned</string>
+    <string name="residence_rent">Rented</string>
+    <string name="residence_family">Family House</string>
+    <string name="dependants">Dependants</string>
+    <string name="dependants_num">How many dependants do you have?</string>
+    <string name="reference_number">Another Reference Number</string>
+    <string name="enter_reference_number">Please enter another reference number</string>
+    <string name="employment_details">Employment Details</string>
+    <string name="employment_type">Employment Type</string>
+    <string name="employment_employee">Employee</string>
+    <string name="employment_private">Private Work</string>
+    <string name="employment_freelance">Freelancer</string>
+    <string name="employment_none">Not Employed</string>
+    <string name="company_name">Company Name</string>
+    <string name="company_field">Field</string>
+    <string name="employment_title">Job Title</string>
+    <string name="company_years">Number of Years</string>
+    <string name="company_salary">Salary</string>
 
     <!--/////////////////////////////Home/////////////////////////////////////////-->
-    <string name="seha">نقابتى صحة مستدامة</string>
-    <string name="wlcare_packages">باقات WLCare</string>
-    <string name="welcome_in">مرحبا %s في</string>
+    <string name="seha">My Sustainable Health</string>
+    <string name="wlcare_packages">WLCare Packages</string>
+    <string name="welcome_in">Welcome, %s, to</string>
     <string name="current_balance">Current Balance</string>
-    <string name="visit_home">زيارات منزلية</string>
-    <string name="consl">استشارات اونلاين</string>
-    <string name="packages">الباقات</string>
-    <string name="menu_more">القائمة</string>
-    <string name="home">الرئيسية</string>
-    <string name="other_services">الخدمات</string>
-    <string name="choose_package">إختر ما بين باقات صحة مستدامة</string>
-    <string name="terms_title">الشروط والأحكام</string>
-    <string name="contact_terms">قواعد عامة\n
-هو نظام مكافآت يمنحك نقاط عند إستخدامك لأي منتج/خدمة من المنتجات والخدمات التاليه:\n
-كونتكت تمويل السيارات\n
-كونتكت تمويل النقل\n
-كونتكت تسوق\n
-كونتكت تمويل التشطيب\n
-كونتكت وساطة تأمينية\n
-كونتكت تمويل عقاري\n
-كونتكت تأجير تمويلي (للمنشات الفردية فقط)\n
-أنت موافق على الاشتراك بالبرنامج طبقاً لهذه الشروط، والتي يجب قراءتها بالإضافة إلى قراءة شروط وأحكام التعاقد الخاصة بالشركة\n
-يتم تفعيل الإشتراك بصورة تلقائية ومجانية في البرنامج دون الحاجة لتقديم طلب إنضمام\n
-يحق للشركة إلغاء إشتراكك في البرنامج، وذلك إذا ما نمى إلى علمها\n
-    </string>
-    <string name="news_details_back_btn">رجوع</string>
-    <string name="news_search">بحث</string>
-    <string name="contact_benefits">اذا كنت تريد الاستفادة بخدمات كونتاكت سجل الآن واحصل على رصيد لحظي يصل إلى 50000 جنية لسداد خدماتك النقابية و الغير نقابية بالتقسيط</string>
-    <string name="contact_home_benefits">سجل واحصل على رصيد لحظي يصل إلى 50000 جنية كحد ائتماني لسداد خدماتك بالتقسيط</string>
-    <string name="contact_failure">تعذر الوصول لرصيدك في الوقت الحالي</string>
-    <string name="marital_status">الحالة الاجتماعية</string>
-    <string name="retry">حاول مرة أخرى</string>
-    <string name="contact_show_balance">عرض الرصيد</string>
-    <string name="contact_already_member">انت عميل سابق لدى كونتاكت لمعرفة الرصيد المتاح برجاء الرجوع لكونتاكت</string>
+    <string name="visit_home">Home Visits</string>
+    <string name="consl">Online Consultations</string>
+    <string name="packages">Packages</string>
+    <string name="menu_more">Menu</string>
+    <string name="home">Home</string>
+    <string name="other_services">Services</string>
+    <string name="choose_package">Choose from My Sustainable Health Packages</string>
+    <string name="terms_title">Terms and Conditions</string>
+    <string name="contact_terms">General Rules\n
+It is a reward system that gives you points when you use any of the following products and services:\n
+Contact Car Financing\n
+Contact Transport Financing\n
+Contact Shopping\n
+Contact Finishing Financing\n
+Contact Insurance Brokerage\n
+Contact Real Estate Financing\n
+Contact Lease Financing (for individual establishments only)\n
+You agree to subscribe to the program according to these terms, which must be read in addition to reading the terms and conditions of the company.\n
+The subscription is automatically activated and free of charge in the program without the need to submit a membership request.\n
+The company has the right to cancel your subscription to the program if it becomes aware of it.\n
+</string>
+    <string name="news_details_back_btn">Back</string>
+    <string name="news_search">Search</string>
+    <string name="contact_benefits">If you want to benefit from Contact\'s services, register now and get an instant credit of up to 50,000 EGP to pay for your syndicate and non-syndicate services in installments.</string>
+    <string name="contact_home_benefits">Register and get an instant credit of up to 50,000 EGP as a credit limit to pay for your services in installments.</string>
+    <string name="contact_failure">Unable to access your balance at the moment</string>
+    <string name="marital_status">Marital Status</string>
+    <string name="retry">Retry</string>
+    <string name="contact_show_balance">Show Balance</string>
+    <string name="contact_already_member">You are a previous client of Contact. To check your available balance, please refer to Contact.</string>
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->
 
-
-    <string name="chefaa" translatable="false">شفاء</string>
-    <string name="add_new_address">أضف عنوان جديد</string>
-    <string name="street">اسم الشارع</string>
-    <string name="add_street_name">مثال: المعادى شارع 151</string>
-    <string name="building">رقم المبنى</string>
-    <string name="add_building_number">مثال: 7</string>
-    <string name="floor">رقم الدور</string>
-    <string name="add_floor_number">مثال: 10</string>
-    <string name="apartment">رقم الشقة</string>
-    <string name="add_apartment_number">مثال: 20</string>
-    <string name="nearest_landmark">علامة مميزة</string>
-    <string name="add_bank_name_supermarket_hospital">مثال: بجوار مترو, ماركت ...</string>
-    <string name="save_address">حفظ العنوان</string>
-    <string name="orders_history">طلباتك</string>
-    <string name="cart">عربة التسوق</string>
-    <string name="do_search">ابحث</string>
-    <string name="add_note">إضافة ملاحظات</string>
-    <!--    <string name="add">إضافة</string>-->
-    <!--    <string name="delivery_fees">مصاريف التوصيل</string>-->
-    <string name="order_is_placed">لقد تم تأكيد طلبك بنجاح</string>
-    <string name="nickname_">نوع العنوان</string>
-    <string name="location">من فضلك حدد موقعك</string>
-    <!--    <string name="alert_title">تنبيه</string>-->
-    <string name="cart_empty">عربة التسوق فارغة</string>
-    <!--    <string name="address">العنوان</string>-->
-    <string name="select_location">اختيار</string>
-    <!--    <string name="please_wait">من فضلك انتظر</string>-->
-    <!--    <string name="order_status">حالة الطلب</string>-->
-    <string name="order_by_note">الطلب بالكتابة</string>
+    <string name="chefaa" translatable="false">Chefaa</string>
+    <string name="add_new_address">Add New Address</string>
+    <string name="street">Street Name</string>
+    <string name="add_street_name">Example: Maadi Street 151</string>
+    <string name="building">Building Number</string>
+    <string name="add_building_number">Example: 7</string>
+    <string name="floor">Floor Number</string>
+    <string name="add_floor_number">Example: 10</string>
+    <string name="apartment">Apartment Number</string>
+    <string name="add_apartment_number">Example: 20</string>
+    <string name="nearest_landmark">Nearest Landmark</string>
+    <string name="add_bank_name_supermarket_hospital">Example: Next to Metro, Market...</string>
+    <string name="save_address">Save Address</string>
+    <string name="orders_history">Your Orders</string>
+    <string name="cart">Shopping Cart</string>
+    <string name="do_search">Search</string>
+    <string name="add_note">Add Notes</string>
+    <string name="order_is_placed">Your order has been successfully placed</string>
+    <string name="nickname_">Address Type</string>
+    <string name="location">Please select your location</string>
+    <string name="cart_empty">Your shopping cart is empty</string>
+    <string name="select_location">Select</string>
+    <string name="order_by_note">Order by Writing</string>
     <string name="facebook_app_id">2276751609173055</string>
     <string name="facebook_client_token">6ca398d94761e4f93afefb0ce6e88a90</string>
-    <!--    <string name="select">اكمل بإستخدام..</string>-->
-    <string name="select_file">اختار صورة</string>
-    <string name="add_to_cart">أضف الى العربة</string>
-    <string name="write_order">اكتب طلبك</string>
-    <string name="note_des">مثال علبة بنادول و بامبرز مقاس 2</string>
-    <string name="work">العمل</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="about_medicine">جميع الادوية يتم صرفها من صيدليات مرخصة من وزارة الصحة وبوجود وصفة طبيه من طبيب مختص</string>
-    <string name="house">المنزل</string>
-    <string name="choose_marital_status">اختر حالتك الإجتماعية</string>
-    <string name="marital_status_single">اعزب</string>
-    <string name="marital_status_married">متزوج</string>
-    <string name="marital_status_divorced">مطلق</string>
-    <string name="marital_status_widow">ارمل</string>
-    <string name="scan_qr">مسح QR كود</string>
-    <string name="contact_providers">مقدمي الخدمة</string>
-    <string name="contact_installments">التقسيط</string>
-    <string name="contact_amount">المبلغ المراد تقسيطه</string>
-    <string name="contact_minimum">المبلغ المراد تقسيطه لا يقل عن 500 جنيه</string>
-    <string name="contact_calculate">احسب</string>
-    <string name="contact_monthly_installment">القسط الشهري</string>
-    <string name="contact_months">عدد الشهور</string>
-    <string name="verification">تأكيد رقم الموبايل</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="logout">هل تريد الخروج!</string>
+    <string name="select_file">Select an Image</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="write_order">Write Your Order</string>
+    <string name="note_des">Example: A box of Panadol and Pampers size 2</string>
+    <string name="work">Work</string>
+    <string name="about_medicine">All medications are dispensed from licensed pharmacies by a specialized doctor\'s prescription.</string>
+    <string name="house">House</string>
+    <string name="choose_marital_status">Choose Your Marital Status</string>
+    <string name="marital_status_single">Single</string>
+    <string name="marital_status_married">Married</string>
+    <string name="marital_status_divorced">Divorced</string>
+    <string name="marital_status_widow">Widow</string>
+    <string name="scan_qr">Scan QR Code</string>
+    <string name="contact_providers">Service Providers</string>
+    <string name="contact_installments">Installments</string>
+    <string name="contact_amount">Desired Amount</string>
+    <string name="contact_minimum">The desired amount for installment should not be less than 500 EGP</string>
+    <string name="contact_calculate">Calculate</string>
+    <string name="contact_monthly_installment">Monthly Installment</string>
+    <string name="contact_months">Number of Months</string>
+    <string name="verification">Mobile Number Verification</string>
+    <string name="logout">Do you want to log out?</string>
 
-    <string name="contact_loading_one">انت عارف انك مع كونتاكت تقدر تاخد رصيد لحظي يوصل ل ٥٠ الف جنية</string>
-    <string name="contact_loading_two">انتظر قليلا .. لسه الوقت ما انتهاش</string>
-    <string name="contact_loading_three">مع رصيدك من خدمة كونتاكت تقدر تقسط كل مدفوعاتك النقابية</string>
-    <string name="contact_loading_four">كمل تسجيل واخد رصيد لحظي تقدر تدفع بيه اي معامله علي تطبيق نقابتي</string>
+    <string name="contact_loading_one">Did you know that with Contact, you can get instant credit of up to 50,000 EGP?</string>
+    <string name="contact_loading_two">Please wait... It\'s not too late yet!</string>
+    <string name="contact_loading_three">With your Contact credit, you can pay all your syndicate payments in installments.</string>
+    <string name="contact_loading_four">Continue registration and get instant credit to pay for any transaction on the Neqabty app.</string>
 
     <array name="retirement_services">
-        <item>إختر الخدمة</item>
-        <item>إستعلام عن بطاقة الفيزا</item>
-        <item>استعلام عن الرصيد</item>
+        <item>Choose a Service</item>
+        <item>Check Visa Card</item>
+        <item>Check Balance</item>
     </array>
 </resources>
