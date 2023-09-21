@@ -35,7 +35,11 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
         val item = items[position]
         viewHolder.binding.mainAddress.text = item.title
         viewHolder.binding.addressDetails.text = "شارع ${item.streetName}, مبنى رقم ${item.buildingNo}, رقم الطابق ${item.floorNo}, شقة رقم ${item.apartmentNo}"
-        viewHolder.binding.layoutItem.setOnClickListener {
+        viewHolder.binding.delete.setOnClickListener {
+            onItemClickListener?.setOnDeleteClickListener(item.id.toString())
+        }
+
+        viewHolder.binding.addressDetails.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
         }
     }
@@ -56,7 +60,10 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    interface OnItemClickListener { fun setOnItemClickListener(addressItem: PharmacyMartAddressEntity) }
+    interface OnItemClickListener {
+        fun setOnItemClickListener(addressItem: PharmacyMartAddressEntity)
+        fun setOnDeleteClickListener(addressIId: String)
+    }
 
     class ViewHolder(val binding: AddressLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)

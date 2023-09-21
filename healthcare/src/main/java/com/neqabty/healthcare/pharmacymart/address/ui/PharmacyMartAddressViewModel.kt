@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.healthcare.pharmacymart.address.domain.entity.DeleteAddressEntity
 import com.neqabty.healthcare.pharmacymart.address.domain.entity.PharmacyMartAddressesListEntity
 import com.neqabty.healthcare.pharmacymart.address.domain.usecases.AddAddressUseCase
+import com.neqabty.healthcare.pharmacymart.address.domain.usecases.DeleteAddressUseCase
 import com.neqabty.healthcare.pharmacymart.address.domain.usecases.GetAddressesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PharmacyMartAddressViewModel @Inject constructor(private val getAllUserAddressUseCase: GetAddressesUseCase,
-                                                       private val addAddressUseCase: AddAddressUseCase) :
-    ViewModel() {
+                                                       private val addAddressUseCase: AddAddressUseCase,
+                                                       private val deleteAddressUseCase: DeleteAddressUseCase) : ViewModel() {
 
     val addresses = MutableLiveData<Resource<PharmacyMartAddressesListEntity>>()
     fun getAddresses() {
@@ -61,6 +63,20 @@ class PharmacyMartAddressViewModel @Inject constructor(private val getAllUserAdd
                 }
             } catch (e: Throwable) {
                 data.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
+
+    val addressStatus = MutableLiveData<Resource<DeleteAddressEntity>>()
+    fun deleteAddresses(addressId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            addressStatus.postValue(Resource.loading(data = null))
+            try {
+                deleteAddressUseCase.build(addressId).collect {
+                    addressStatus.postValue(Resource.success(data = it))
+                }
+            } catch (exception:Throwable){
+                addressStatus.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
         }
     }

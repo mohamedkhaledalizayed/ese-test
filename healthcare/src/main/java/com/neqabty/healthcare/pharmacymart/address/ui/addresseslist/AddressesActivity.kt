@@ -10,10 +10,10 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.selectedAddressPharmacyMart
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -21,7 +21,6 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityAddressesBinding
 import com.neqabty.healthcare.pharmacymart.address.domain.entity.PharmacyMartAddressEntity
 import com.neqabty.healthcare.pharmacymart.address.ui.PharmacyMartAddressViewModel
-import com.neqabty.healthcare.pharmacymart.address.ui.addaddress.PharmacyMartAddAddressActivity
 import com.neqabty.healthcare.pharmacymart.address.ui.selectlocation.PharmacyMartSelectLocationActivity
 import com.neqabty.healthcare.pharmacymart.orders.ui.addorder.AddOrderActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -98,6 +97,29 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>(), LocationList
                 selectedAddressPharmacyMart = addressItem
                 startActivity(Intent(this@AddressesActivity, AddOrderActivity::class.java))
                 finish()
+            }
+
+            override fun setOnDeleteClickListener(addressIId: String) {
+                viewModel.deleteAddresses(addressIId)
+            }
+        }
+
+        viewModel.addressStatus.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+                    binding.progressActivity.showLoading()
+                }
+                Status.SUCCESS ->{
+                    binding.progressActivity.showContent()
+                    Toast.makeText(this@AddressesActivity, it.data?.message, Toast.LENGTH_LONG).show()
+                    if (it.data!!.status){
+                        viewModel.getAddresses()
+                    }
+                }
+                Status.ERROR ->{
+                    binding.progressActivity.showContent()
+                    Toast.makeText(this@AddressesActivity, "حدث خطاء ما.", Toast.LENGTH_LONG).show()
+                }
             }
         }
 

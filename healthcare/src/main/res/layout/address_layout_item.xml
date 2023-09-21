@@ -18,6 +18,14 @@
             android:layout_marginTop="@dimen/_1sdp"
             android:src="@drawable/outline_location" />
 
+        <ImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/delete"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:src="@drawable/delete_prescription" />
+
         <TextView
             android:id="@+id/main_address"
             android:layout_width="wrap_content"

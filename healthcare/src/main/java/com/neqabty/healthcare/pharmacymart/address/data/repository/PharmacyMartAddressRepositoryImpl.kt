@@ -4,6 +4,8 @@ package com.neqabty.healthcare.pharmacymart.address.data.repository
 import com.neqabty.healthcare.pharmacymart.address.data.datasourse.PharmacyMartAddressDS
 import com.neqabty.healthcare.pharmacymart.address.data.model.addresses.Addresse
 import com.neqabty.healthcare.pharmacymart.address.data.model.addresses.PharmacyMartAddressesModel
+import com.neqabty.healthcare.pharmacymart.address.data.model.deleteaddress.DeleteAddressModel
+import com.neqabty.healthcare.pharmacymart.address.domain.entity.DeleteAddressEntity
 import com.neqabty.healthcare.pharmacymart.address.domain.entity.PharmacyMartAddressEntity
 import com.neqabty.healthcare.pharmacymart.address.domain.entity.PharmacyMartAddressesListEntity
 import com.neqabty.healthcare.pharmacymart.address.domain.repository.PharmacyMartAddressRepository
@@ -74,4 +76,17 @@ class PharmacyMartAddressRepositoryImpl @Inject constructor(private val addressD
         }
     }
 
+    override fun deleteAddress(addressId: String): Flow<DeleteAddressEntity> {
+        return flow {
+            emit(addressDS.deleteAddress(addressId).toDeleteAddressEntity())
+        }
+    }
+
+    private fun DeleteAddressModel.toDeleteAddressEntity(): DeleteAddressEntity{
+        return DeleteAddressEntity(
+            status = status,
+            statusCode = status_code,
+            message = message
+        )
+    }
 }

@@ -5,8 +5,10 @@ package com.neqabty.healthcare.pharmacymart.address.data.datasourse
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.pharmacymart.address.data.api.PharmacyMartAddressApi
 import com.neqabty.healthcare.pharmacymart.address.data.model.AddAddressBody
+import com.neqabty.healthcare.pharmacymart.address.data.model.DeleteAddressBody
 import com.neqabty.healthcare.pharmacymart.address.data.model.GetAddressesBody
 import com.neqabty.healthcare.pharmacymart.address.data.model.addresses.PharmacyMartAddressesModel
+import com.neqabty.healthcare.pharmacymart.address.data.model.deleteaddress.DeleteAddressModel
 import javax.inject.Inject
 
 
@@ -36,4 +38,7 @@ class PharmacyMartAddressDS @Inject constructor(private val addressApi: Pharmacy
         ).status
     }
 
+    suspend fun deleteAddress(addressId: String): DeleteAddressModel {
+        return addressApi.deleteAddress(DeleteAddressBody(addressId = addressId))
+    }
 }
