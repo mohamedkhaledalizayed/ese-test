@@ -2,13 +2,16 @@ package com.neqabty.healthcare.pharmacymart.orders.data.repository
 
 
 
-import com.neqabty.healthcare.chefaa.orders.data.model.OrderRequestBody
 import com.neqabty.healthcare.pharmacymart.orders.data.datasource.PharmacyMartOrdersDS
 import com.neqabty.healthcare.pharmacymart.orders.data.model.addorder.AddOrderModel
+import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderDetailsModel
+import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderItemModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderStatusModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrdersListModel
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.addorder.AddOrderEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderDetailsEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderItemEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderStatusEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrdersEntityList
@@ -67,13 +70,50 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
         )
     }
 
-    override fun getOrderDetails(orderId: String): Flow<String> {
+    override fun getOrderDetails(orderId: String): Flow<OrderDetailsEntity> {
         return flow {
             emit(
-                ordersDS.getOrder(OrderRequestBody(orderId))
+                ordersDS.getOrder(orderId).toOrderDetailsEntity()
             )
         }
     }
+
+    private fun OrderDetailsModel.toOrderDetailsEntity(): OrderDetailsEntity{
+        return OrderDetailsEntity(
+            data = data.map { it.toOrderItemEntity() },
+            message = message,
+            status = status,
+            statusCode = status_code
+        )
+    }
+
+    private fun OrderItemModel.toOrderItemEntity(): OrderItemEntity {
+        return OrderItemEntity(
+            actualDeliveryDatetime = actual_delivery_datetime ?: "",
+            attachments = attachments,
+            mobile = mobile,
+            status = status,
+            items = items,
+            orderStatusId = order_status.id,
+            orderStatusTitle = order_status.title_ar,
+            id = id,
+            priceBeforeDiscount = price_before_discount ?: "",
+            priceAfterDiscount = price_after_discount ?: "",
+            cancellationReason = cancellation_reason ?: "",
+            totalPrice = total_price ?: "",
+            paid = paid,
+            deliveryFees = delivery_fees ?: "",
+            orderNumber = order_number,
+            deliveryMobile = delivery_mobile ?: "",
+            createdAt = created_at ?: "",
+            deliveryNote = delivery_note ?: "",
+            cancelledBy = cancelled_by ?: "",
+            orderText = order_text ?: "",
+            importedDiscountPercentage = imported_discount_percentage ?: "",
+            localDiscountPercentage = local_discount_percentage ?: ""
+        )
+    }
+
 
     override fun placeOrder(
         items: List<String>,

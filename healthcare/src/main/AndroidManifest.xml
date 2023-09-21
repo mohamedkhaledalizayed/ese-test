@@ -66,9 +66,6 @@
             android:name=".pharmacymart.orders.ui.orderdetails.PharmacyMartOrderDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".pharmacymart.orders.ui.orderlist.PharmacyMartOrdersActivity"
-            android:exported="false" />
-        <activity
             android:name=".pharmacymart.home.ui.PharmacyMartHomeActivity"
             android:exported="false" />
         <activity

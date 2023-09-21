@@ -6,14 +6,17 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.addorder.AddOrderEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderDetailsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.usecases.AddOrderUseCase
+import com.neqabty.healthcare.pharmacymart.orders.domain.usecases.GetOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OrdersViewModel @Inject constructor(private val placeOrderUseCase: AddOrderUseCase) :
+class OrdersViewModel @Inject constructor(private val placeOrderUseCase: AddOrderUseCase,
+                                          private val getOrderUseCase: GetOrderUseCase) :
     ViewModel() {
 
     val placeImagesResult = MutableLiveData<Resource<AddOrderEntity>>()
@@ -33,6 +36,20 @@ class OrdersViewModel @Inject constructor(private val placeOrderUseCase: AddOrde
                 }
             } catch (exception: Throwable) {
                 placeImagesResult.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+            }
+        }
+    }
+
+    val order = MutableLiveData<Resource<OrderDetailsEntity>>()
+    fun getOrder(orderId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            order.postValue(Resource.loading(data = null))
+            try {
+                getOrderUseCase.build(orderId).collect {
+                    order.postValue(Resource.success(it))
+                }
+            } catch (exception: Throwable) {
+                order.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
         }
     }

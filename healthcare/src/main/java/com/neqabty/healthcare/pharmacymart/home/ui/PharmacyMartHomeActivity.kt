@@ -29,6 +29,7 @@ import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.PhotoUI
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityPharmacyMartHomeBinding
+import com.neqabty.healthcare.pharmacymart.orders.ui.orderdetails.PharmacyMartOrderDetailsActivity
 import com.neqabty.healthcare.pharmacymart.orders.ui.uploadprescription.PharmacyMartCartActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
@@ -96,9 +97,9 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
         mAdapter.onItemClickListener = object :
             PharmacyMartOrdersAdapter.OnItemClickListener {
             override fun setOnItemClickListener(orderEntity: OrderEntity) {
-//                val intent = Intent(this@PharmacyMartHomeActivity, OrderDetailsActivity::class.java)
-//                intent.putExtra("orderId", orderEntity.id)
-//                startActivity(intent)
+                val intent = Intent(this@PharmacyMartHomeActivity, PharmacyMartOrderDetailsActivity::class.java)
+                intent.putExtra("orderId", orderEntity.id)
+                startActivity(intent)
             }
 
             override fun setOnCallClickListener() {
