@@ -83,6 +83,16 @@
     </FrameLayout>
 
 
+    <carbon.widget.ImageView
+        android:id="@+id/wlcare"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:src="@drawable/wlcare"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_container"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -217,23 +227,6 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/pharmacy_mart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="صيدلية WLCARE"
-        android:padding="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:textColor="#5d81d4"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/back_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="@dimen/_20sdp"
-        android:background="@drawable/back_btn_bg"
-        android:textSize="@dimen/_12ssp"
-        android:fontFamily="@font/hanimation_regular"/>
 
     <TextView
         android:id="@+id/back_btn"

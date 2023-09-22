@@ -4,12 +4,14 @@ package com.neqabty.healthcare.pharmacymart.orders.data.repository
 
 import com.neqabty.healthcare.pharmacymart.orders.data.datasource.PharmacyMartOrdersDS
 import com.neqabty.healthcare.pharmacymart.orders.data.model.addorder.AddOrderModel
+import com.neqabty.healthcare.pharmacymart.orders.data.model.cancelorder.CancelOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderDetailsModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderItemModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderStatusModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrdersListModel
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.addorder.AddOrderEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.cancelorder.CancelOrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderDetailsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderItemEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
@@ -134,6 +136,27 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
                 deviceInfo = deviceInfo,
                 currentLocation = currentLocation
             ).toAddOrderEntity())
+        }
+    }
+
+    override fun cancelOrder(orderId: String, cancellationReason: String): Flow<CancelOrderEntity> {
+        return flow {
+            emit(ordersDS.cancelOrder(orderId, cancellationReason).toCancelOrderEntity())
+        }
+    }
+
+    private fun CancelOrderModel.toCancelOrderEntity(): CancelOrderEntity{
+        return CancelOrderEntity(
+            data = data,
+            message = message,
+            status = status,
+            statusCode = status_code
+        )
+    }
+
+    override fun confirmOrder(orderId: String): Flow<String> {
+        return flow {
+            emit(ordersDS.confirmOrder(orderId))
         }
     }
 

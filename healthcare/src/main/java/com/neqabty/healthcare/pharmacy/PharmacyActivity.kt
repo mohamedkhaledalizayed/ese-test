@@ -22,7 +22,7 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
 
         binding.circularProgress.setProgress(60.0, 100.0)
         binding.backBtnHeader.setOnClickListener { finish() }
-        binding.pharmacyMart.setOnClickListener {
+        binding.wlcare.setOnClickListener {
             startActivity(Intent(this@PharmacyActivity, PharmacyMartHomeActivity::class.java))
         }
         binding.backBtn.setOnClickListener { finish() }

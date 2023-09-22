@@ -34,5 +34,35 @@ class PharmacyMartOrderDetailsActivity : BaseActivity<ActivityPharmacyMartOrderD
                 }
             }
         }
+
+//        viewModel.cancelOrder(intent.getStringExtra("orderId") ?: "", "")
+        viewModel.cancellationStatus.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+
+                }
+                Status.SUCCESS ->{
+
+                }
+                Status.ERROR ->{
+
+                }
+            }
+        }
+
+//        viewModel.confirmOrder(intent.getStringExtra("orderId") ?: "")
+        viewModel.confirmationStatus.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+
+                }
+                Status.SUCCESS ->{
+
+                }
+                Status.ERROR ->{
+
+                }
+            }
+        }
     }
 }

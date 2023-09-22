@@ -6,8 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.addorder.AddOrderEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.cancelorder.CancelOrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderDetailsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.usecases.AddOrderUseCase
+import com.neqabty.healthcare.pharmacymart.orders.domain.usecases.CancelOrderUseCase
+import com.neqabty.healthcare.pharmacymart.orders.domain.usecases.ConfirmOrderUseCase
 import com.neqabty.healthcare.pharmacymart.orders.domain.usecases.GetOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +19,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrdersViewModel @Inject constructor(private val placeOrderUseCase: AddOrderUseCase,
-                                          private val getOrderUseCase: GetOrderUseCase) :
+                                          private val getOrderUseCase: GetOrderUseCase,
+                                          private val cancelOrderUseCase: CancelOrderUseCase,
+                                          private val confirmOrderUseCase: ConfirmOrderUseCase) :
     ViewModel() {
 
     val placeImagesResult = MutableLiveData<Resource<AddOrderEntity>>()
@@ -50,6 +55,34 @@ class OrdersViewModel @Inject constructor(private val placeOrderUseCase: AddOrde
                 }
             } catch (exception: Throwable) {
                 order.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+            }
+        }
+    }
+
+    val cancellationStatus = MutableLiveData<Resource<CancelOrderEntity>>()
+    fun cancelOrder(orderId: String, cancellationReason: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            cancellationStatus.postValue(Resource.loading(data = null))
+            try {
+                cancelOrderUseCase.build(orderId, cancellationReason).collect {
+                    cancellationStatus.postValue(Resource.success(it))
+                }
+            } catch (exception: Throwable) {
+                cancellationStatus.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+            }
+        }
+    }
+
+    val confirmationStatus = MutableLiveData<Resource<String>>()
+    fun confirmOrder(orderId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            confirmationStatus.postValue(Resource.loading(data = null))
+            try {
+                confirmOrderUseCase.build(orderId).collect {
+                    confirmationStatus.postValue(Resource.success(it))
+                }
+            } catch (exception: Throwable) {
+                confirmationStatus.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
         }
     }
