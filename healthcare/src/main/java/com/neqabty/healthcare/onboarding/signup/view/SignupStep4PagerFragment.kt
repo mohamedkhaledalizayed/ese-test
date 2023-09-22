@@ -79,6 +79,10 @@ class SignupStep4PagerFragment : Fragment() {
         val entityValidationsList =
             SignupData.syndicatesList.findLast { it.code == SignupData.syndicateID }?.entityValidations
 
+        if (entityValidationsList?.find { it.validationName == "has_full_name" }?.value == true) {
+            binding.clName.visibility = View.VISIBLE
+        }
+
         if (entityValidationsList?.find { it.validationName == "has_membership_id" }?.value == true) {
             binding.clMembershipNumber.visibility = View.VISIBLE
         }
@@ -89,6 +93,14 @@ class SignupStep4PagerFragment : Fragment() {
 
         if (entityValidationsList?.find { it.validationName == "has_email" }?.value == true) {
             binding.clEmail.visibility = View.VISIBLE
+        }
+
+        if (entityValidationsList?.find { it.validationName == "password" }?.value == true) {
+            binding.clPassword.visibility = View.VISIBLE
+            binding.clPasswordConfirmation.visibility = View.VISIBLE
+            binding.tvPasswordReset.visibility = View.VISIBLE
+            binding.ivPasswordRules.visibility = View.VISIBLE
+            binding.tvPasswordRules.visibility = View.VISIBLE
         }
 
         binding.tvPasswordRules.setOnClickListener {
