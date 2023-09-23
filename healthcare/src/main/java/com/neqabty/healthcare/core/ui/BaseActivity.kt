@@ -335,7 +335,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
                     // check for permanent denial of any permission
                     if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied) {
                         // permission is denied permanently, we will show user a dialog message.
-                        showSettingsDialog()
+                        showSettingsDialog("يحتاج هذا التطبيق الاذن للوصول الى موقعك الحالى. يمكنك منحهم في إعدادات التطبيق.")
                     }
                 }
 
@@ -353,11 +353,11 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             .onSameThread().check()
     }
 
-    private fun showSettingsDialog() {
+     fun showSettingsDialog(message: String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(this@BaseActivity)
         builder.setTitle("بحاجة إلى أذونات")
         builder.setCancelable(false)
-        builder.setMessage("يحتاج هذا التطبيق إلى إذن لاستخدام هذه الميزة. يمكنك منحهم في إعدادات التطبيق.")
+        builder.setMessage(message)
         builder.setPositiveButton("اذهب للاعدادات\n") { dialog: DialogInterface, which: Int ->
             dialog.cancel()
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)

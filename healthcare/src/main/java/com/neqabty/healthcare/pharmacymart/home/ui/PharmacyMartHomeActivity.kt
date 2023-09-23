@@ -5,7 +5,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
@@ -16,19 +15,24 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.view.IMediaSelection
 import com.neqabty.healthcare.chefaa.home.view.PickUpImageBottomSheet
-import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.PhotoUI
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityPharmacyMartHomeBinding
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.ui.orderdetails.PharmacyMartOrderDetailsActivity
 import com.neqabty.healthcare.pharmacymart.orders.ui.uploadprescription.PharmacyMartCartActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +40,7 @@ import dmax.dialog.SpotsDialog
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 @AndroidEntryPoint
 class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>(), IMediaSelection {
@@ -148,17 +153,6 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
 
     private fun addImageToCart(photoUI: PhotoUI){
         Constants.pharmacyMartCart.pharmacyMartImageList.add(photoUI.uri)
-//        Constants.cart.imageList.add(
-//            OrderItemsEntity(
-//                image = photoUI.uri?.path!!,
-//                quantity = 1,
-//                type = Constants.ITEMTYPES.IMAGE.typeName,
-//                note = "",
-//                productId = -1,
-//                productEntity = null,
-//                imageUri = photoUI.uri
-//            )
-//        )
         startActivity(Intent(this, PharmacyMartCartActivity::class.java))
     }
 
@@ -175,18 +169,25 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
     }
 
     private fun grantCameraPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CAMERA)
-        } else {
-            cameraIntent()
-        }
-    }
+        Dexter.withContext(this)
+            .withPermission(Manifest.permission.CAMERA)
+            .withListener(object : PermissionListener {
+                override fun onPermissionGranted(response: PermissionGrantedResponse) {
+                    cameraIntent()
+                }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CAMERA) {
-            grantCameraPermission()
-        }
+                override fun onPermissionDenied(response: PermissionDeniedResponse) {
+                    dialog.dismiss()
+                    showSettingsDialog("يحتاج هذا التطبيق الاذن للوصول الى الكاميرا. يمكنك منحهم في إعدادات التطبيق.")
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permission: PermissionRequest,
+                    token: PermissionToken
+                ) {
+                    token.continuePermissionRequest()
+                }
+            }).check()
     }
 
     private fun cameraIntent() {
