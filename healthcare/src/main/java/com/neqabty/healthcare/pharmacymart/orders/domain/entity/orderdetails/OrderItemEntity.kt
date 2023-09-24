@@ -13,7 +13,7 @@ data class OrderItemEntity(
     val deliveryNote: String,
     val id: Int,
     val importedDiscountPercentage: String,
-    val items: List<Any>,
+    val items: List<ItemsEntity>,
     val localDiscountPercentage: String,
     val mobile: String,
     val orderNumber: String,

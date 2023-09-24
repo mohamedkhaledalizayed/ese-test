@@ -18,7 +18,7 @@ data class OrderItemModel(
     val delivery_note: String?,
     val id: Int,
     val imported_discount_percentage: String?,
-    val items: List<Any>,
+    val items: List<ItemsModel>,
     val local_discount_percentage: String?,
     val mobile: String,
     val order_number: String,

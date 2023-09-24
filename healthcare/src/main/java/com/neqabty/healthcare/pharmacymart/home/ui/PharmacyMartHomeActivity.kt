@@ -76,13 +76,15 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        viewModel.getOrders()
+
         viewModel.orders.observe(this){
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
                         if (resource.data!!.status){
                             mAdapter.submitList(resource.data.data)
                         }else{
@@ -92,6 +94,7 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
                         }
                     }
                     Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this@PharmacyMartHomeActivity, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
@@ -106,10 +109,6 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
                 intent.putExtra("orderId", orderEntity.id)
                 startActivity(intent)
             }
-
-            override fun setOnCallClickListener() {
-                AppUtils().call(this@PharmacyMartHomeActivity, Constants.CHEFAA_SUPPORT_NUMBER)
-            }
         }
 
         viewModel.registerUser()
@@ -120,7 +119,9 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
                 }
                 Status.SUCCESS ->{
                     dialog.hide()
-                    if (!it.data!!.status){
+                    if (it.data!!.status){
+                        viewModel.getOrders()
+                    }else{
                         Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
                         finish()
                     }

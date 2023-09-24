@@ -2,17 +2,22 @@ package com.neqabty.healthcare.pharmacymart.address.ui.addresseslist
 
 
 import android.Manifest
-import android.content.Context
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.selectedAddressPharmacyMart
@@ -24,39 +29,29 @@ import com.neqabty.healthcare.pharmacymart.address.ui.PharmacyMartAddressViewMod
 import com.neqabty.healthcare.pharmacymart.address.ui.selectlocation.PharmacyMartSelectLocationActivity
 import com.neqabty.healthcare.pharmacymart.orders.ui.addorder.AddOrderActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
 
 @AndroidEntryPoint
-class AddressesActivity : BaseActivity<ActivityAddressesBinding>(), LocationListener {
+class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
 
-    private lateinit var locationManager: LocationManager
     private val mAdapter = AddressAdapter()
+    private lateinit var dialog: AlertDialog
     private val viewModel: PharmacyMartAddressViewModel by viewModels()
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun getViewBinding() = ActivityAddressesBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        dialog = SpotsDialog.Builder()
+            .setContext(this)
+            .setCancelable(false)
+            .setMessage(getString(R.string.please_wait))
+            .build()
+
         binding.backBtn.setOnClickListener {
             finish()
         }
-
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        try{
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                requestPermissions()
-            }
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
-        }catch (e: Exception){
-
-        }
-
 
         viewModel.addresses.observe(this){
             when(it.status){
@@ -125,29 +120,62 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>(), LocationList
 
         binding.addAddressBtn.setOnClickListener {
 
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions()
-                return@setOnClickListener
-            }
-
             if (!checkGPS()){
                 buildAlertMessageNoGps()
                 return@setOnClickListener
             }
 
-            startActivity(Intent(this@AddressesActivity, PharmacyMartSelectLocationActivity::class.java))
+            requestLocationPermissions()
+
         }
 
+    }
+
+    private fun requestLocationPermissions() {
+        Dexter.withContext(this)
+            .withPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(multiplePermissionsReport: MultiplePermissionsReport) {
+                    if (multiplePermissionsReport.areAllPermissionsGranted()) {
+                        dialog.show()
+                        openMap()
+                    }
+                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied) {
+                        // permission is denied permanently, we will show user a dialog message.
+                        showSettingsDialog("يحتاج هذا التطبيق الاذن للوصول الى موقعك الحالى. يمكنك منحهم في إعدادات التطبيق.")
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    list: List<PermissionRequest?>?,
+                    permissionToken: PermissionToken
+                ) {
+                    // this method is called when user grants some permission and denies some of them.
+                    permissionToken.continuePermissionRequest()
+                }
+            }).withErrorListener {
+                Toast.makeText(applicationContext, "Error occurred! ", Toast.LENGTH_SHORT).show()
+            }.check()
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun openMap() {
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this@AddressesActivity)
+        fusedLocationProviderClient.getCurrentLocation(
+            Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token).addOnCompleteListener {
+            dialog.dismiss()
+            Constants.latitude = it.result.latitude
+            Constants.longitude = it.result.longitude
+            startActivity(Intent(this@AddressesActivity, PharmacyMartSelectLocationActivity::class.java))
+        }
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.getAddresses()
-    }
-
-    override fun onLocationChanged(location: Location) {
-        Constants.latitude = location.latitude
-        Constants.longitude = location.longitude
     }
 
 }

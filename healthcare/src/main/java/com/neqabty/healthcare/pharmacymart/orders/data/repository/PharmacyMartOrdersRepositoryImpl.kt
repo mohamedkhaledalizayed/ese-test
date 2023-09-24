@@ -5,6 +5,7 @@ package com.neqabty.healthcare.pharmacymart.orders.data.repository
 import com.neqabty.healthcare.pharmacymart.orders.data.datasource.PharmacyMartOrdersDS
 import com.neqabty.healthcare.pharmacymart.orders.data.model.addorder.AddOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.cancelorder.CancelOrderModel
+import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.ItemsModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderDetailsModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderItemModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderModel
@@ -12,6 +13,7 @@ import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderSta
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrdersListModel
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.addorder.AddOrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.cancelorder.CancelOrderEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.ItemsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderDetailsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderItemEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
@@ -95,7 +97,7 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
             attachments = attachments,
             mobile = mobile,
             status = status,
-            items = items,
+            items = items.map { it.toItemsEntity() },
             orderStatusId = order_status.id,
             orderStatusTitle = order_status.title_ar,
             id = id,
@@ -113,6 +115,20 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
             orderText = order_text ?: "",
             importedDiscountPercentage = imported_discount_percentage ?: "",
             localDiscountPercentage = local_discount_percentage ?: ""
+        )
+    }
+
+    private fun ItemsModel.toItemsEntity(): ItemsEntity{
+        return ItemsEntity(
+            name = name,
+            price = "$price",
+            priceBeforeDiscount = price_before_discount,
+            orderId = order_id,
+            id = id,
+            discountPercentage = discount_percentage,
+            imported = imported,
+            productImage = product_image ?: "",
+            quantity = quantity
         )
     }
 
