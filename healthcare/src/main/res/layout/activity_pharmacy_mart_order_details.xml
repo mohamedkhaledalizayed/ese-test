@@ -96,7 +96,7 @@
 
                     <TextView
                         android:id="@+id/total"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/hanimation_arabic_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="EGP 0.00"
@@ -147,28 +147,30 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/cancel_btn"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:background="@drawable/add_address_btn_bg"
-                android:text="إلغاء الطلب"
-                android:layout_margin="@dimen/_16sdp"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
-                />
-
-            <TextView
                 android:id="@+id/confirm_btn"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_36sdp"
                 android:textAlignment="center"
                 android:gravity="center"
+                android:visibility="gone"
                 android:background="@drawable/add_address_btn_bg"
                 android:text="تاكيد الطلب"
                 android:layout_marginHorizontal="@dimen/_16sdp"
                 android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                />
+
+            <TextView
+                android:id="@+id/cancel_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:visibility="gone"
+                android:background="@drawable/cancel_btn_bg"
+                android:text="إلغاء الطلب"
+                android:layout_margin="@dimen/_16sdp"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 />
 

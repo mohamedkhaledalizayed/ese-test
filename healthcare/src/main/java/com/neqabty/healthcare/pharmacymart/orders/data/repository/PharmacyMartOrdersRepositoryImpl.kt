@@ -5,6 +5,7 @@ package com.neqabty.healthcare.pharmacymart.orders.data.repository
 import com.neqabty.healthcare.pharmacymart.orders.data.datasource.PharmacyMartOrdersDS
 import com.neqabty.healthcare.pharmacymart.orders.data.model.addorder.AddOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.cancelorder.CancelOrderModel
+import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.AddressModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.ItemsModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderDetailsModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderItemModel
@@ -13,6 +14,7 @@ import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderSta
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrdersListModel
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.addorder.AddOrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.cancelorder.CancelOrderEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.AddressEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.ItemsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderDetailsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderItemEntity
@@ -100,6 +102,7 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
             items = items.map { it.toItemsEntity() },
             orderStatusId = order_status.id,
             orderStatusTitle = order_status.title_ar,
+            address = addresses.toAddressEntity(),
             id = id,
             priceBeforeDiscount = price_before_discount ?: "",
             priceAfterDiscount = price_after_discount ?: "",
@@ -129,6 +132,20 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
             imported = imported,
             productImage = product_image ?: "",
             quantity = quantity
+        )
+    }
+
+    private fun AddressModel.toAddressEntity(): AddressEntity {
+        return AddressEntity(
+            apartment = apartment,
+            landLark = land_mark,
+            id = id,
+            streetName = street_name,
+            title = title,
+            buildingNo = building_no,
+            floor = floor,
+            lat = lat,
+            long = long
         )
     }
 

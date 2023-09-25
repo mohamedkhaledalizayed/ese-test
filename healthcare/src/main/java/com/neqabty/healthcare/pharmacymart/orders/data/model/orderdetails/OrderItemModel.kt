@@ -23,6 +23,7 @@ data class OrderItemModel(
     val mobile: String,
     val order_number: String,
     val order_status: OrderStatus,
+    val addresses: AddressModel,
     val order_text: String?,
     val paid: Int,
     val pharmacy_user_id: Int,

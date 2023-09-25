@@ -20,6 +20,7 @@ data class OrderItemEntity(
     val orderStatusTitle: String,
     val orderStatusId: Int,
     val orderText: String,
+    val address: AddressEntity,
     val paid: Int,
     val priceAfterDiscount: String,
     val priceBeforeDiscount: String,

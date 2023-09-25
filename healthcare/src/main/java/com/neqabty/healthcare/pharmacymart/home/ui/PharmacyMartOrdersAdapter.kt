@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.databinding.OrderLayoutBinding
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
 import java.util.*
@@ -39,27 +40,36 @@ class PharmacyMartOrdersAdapter : RecyclerView.Adapter<PharmacyMartOrdersAdapter
 
         viewHolder.binding.orderStatus.text = order.order_status.title_ar
         viewHolder.binding.orderNumber.text = order.order_number
-        viewHolder.binding.orderDate.text = order.created_at
+        viewHolder.binding.orderDate.text = AppUtils().dateFormat(order.created_at.split(".")[0])
 
         viewHolder.binding.root.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(order)
         }
 
         when (order.status) {
-            1 -> {//New
+            1 -> {//Draft
                 viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_new_bg)
             }
             2 -> {//Accepted
                 viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_accepted_bg)
             }
-            3 -> {//In Progress
+            3 -> {//New
                 viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_inprogress_bg)
             }
-            4 -> {//Delivered
+            4 -> {//At Warehouse
                 viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_bg)
             }
-            5 -> {//Canceled
+            5 -> {//With Courier
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_courier_bg)
+            }
+            6 -> {//Delivered
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_delivered_bg)
+            }
+            7 -> {//Canceled
                 viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_canceled_bg)
+            }
+            8 -> {//Returned
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_returened_bg)
             }
             else -> {
                 viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_bg)
