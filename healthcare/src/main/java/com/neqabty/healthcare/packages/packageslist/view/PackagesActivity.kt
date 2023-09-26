@@ -41,7 +41,11 @@ class PackagesActivity : BaseActivity<ActivityPackagesBinding>() {
     }
 
     private fun getPackages() {
-        packagesViewModel.getPackages(Constants.NEQABTY_CODE)
+        if (sharedPreferences.code.isEmpty()){
+            packagesViewModel.getPackages(Constants.NEQABTY_CODE)
+        }else{
+            packagesViewModel.getPackages(sharedPreferences.code)
+        }
         packagesViewModel.packages.observe(this) {
 
             it?.let { resource ->
