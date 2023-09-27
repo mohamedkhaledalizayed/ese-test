@@ -40,7 +40,7 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
 
     private fun OrdersListModel.toOrdersEntityList(): OrdersEntityList{
         return OrdersEntityList(
-            data = data.map { it.toOrderEntity() },
+            data = data.let { it?.map { it.toOrderEntity() } },
             message = message,
             status = status,
             status_code = status_code

@@ -26,7 +26,7 @@ class OTPModule {
     @Provides
     @Named("otp")
     fun providesBaseUrl(): String {
-        return BASE_URL_DEV_OTP
+        return BASE_URL_STAGING_OTP
     }
 
     @Provides
