@@ -25,7 +25,11 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getAllServiceTypes(userNumber: String): Observable<ServiceTypeEntity> {
+    override fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>> {
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getSyndicateServices(userNumber: String): Observable<SyndicateServicesEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
@@ -164,7 +168,21 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
-    override fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+    override fun inquireMedicalRenewalPayment(userNumber: String): Observable<MedicalRenewalPaymentEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override fun addMedicalRenewalRequest(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
         TODO("Not yet implemented")
     }
 
@@ -259,8 +277,51 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override fun inquirePayment(userNumber: String): Observable<RenewalPaymentEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override fun addRenewalRequest(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override fun inquireSyndicateServicesPayment(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        countryID: Int,
+        paymentType: String,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<SyndicateServicesPaymentEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override fun addSyndicateServicesPaymentRequest(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        countryID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<SyndicateServicesPaymentRequestEntity> {
+        TODO("Not yet implemented")
     }
 
     override fun sendMedicalRequest(

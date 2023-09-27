@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_horizontal_normal"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_horizontal_large"
+            android:paddingEnd="@dimen/margin_horizontal_large"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:background="@drawable/rounded_bg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="@string/choose_service"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spSyndicateServices"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:hint="@string/governorate"
+                    android:textDirection="rtl"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spService"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:hint="@string/governorate"
+                    android:textDirection="rtl"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="@string/enter_member_number"
+                    android:textSize="?textSizeMedium"
+                    android:visibility="gone"/>
+
+                <EditText
+                    android:id="@+id/edMemberNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textDirection="anyRtl"
+                    android:maxLength="8"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeLarge"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/bSend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_green"
+                    android:gravity="center"
+                    android:text="@string/pay"
+                    android:textColor="@android:color/white"
+                    android:textSize="?textSizeMedium" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

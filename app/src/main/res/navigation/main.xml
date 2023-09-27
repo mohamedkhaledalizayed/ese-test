@@ -187,6 +187,11 @@
             app:destination="@id/medicalComplaintsFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openSyndicateServices"
+            app:destination="@id/syndicateServicesFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -292,6 +297,11 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openSyndicateServices"
+            app:destination="@id/syndicateServicesFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openMedicalComplaints"
             app:destination="@id/medicalComplaintsFragment"
             app:popUpTo="@id/homeFragment"
@@ -366,8 +376,8 @@
             android:name="mobile"
             app:argType="java.lang.String" />
         <argument
-            android:name="medicalRenewalUI"
-            app:argType="com.neqabty.presentation.entities.MedicalRenewalUI" />
+            android:name="medicalRenewalPaymentUI"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
         <action
             android:id="@+id/openPayment"
             app:destination="@id/paymentFragment" />
@@ -811,15 +821,45 @@
 
 
         <argument
-            android:name="medicalRenewalPaymentUI"
-            app:argType="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
+            android:name="renewalPaymentUI"
+            app:argType="com.neqabty.presentation.entities.RenewalPaymentUI" />
         <argument
             android:name="serviceID"
-            app:argType="java.lang.String" />
+            app:argType="java.lang.Integer" />
 
         <action
             android:id="@+id/openPayment"
             app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/syndicateServicesFragment"
+        android:name="com.neqabty.presentation.ui.syndicateServices.SyndicateServicesFragment"
+        android:label="@string/syndicate_services_title"
+        tools:layout="@layout/syndicate_services_fragment">
+        <action
+            android:id="@+id/openSyndicateServicesDetails"
+            app:destination="@id/syndicateServicesDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/syndicateServicesDetailsFragment"
+        android:name="com.neqabty.presentation.ui.syndicateServicesDetails.SyndicateServicesDetailsFragment"
+        android:label="@string/syndicate_services_title"
+        tools:layout="@layout/syndicate_services_fragment">
+        <argument
+            android:name="title"
+            app:argType="java.lang.String" />
+
+        <argument
+            android:name="serviceID"
+            app:argType="java.lang.Integer" />
+
+        <argument
+            android:name="amount"
+            app:argType="java.lang.String" />
+
+        <argument
+            android:name="syndicateServicesPaymentUI"
+            app:argType="com.neqabty.presentation.entities.SyndicateServicesPaymentUI" />
     </fragment>
     <fragment
         android:id="@+id/medicalProceduresInquiryFragment"

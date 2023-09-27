@@ -56,6 +56,7 @@ object Constants {
     var REFUND = 16
     var MEDICAL_PROCEDURES_INQUIRY = 17
     var MEDICAL_COMPLAINTS = 18
+    var SYNDICATE_SERVICES = 19
 
     var AD_MEDICAL_RENEW = 1
     var AD_TRIPS = 2
@@ -72,9 +73,9 @@ object Constants {
     var DELIVERY_LOCATION_HOME = 2
     var DELIVERY_LOCATION_MAIN_SYNDICATE = 3
 
-    var PAYMENT_TYPE_TRIPS = "9991"
-    var PAYMENT_TYPE_RECORDS = "9992"
-    var PAYMENT_TYPE_MEDICAL_RENEW = "9993"
+    var PAYMENT_TYPE_TRIPS = 9991
+    var PAYMENT_TYPE_RECORDS = 9992
+    var PAYMENT_TYPE_MEDICAL_RENEW = 9993
 
     sealed class Mode {
         class Visitor : Mode() {

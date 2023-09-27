@@ -234,6 +234,10 @@ class SignupFragment : BaseFragment() {
                 SignupFragmentDirections.openRefund()
             )
 
+            Constants.SYNDICATE_SERVICES -> navController().navigate(
+                SignupFragmentDirections.openSyndicateServices()
+            )
+
             Constants.MEDICAL_COMPLAINTS -> navController().navigate(
                 SignupFragmentDirections.openMedicalComplaints()
             )

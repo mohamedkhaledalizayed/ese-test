@@ -482,6 +482,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideAddMedicalRenewalRequest(neqabtyRepository: NeqabtyRepository): AddMedicalRenewalRequest {
+        return AddMedicalRenewalRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideUpdateMedicalRenewalData(neqabtyRepository: NeqabtyRepository): UpdateMedicalRenewalData {
         return UpdateMedicalRenewalData(ASyncTransformer(), neqabtyRepository)
     }
@@ -502,6 +508,24 @@ class AppModule {
     @Provides
     fun provideGetAllServiceTypes(neqabtyRepository: NeqabtyRepository): GetAllServiceTypes {
         return GetAllServiceTypes(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetSyndicateServices(neqabtyRepository: NeqabtyRepository): GetSyndicateServices {
+        return GetSyndicateServices(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideInquireSyndicateServicesPayment(neqabtyRepository: NeqabtyRepository): InquireSyndicateServicesPayment {
+        return InquireSyndicateServicesPayment(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAddSyndicateServicesPaymentRequest(neqabtyRepository: NeqabtyRepository): AddSyndicateServicesPaymentRequest {
+        return AddSyndicateServicesPaymentRequest(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
@@ -550,6 +574,12 @@ class AppModule {
     @Provides
     fun providePaymentInquiry(neqabtyRepository: NeqabtyRepository): PaymentInquiry {
         return PaymentInquiry(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAddRenewalRequest(neqabtyRepository: NeqabtyRepository): AddRenewalRequest {
+        return AddRenewalRequest(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

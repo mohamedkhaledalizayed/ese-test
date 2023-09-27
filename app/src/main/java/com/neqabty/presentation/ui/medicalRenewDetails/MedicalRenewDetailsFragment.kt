@@ -22,7 +22,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
-import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.entities.PaymentRequestUI
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_renew_details_fragment.*
@@ -46,6 +46,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
     @Inject
     lateinit var appExecutors: AppExecutors
     lateinit var medicalRenewalPaymentUI: MedicalRenewalPaymentUI
+    lateinit var paymentRequestUI: PaymentRequestUI
 
     lateinit var mechanismTypeButton: RadioButton
 
@@ -53,10 +54,10 @@ class MedicalRenewDetailsFragment : BaseFragment() {
     var deliveryType: Int = Constants.DELIVERY_LOCATION_HOME
     lateinit var address: String
     lateinit var mobile: String
-    lateinit var medicalRenewalUI: MedicalRenewalUI
+//    lateinit var medicalRenewalUI: MedicalRenewalUI
 
     var commission: Double = 0.0
-    var newAmount: Double = 0.0
+    var newAmount: Float = 0.0F
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -80,7 +81,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
         deliveryType = params.deliveryType
         address = params.address
         mobile = params.mobile
-        medicalRenewalUI = params.medicalRenewalUI
+        medicalRenewalPaymentUI = params.medicalRenewalPaymentUI
 
         medicalRenewDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
@@ -88,20 +89,21 @@ class MedicalRenewDetailsFragment : BaseFragment() {
         medicalRenewDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalRenewDetailsViewModel.paymentInquiry(sharedPref.mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
+                paymentInquiry()
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
-//        initializeViews()
-        medicalRenewDetailsViewModel.paymentInquiry(sharedPref.mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
+        initializeViews()
+//        paymentInquiry()
     }
 
     fun initializeViews() {
         llContent.visibility = View.VISIBLE
         val adapter = MedicalRenewPaymentItemsAdapter(dataBindingComponent, appExecutors) { }
         this.adapter = adapter
-
+        adapter.submitList(medicalRenewalPaymentUI.paymentItem?.paymentDetailsItems)
+        binding.rvDetails.adapter = adapter
         calculateCommission(Constants.PaymentOption.OpayCredit)
 //        medicalRenewalPaymentUI.paymentItem = MedicalRenewalPaymentUI.PaymentItem(paymentRequestNumber = "111",amount = 555,name = "mona",paymentDetailsItems = null)
         medicalRenewalPaymentUI?.let {
@@ -153,8 +155,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
 
         bPay.setOnClickListener {
             bPay.isEnabled = false
-            proceedToPaymentConfirmation()
-            bPay.isEnabled = true
+            paymentInquiry()
         }
     }
 
@@ -192,20 +193,23 @@ class MedicalRenewDetailsFragment : BaseFragment() {
     private fun handleViewState(state: MedicalRenewDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
-            state.medicalRenewalPayment?.let {
-                medicalRenewalPaymentUI = it
-                if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
-                    showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.homeFragment)
-                    }
-                else if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-1")
-                    showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.homeFragment)
-                    }
-                else
-                    initializeViews()
+            state.paymentRequestUI?.let {
+                paymentRequestUI = it
+
+                proceedToPaymentConfirmation()
+                bPay.isEnabled = true
+//                if ((state.paymentRequestUI as MedicalRenewalPaymentUI).resultType == "-2")
+//                    showAlert((state.paymentRequestUI as MedicalRenewalPaymentUI).msg) {
+//                        navController().popBackStack()
+//                        navController().navigate(R.id.homeFragment)
+//                    }
+//                else if ((state.paymentRequestUI as MedicalRenewalPaymentUI).resultType == "-1")
+//                    showAlert((state.paymentRequestUI as MedicalRenewalPaymentUI).msg) {
+//                        navController().popBackStack()
+//                        navController().navigate(R.id.homeFragment)
+//                    }
+//                else
+//                    initializeViews()
             }
         }
     }
@@ -220,14 +224,14 @@ class MedicalRenewDetailsFragment : BaseFragment() {
             else -> ""
         }
         PaymentTask.sandBox = Constants.OPAY_MODE
-        val userInfo = UserInfo(medicalRenewalPaymentUI.paymentItem?.amount.toString(), sharedPref.user, sharedPref.mobile, sharedPref.name)
+        val userInfo = UserInfo(paymentRequestUI.amount.toString(), sharedPref.user, sharedPref.mobile, sharedPref.name)
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
             merchantName = Constants.OPAY_MERCHANT_NAME,
-            reference = medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber!!,
+            reference = paymentRequestUI.refId,
             countryCode = "EG", // uppercase
-            payAmount = (newAmount * 100).toLong(),
+            payAmount = (paymentRequestUI.amount?.times(100))?.toLong()!!,
             currency = "EGP", // uppercase
             productName = "healthCareSubscription",
             productDescription = "android",
@@ -280,16 +284,16 @@ class MedicalRenewDetailsFragment : BaseFragment() {
                 "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
         )
         //order id
-        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber)
+        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, paymentRequestUI.refId)
         //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
+        intent.putExtra(CowpayConstantKeys.Amount, paymentRequestUI.amount.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPaymentUI.paymentItem?.amount.toString())
-        intent.putExtra(CowpayConstantKeys.CustomerName, medicalRenewalUI.oldRefId)
+        intent.putExtra(CowpayConstantKeys.Description, paymentRequestUI.amount.toString())
+        intent.putExtra(CowpayConstantKeys.CustomerName, sharedPref.user)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, sharedPref.mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
         //user id
-        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber)
+        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, paymentRequestUI.refId)
 
 
         startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
@@ -297,26 +301,33 @@ class MedicalRenewDetailsFragment : BaseFragment() {
 
     private fun calculateCommission(paymentOption: Constants.PaymentOption) {
         when (paymentOption) {
-            Constants.PaymentOption.OpayCredit -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
-            Constants.PaymentOption.OpayPOS -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
-            Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
+            Constants.PaymentOption.OpayCredit -> newAmount = medicalRenewalPaymentUI.amounts?.get(1)?.cardAmount!!
+            Constants.PaymentOption.OpayPOS -> newAmount = medicalRenewalPaymentUI.amounts?.get(1)?.posAmount!!
+            Constants.PaymentOption.Fawry -> newAmount = medicalRenewalPaymentUI.amounts?.get(0)?.posAmount!!
+            else -> {}
         }
-        commission = Math.round(commission * 10.0) / 10.0
-        newAmount = (medicalRenewalPaymentUI.paymentItem?.amount ?: 0.0) + commission
         binding.newAmount = newAmount
-        updateCommissionInList()
+//        when (paymentOption) {
+//            Constants.PaymentOption.OpayCredit -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
+//            Constants.PaymentOption.OpayPOS -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
+//            Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
+//        }
+//        commission = Math.round(commission * 10.0) / 10.0
+//        newAmount = (medicalRenewalPaymentUI.paymentItem?.amount ?: 0) + commission
+//        binding.newAmount = newAmount
+//        updateCommissionInList()
     }
 
-    private fun updateCommissionInList() {
-        medicalRenewalPaymentUI.paymentItem?.paymentDetailsItems?.let {
-            it.let {
-                val tmp = it.toMutableList()
-                tmp.add(MedicalRenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
-                adapter.submitList(tmp)
-                rvDetails.adapter = adapter
-            }
-        }
-    }
+//    private fun updateCommissionInList() {
+//        medicalRenewalPaymentUI.paymentItem?.paymentDetailsItems?.let {
+//            it.let {
+//                val tmp = it.toMutableList()
+//                tmp.add(MedicalRenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
+//                adapter.submitList(tmp)
+//                rvDetails.adapter = adapter
+//            }
+//        }
+//    }
 
     private fun proceedToPaymentConfirmation() {
         builder = AlertDialog.Builder(requireContext())
@@ -377,6 +388,14 @@ class MedicalRenewDetailsFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    fun paymentInquiry(){
+        medicalRenewDetailsViewModel.paymentInquiry(sharedPref.mobile, sharedPref.user, sharedPref.name, 1,
+            if (rb_card.isChecked) "card" else "pos",
+            if (rb_card.isChecked) 2 else if (rb_channel.isChecked) 2 else 1,
+            deliveryType, address, mobile
+        )
     }
 
     //endregion

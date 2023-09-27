@@ -343,15 +343,40 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 
     private val medicalRenewalPaymentDataEntityMapper = MedicalRenewalPaymentDataEntityMapper()
 
-    override fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-        return if(isInquire) api.inquireHealthCare(mobileNumber, userNumber).flatMap { renewalPaymentInfo ->
-            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
-        } else api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
-            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
+    override fun inquireMedicalRenewalPayment(userNumber: String): Observable<MedicalRenewalPaymentEntity> {
+        return api.inquireHealthCare(MedicalInquiryRequest(userNumber)).flatMap { renewalData ->
+            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData.data!!))
         }
-//        return api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
-//            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
-//        }
+    }
+
+    private val paymentRequestDataEntityMapper = PaymentRequestDataEntityMapper()
+
+    override fun addMedicalRenewalRequest(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        return api.getMedicalRenewPaymentData(
+            AddMedicalRenewalRequest(
+                userNumber,
+                userName,
+                mobileNumber,
+                locationType,
+                address,
+                mobile,
+                serviceID,
+                paymentType,
+                paymentGatewayId
+            )
+        ).flatMap { renewalPaymentInfo ->
+            Observable.just(paymentRequestDataEntityMapper.mapFrom(renewalPaymentInfo.data!!))
+        }
     }
 
     private val medicalRenewalEntityDataMapper = MedicalRenewalEntityDataMapper()
@@ -485,27 +510,122 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val serviceDataEntityMapper = ServiceDataEntityMapper()
 
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
-        return api.getAllServices(ServicesRequest("")).map { services ->
+        return api.getAllServices(ServicesRequest(typeID)).map { services ->
             services.data?.map { serviceDataEntityMapper.mapFrom(it) }
         }
     }
 
     private val serviceTypeDataEntityMapper = ServiceTypeDataEntityMapper()
 
-    override fun getAllServiceTypes(userNumber: String): Observable<ServiceTypeEntity> {
-        return api.getAllServiceTypes(ServicesRequest(userNumber)).map { serviceTypes ->
-            serviceTypeDataEntityMapper.mapFrom(serviceTypes.data!!)
+    override fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>> {
+        return api.getAllServiceTypes().map { serviceTypes ->
+            serviceTypes.data?.map { serviceTypeDataEntityMapper.mapFrom(it) }
         }
     }
 
-    private val memberDataEntityMapper = MemberDataEntityMapper()
+    private val syndicateServicesDataEntityMapper = SyndicateServicesDataEntityMapper()
 
-    override fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-//        return if (isInquire) api.paymentInquiry(mobileNumber, userNumber, serviceID, requestID, amount).flatMap { renewalData ->
-//            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData))
-//        } else
-        return api.addRenewalRequest(mobileNumber, userNumber, serviceID, requestID, amount, locationType, address, mobile).flatMap { renewalData ->
-            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData))
+    override fun getSyndicateServices(userNumber: String): Observable<SyndicateServicesEntity> {
+        return api.getSyndicateServices(SyndicateServicesRequest(userNumber)).map { serviceTypes ->
+            syndicateServicesDataEntityMapper.mapFrom(serviceTypes.data!!)
+        }
+    }
+
+    private val renewalPaymentDataEntityMapper = RenewalPaymentDataEntityMapper()
+
+    override fun inquirePayment(userNumber: String): Observable<RenewalPaymentEntity> {
+        return api.paymentInquiry(InquiryRequest(userNumber)).flatMap { renewalData ->
+            Observable.just(renewalPaymentDataEntityMapper.mapFrom(renewalData.data!!))
+        }
+    }
+
+        override fun addRenewalRequest(
+            mobileNumber: String,
+            userNumber: String,
+            userName: String,
+            serviceID: Int,
+            paymentType: String,
+            paymentGatewayId: Int,
+            locationType: Int,
+            address: String,
+            mobile: String
+        ): Observable<PaymentRequestEntity> {
+            return api.addRenewalRequest(
+                AddInquiryRequest(
+                    userNumber,
+                    userName,
+                    mobileNumber,
+                    locationType,
+                    address,
+                    mobile,
+                    serviceID,
+                    paymentType,
+                    paymentGatewayId
+                )
+            ).flatMap { renewalData ->
+                Observable.just(paymentRequestDataEntityMapper.mapFrom(renewalData.data!!))
+            }
+        }
+
+    private val syndicateServicesPaymentDataEntityMapper = SyndicateServicesPaymentDataEntityMapper()
+
+    override fun inquireSyndicateServicesPayment(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        countryID: Int,
+        paymentType: String,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<SyndicateServicesPaymentEntity> {
+        return api.inquireSyndicateServicesPayment(
+            SyndicateServicesInquiryRequest(
+                userNumber,
+                userName,
+                mobileNumber,
+                locationType,
+                address,
+                mobile,
+                serviceID,
+                countryID,
+                paymentType
+            )
+        ).flatMap { renewalData ->
+            Observable.just(syndicateServicesPaymentDataEntityMapper.mapFrom(renewalData.data!!))
+        }
+    }
+
+    private val syndicateServicesPaymentRequestDataEntityMapper = SyndicateServicesPaymentRequestDataEntityMapper()
+
+    override fun addSyndicateServicesPaymentRequest(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        countryID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<SyndicateServicesPaymentRequestEntity> {
+        return api.addSyndicateServicesPaymentRequest(
+            SyndicateServicesPaymentRequest(
+                userNumber,
+                userName,
+                mobileNumber,
+                locationType,
+                address,
+                mobile,
+                serviceID,
+                countryID,
+                paymentType,
+                paymentGatewayId
+            )
+        ).flatMap { renewalData ->
+            Observable.just(syndicateServicesPaymentRequestDataEntityMapper.mapFrom(renewalData.data!!))
         }
     }
 

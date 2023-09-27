@@ -163,33 +163,33 @@ interface WebService {
     ): Observable<ApiResponse<RefundData>>
 
     @POST("api/v1/ese-services")
-    fun getAllServiceTypes(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<ServiceTypeData>>
+    fun getSyndicateServices(@Body servicesRequest: SyndicateServicesRequest): Observable<ApiResponse<SyndicateServicesData>>
+
+    @GET("api/v1/eseServicesTypes")
+    fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
 
     @POST("api/v1/eseServices")
     fun getAllServices(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<List<ServiceData>>>
 
-    @GET("api/apiPaymentRequest/RenewalInquiryDetails")
+    @POST("api/payment/renewal-inquiry")
     fun paymentInquiry(
-            @Query("mobile_number") mobileNumber: String,
-            @Query("OldrefID") oldrefID: String,
-            @Query("serviceID") serviceID: Int,
-            @Query("requestID") requestID: String,
-            @Query("amount") amount: String,
-            @Query("server") server: String = ""
-    ): Observable<MedicalRenewalPaymentData>
+        @Body inquiryRequest: InquiryRequest
+    ): Observable<ApiResponse<RenewalPaymentData>>
 
-    @POST("api/Api/ApiRequest/AddServiceRequest")
+    @POST("api/payment/renewal-request")
     fun addRenewalRequest(
-            @Query("mobile_number") mobileNumber: String,
-            @Query("oldRefId") oldRefID: String,
-            @Query("serviceID") serviceID: Int,
-            @Query("requestID") requestID: String,
-            @Query("amount") amount: String,
-            @Query("deliveryLocation") locationType: Int,
-            @Query("deliveryAddress") address: String,
-            @Query("deliveryPhone") mobile: String,
-            @Query("server") server: String = ""
-    ): Observable<MedicalRenewalPaymentData>
+            @Body addInquiryRequest: AddInquiryRequest
+    ): Observable<ApiResponse<PaymentRequestData>>
+
+    @POST("api/payment/init")
+    fun inquireSyndicateServicesPayment(
+        @Body syndicateServicesInquiryRequest: SyndicateServicesInquiryRequest
+    ): Observable<ApiResponse<SyndicateServicesPaymentData>>
+
+    @POST("api/payment/init")
+    fun addSyndicateServicesPaymentRequest(
+        @Body syndicateServicesPaymentRequest: SyndicateServicesPaymentRequest
+    ): Observable<ApiResponse<SyndicateServicesPaymentRequestData>>
 
     @POST("api/v1/encrypt")
     fun paymentEncryption(@Body encryptionRequest: EncryptionRequest): Observable<EncryptionData>
@@ -225,11 +225,15 @@ interface WebService {
     @GET("api/ApiHealthCare/GetFollowersList")
     fun getMedicalRenewData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
 
-    @GET("api/apiPaymentRequest/HealthCareInquiryDetails")
-    fun inquireHealthCare(@Query("mobile_number") mobileNumber: String, @Query("OldrefID") oldRefId: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
+    @POST("api/payment/healthcare-inquiry")
+    fun inquireHealthCare(
+        @Body medicalInquiryRequest: MedicalInquiryRequest
+    ): Observable<ApiResponse<MedicalRenewalPaymentData>>
 
-    @POST("api/apiPaymentRequest/AddHealthCareRequest")
-    fun getMedicalRenewPaymentData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
+    @POST("api/payment/healthcare-request")
+    fun getMedicalRenewPaymentData(
+        @Body addMedicalRenewalRequest: AddMedicalRenewalRequest
+    ): Observable<ApiResponse<PaymentRequestData>>
 
     @POST("api/ApiHealthCare/MedBeneficiaryFollowersUpdate")
     fun updateMedicalRenewPaymentData(@Query("mobile_number") mobileNumber: String, @Body medicalRenewalDataRequest: MedicalRenewalData, @Query("server") server: String = ""): Observable<MedicalRenewalUpdateData>

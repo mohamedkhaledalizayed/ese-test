@@ -170,6 +170,10 @@ class ActivateAccountFragment : BaseFragment() {
                 )
 
 
+                Constants.SYNDICATE_SERVICES -> navController().navigate(
+                    ActivateAccountFragmentDirections.openSyndicateServices()
+                )
+
                 Constants.MEDICAL_COMPLAINTS -> navController().navigate(
                     ActivateAccountFragmentDirections.openMedicalComplaints()
                 )

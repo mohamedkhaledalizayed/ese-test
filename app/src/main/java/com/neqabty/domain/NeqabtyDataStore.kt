@@ -127,9 +127,13 @@ interface NeqabtyDataStore {
         letterTypeId: String,
         attachments: List<AttachmentEntity>
     ): Observable<RefundEntity>
-    fun getAllServiceTypes(userNumber: String): Observable<ServiceTypeEntity>
+    fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
     fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
-    fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
+    fun getSyndicateServices(userNumber: String): Observable<SyndicateServicesEntity>
+    fun inquirePayment(userNumber: String): Observable<RenewalPaymentEntity>
+    fun addRenewalRequest(mobileNumber: String, userNumber: String, userName: String, serviceID: Int, paymentType: String, paymentGatewayId: Int, locationType: Int, address: String, mobile: String): Observable<PaymentRequestEntity>
+    fun inquireSyndicateServicesPayment(mobileNumber: String, userNumber: String, userName: String, serviceID: Int, countryID: Int, paymentType: String, locationType: Int, address: String, mobile: String): Observable<SyndicateServicesPaymentEntity>
+    fun addSyndicateServicesPaymentRequest(mobileNumber: String, userNumber: String, userName: String, serviceID: Int, countryID: Int, paymentType: String, paymentGatewayId: Int, locationType: Int, address: String, mobile: String): Observable<SyndicateServicesPaymentRequestEntity>
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>
     fun getMedicalLetters(mobileNumber: String, benID: String, start: Int, end: Int, orderBy: String, dir: String): Observable<MedicalLetterEntity>
@@ -137,7 +141,8 @@ interface NeqabtyDataStore {
     fun getAds(sectionId: Int): Observable<List<AdEntity>>
     fun getLiteFollowersListData(mobileNumber: String, userNumber: String): Observable<List<LiteFollowersListEntity>>
     fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity>
-    fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
+    fun inquireMedicalRenewalPayment(userNumber: String): Observable<MedicalRenewalPaymentEntity>
+    fun addMedicalRenewalRequest(mobileNumber: String, userNumber: String, userName: String, serviceID: Int, paymentType: String, paymentGatewayId: Int, locationType: Int, address: String, mobile: String): Observable<PaymentRequestEntity>
     fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>

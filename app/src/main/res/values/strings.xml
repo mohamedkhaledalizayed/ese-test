@@ -203,6 +203,7 @@
     <string name="medical_procedures_inquiry_title">الاستعلامات الطبية</string>
     <string name="committees_title">اللجان</string>
     <string name="refund_title">طلبات الاسترداد</string>
+    <string name="syndicate_services_title">خدمات نقابية</string>
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
     <string name="complaints_title">خدمة العملاء والشكاوى</string>
