@@ -7,6 +7,7 @@ import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.addorder.AddOrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.cancelorder.CancelOrderEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.confirmorder.ConfirmOrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderDetailsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.usecases.AddOrderUseCase
 import com.neqabty.healthcare.pharmacymart.orders.domain.usecases.CancelOrderUseCase
@@ -73,7 +74,7 @@ class OrdersViewModel @Inject constructor(private val placeOrderUseCase: AddOrde
         }
     }
 
-    val confirmationStatus = MutableLiveData<Resource<String>>()
+    val confirmationStatus = MutableLiveData<Resource<ConfirmOrderEntity>>()
     fun confirmOrder(orderId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             confirmationStatus.postValue(Resource.loading(data = null))

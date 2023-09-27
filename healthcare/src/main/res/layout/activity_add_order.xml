@@ -57,6 +57,20 @@
             app:layout_constraintTop_toBottomOf="@id/header_container"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+        <EditText
+            android:id="@+id/write_order"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120sdp"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/edit_text_bg"
+            android:textSize="@dimen/_10ssp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/product_recycler_view"
+            android:textColorHint="@color/unselected_color"
+            android:textAlignment="center"
+            android:layout_margin="@dimen/_16sdp"
+            />
+
         <LinearLayout
             android:id="@+id/items_details"
             android:layout_width="match_parent"
@@ -65,7 +79,7 @@
             android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:background="@drawable/chefaa_orders_bg"
-            app:layout_constraintTop_toBottomOf="@id/product_recycler_view"
+            app:layout_constraintTop_toBottomOf="@id/write_order"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
             >

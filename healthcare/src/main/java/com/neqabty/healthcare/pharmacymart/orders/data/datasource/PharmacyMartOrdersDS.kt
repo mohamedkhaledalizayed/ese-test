@@ -6,6 +6,7 @@ import com.neqabty.healthcare.pharmacymart.orders.data.model.*
 import com.neqabty.healthcare.pharmacymart.orders.data.api.PharmacyMartOrdersApi
 import com.neqabty.healthcare.pharmacymart.orders.data.model.addorder.AddOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.cancelorder.CancelOrderModel
+import com.neqabty.healthcare.pharmacymart.orders.data.model.confirmorder.ConfirmOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderDetailsModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrdersListModel
 import javax.inject.Inject
@@ -57,7 +58,7 @@ class PharmacyMartOrdersDS @Inject constructor(
         )
     }
 
-    suspend fun confirmOrder(orderId: String): String {
+    suspend fun confirmOrder(orderId: String): ConfirmOrderModel {
         return ordersApi.confirmOrder(
             confirmOrderBody = ConfirmOrderBody(
                 mobile = preferencesHelper.mobile,

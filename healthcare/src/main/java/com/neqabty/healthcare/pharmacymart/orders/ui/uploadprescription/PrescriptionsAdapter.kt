@@ -37,6 +37,7 @@ class PrescriptionsAdapter : RecyclerView.Adapter<PrescriptionsAdapter.ViewHolde
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.delete.setOnClickListener { onItemClickListener?.setOnDeleteClickListener(position) }
+        viewHolder.binding.image.setImageURI(Constants.pharmacyMartCart.pharmacyMartImageList[position])
     }
 
     override fun getItemCount() = Constants.pharmacyMartCart.pharmacyMartImageList.size

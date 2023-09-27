@@ -35,10 +35,16 @@ class PharmacyTermsBottomSheet : BottomSheetDialogFragment() {
         )
         bottomSheetDialog.setContentView(binding.root)
 
-        if (pharmacy == "chefaa"){
-            binding.terms.text = resources.getString(R.string.chefaa_terms)
-        }else{
-            binding.terms.text = resources.getString(R.string.terms)
+        when (pharmacy) {
+            "chefaa" -> {
+                binding.terms.text = resources.getString(R.string.chefaa_terms)
+            }
+            "mart" -> {
+                binding.terms.text = resources.getString(R.string.mart_terms)
+            }
+            else -> {
+                binding.terms.text = resources.getString(R.string.terms)
+            }
         }
 
         binding.closeBtn.setOnClickListener { dialog.dismiss() }

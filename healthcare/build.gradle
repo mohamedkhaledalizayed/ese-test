@@ -219,7 +219,6 @@ android {
 
         //test
         testImplementation "junit:junit:$junitVersion"
-        androidTestImplementation "androidx.test.ext:junit:$junitAndroidxVersion"
         androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
         // Coroutines

@@ -4,6 +4,7 @@ package com.neqabty.healthcare.pharmacymart.orders.data.api
 import com.neqabty.healthcare.pharmacymart.orders.data.model.*
 import com.neqabty.healthcare.pharmacymart.orders.data.model.addorder.AddOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.cancelorder.CancelOrderModel
+import com.neqabty.healthcare.pharmacymart.orders.data.model.confirmorder.ConfirmOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderDetailsModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrdersListModel
 import retrofit2.http.Body
@@ -28,6 +29,6 @@ interface PharmacyMartOrdersApi {
     suspend fun cancelOrder(@Body cancelOrderBody: CancelOrderBody): CancelOrderModel
 
     @POST("pharmacy/confirm-order")
-    suspend fun confirmOrder(@Body confirmOrderBody: ConfirmOrderBody): String
+    suspend fun confirmOrder(@Body confirmOrderBody: ConfirmOrderBody): ConfirmOrderModel
 
 }

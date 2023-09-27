@@ -70,6 +70,12 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
             startActivity(Intent(this, PharmacyMartCartActivity::class.java))
         }
 
+        binding.contact.setOnClickListener {
+            AppUtils().call(this, Constants.PHARMACY_MART_SUPPORT_NUMBER)
+        }
+
+        binding.headerContainer.setOnClickListener { finish() }
+
         dialog = SpotsDialog.Builder()
             .setContext(this)
             .setCancelable(false)
@@ -82,10 +88,13 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
                 when (resource.status) {
                     Status.LOADING -> {
                         binding.progressCircular.visibility = View.VISIBLE
+                        binding.ordersRecycler.visibility = View.GONE
                     }
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
+                        binding.ordersRecycler.visibility = View.VISIBLE
                         if (resource.data!!.status){
+                            mAdapter.clear()
                             mAdapter.submitList(resource.data.data)
                         }else{
                             binding.noPreviousOrders.visibility = View.VISIBLE
@@ -120,7 +129,7 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
                 Status.SUCCESS ->{
                     dialog.hide()
                     if (it.data!!.status){
-                        viewModel.getOrders()
+
                     }else{
                         Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
                         finish()
@@ -132,6 +141,11 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
             }
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getOrders()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

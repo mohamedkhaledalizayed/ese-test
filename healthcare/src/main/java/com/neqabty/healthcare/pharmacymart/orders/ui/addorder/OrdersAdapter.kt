@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.cart
+import com.neqabty.healthcare.core.data.Constants.pharmacyMartCart
 import com.neqabty.healthcare.databinding.PrescriptionLayoutItemBinding
 
 
@@ -37,10 +38,11 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         viewHolder.binding.delete.visibility = View.GONE
+        viewHolder.binding.image.setImageURI(pharmacyMartCart.pharmacyMartImageList[position])
 
     }
 
-    override fun getItemCount() = Constants.pharmacyMartCart.pharmacyMartImageList.size
+    override fun getItemCount() = pharmacyMartCart.pharmacyMartImageList.size
 
     fun submitList() {
         notifyDataSetChanged()

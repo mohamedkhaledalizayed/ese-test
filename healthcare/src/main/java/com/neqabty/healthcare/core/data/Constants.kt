@@ -82,6 +82,7 @@ object Constants {
     var DOCTORS_RESERVATION_URL = ""
     var MEDICINE_URL = ""
     var CHEFAA_SUPPORT_NUMBER = "0221294341"
+    var PHARMACY_MART_SUPPORT_NUMBER = "+201153015041"
     var selectedAddress: AddressEntity? = null
     var selectedAddressPharmacyMart: PharmacyMartAddressEntity? = null
     var userNumber: String = ""

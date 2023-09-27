@@ -99,6 +99,12 @@ class AddOrderActivity : BaseActivity<ActivityAddOrderBinding>(), LocationListen
             }
         }
 
+        if (pharmacyMartCart.orderByText.isEmpty()){
+            binding.writeOrder.visibility = View.GONE
+        }else{
+            binding.writeOrder.setText(pharmacyMartCart.orderByText)
+        }
+
         binding.completeBtn.setOnClickListener {
             checkOut()
         }
@@ -126,7 +132,7 @@ class AddOrderActivity : BaseActivity<ActivityAddOrderBinding>(), LocationListen
         val list = mutableListOf<String>()
         lifecycleScope.launch(Dispatchers.IO) {
              pharmacyMartCart.pharmacyMartImageList.map {
-                list.add("data:image/png;base64," + Base64.encodeToString(
+                list.add(Base64.encodeToString(
                     File(it?.path).readBytes(),
                     Base64.DEFAULT
                 ))

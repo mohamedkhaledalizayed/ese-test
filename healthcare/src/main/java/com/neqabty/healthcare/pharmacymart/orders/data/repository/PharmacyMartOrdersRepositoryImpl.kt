@@ -5,6 +5,7 @@ package com.neqabty.healthcare.pharmacymart.orders.data.repository
 import com.neqabty.healthcare.pharmacymart.orders.data.datasource.PharmacyMartOrdersDS
 import com.neqabty.healthcare.pharmacymart.orders.data.model.addorder.AddOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.cancelorder.CancelOrderModel
+import com.neqabty.healthcare.pharmacymart.orders.data.model.confirmorder.ConfirmOrderModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.AddressModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.ItemsModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderDetailsModel
@@ -14,6 +15,7 @@ import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrderSta
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrdersListModel
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.addorder.AddOrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.cancelorder.CancelOrderEntity
+import com.neqabty.healthcare.pharmacymart.orders.domain.entity.confirmorder.ConfirmOrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.AddressEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.ItemsEntity
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderdetails.OrderDetailsEntity
@@ -187,12 +189,6 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
         )
     }
 
-    override fun confirmOrder(orderId: String): Flow<String> {
-        return flow {
-            emit(ordersDS.confirmOrder(orderId))
-        }
-    }
-
     private fun AddOrderModel.toAddOrderEntity(): AddOrderEntity{
         return AddOrderEntity(
             status = status,
@@ -200,4 +196,20 @@ class PharmacyMartOrdersRepositoryImpl @Inject constructor(private val ordersDS:
             message = message
         )
     }
+
+    override fun confirmOrder(orderId: String): Flow<ConfirmOrderEntity> {
+        return flow {
+            emit(ordersDS.confirmOrder(orderId).toConfirmOrderEntity())
+        }
+    }
+
+    private fun ConfirmOrderModel.toConfirmOrderEntity(): ConfirmOrderEntity{
+        return ConfirmOrderEntity(
+            data = data ?: "",
+            message = message,
+            status = status,
+            status_code = status_code
+        )
+    }
+
 }

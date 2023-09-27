@@ -56,6 +56,19 @@
             app:layout_constraintTop_toBottomOf="@id/header_container"
             >
 
+            <TextView
+                android:fontFamily="@font/hanimation_arabic_light"
+                android:id="@+id/order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تم التوصيل"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:textColor="@color/white"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:background="@drawable/order_status_new_bg"
+                android:textSize="@dimen/_10ssp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/product_recycler_view"
                 android:layout_width="match_parent"
@@ -64,6 +77,28 @@
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:layout_marginTop="@dimen/_16sdp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/images_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <TextView
+                android:id="@+id/write_order"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp"
+                android:padding="@dimen/_10sdp"
+                android:background="@drawable/edit_text_bg"
+                android:textSize="@dimen/_10ssp"
+                android:gravity="center"
+                android:textColorHint="@color/unselected_color"
+                android:textAlignment="center"
+                android:layout_margin="@dimen/_16sdp"
+                />
 
             <LinearLayout
                 android:id="@+id/items_details"
