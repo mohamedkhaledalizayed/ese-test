@@ -100,6 +100,20 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.addMedicalRenewalRequest(mobileNumber, userNumber, userName, 3, paymentType, paymentGatewayId, locationType, address, mobile)
     }
 
+    override fun addMedicalRenewalRequestNew(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        return remoteDataStore.addMedicalRenewalRequestNew(mobileNumber, userNumber, userName, 3, paymentType, paymentGatewayId, locationType, address, mobile)
+    }
+
     override fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
         return remoteDataStore.updateMedicalRenewalData(mobileNumber, medicalRenewalData)
     }
@@ -319,6 +333,24 @@ class NeqabtyRepositoryImpl @Inject constructor(
         mobile: String
     ): Observable<SyndicateServicesPaymentRequestEntity> {
         return remoteDataStore.addSyndicateServicesPaymentRequest(mobileNumber, userNumber, userName, serviceID, countryID, paymentType, paymentGatewayId, locationType, address, mobile)
+    }
+
+    override fun addRenewalRequestNew(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        return remoteDataStore.addRenewalRequestNew(mobileNumber, userNumber, userName, serviceID, paymentType, paymentGatewayId, locationType, address, mobile)
+    }
+
+    override fun createFawryTransaction(refrenceId: String): Observable<FawryTransactionEntity> {
+        return remoteDataStore.createFawryTransaction(refrenceId)
     }
 
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {

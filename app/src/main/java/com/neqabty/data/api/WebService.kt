@@ -191,6 +191,16 @@ interface WebService {
         @Body syndicateServicesPaymentRequest: SyndicateServicesPaymentRequest
     ): Observable<ApiResponse<SyndicateServicesPaymentRequestData>>
 
+    @POST("api/payment/renewal-request")
+    fun addRenewalRequestNew(
+        @Body addInquiryRequest: AddInquiryRequest
+    ): Observable<ApiResponse<PaymentRequestData>>
+
+    @POST("api/v1/transactions/fawry/create-transaction")
+    fun createFawryTransaction(
+        @Body fawryTransactionRequest: FawryTransactionRequest
+    ): Observable<ApiResponse<FawryTransactionData>>
+
     @POST("api/v1/encrypt")
     fun paymentEncryption(@Body encryptionRequest: EncryptionRequest): Observable<EncryptionData>
 
@@ -232,6 +242,11 @@ interface WebService {
 
     @POST("api/payment/healthcare-request")
     fun getMedicalRenewPaymentData(
+        @Body addMedicalRenewalRequest: AddMedicalRenewalRequest
+    ): Observable<ApiResponse<PaymentRequestData>>
+
+    @POST("api/payment/healthcare-request")
+    fun getMedicalRenewPaymentDataNew(
         @Body addMedicalRenewalRequest: AddMedicalRenewalRequest
     ): Observable<ApiResponse<PaymentRequestData>>
 

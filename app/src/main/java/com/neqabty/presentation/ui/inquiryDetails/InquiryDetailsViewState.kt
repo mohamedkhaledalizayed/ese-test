@@ -6,5 +6,7 @@ data class InquiryDetailsViewState(
     var isLoading: Boolean = false,
     var encryptionData: EncryptionUI? = null,
     var decryptionData: DecryptionUI? = null,
-    var paymentRequestUI: PaymentRequestUI? = null
+    var medicalRenewalPayment: MedicalRenewalPaymentUI? = null,
+    var paymentRequestUI: PaymentRequestUI? = null,
+    var fawryTransactionUI: FawryTransactionUI? = null
 )

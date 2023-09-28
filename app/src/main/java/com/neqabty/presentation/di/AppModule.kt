@@ -94,11 +94,11 @@ class AppModule {
         if(!BuildConfig.DEBUG) {val certificatePinner : CertificatePinner = CertificatePinner.Builder()
             .add(
                 BuildConfig.URL,
-                "sha256/hgx3/z5ENRCVF9jDSHk8GwocaQsEFYAW8ON1eGs2qUc="
+                "sha256/OHBR6iUv0VI2PGqJSnQGP8SiLphZ1zCJcpQC0Dis/8E="
             )
             .add(
                 "*.neqabty.com",
-                "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
+                "sha256/nrXT/b2RmJlsQHqiO7RRyu2tVMocAGci9GjSL5AcKDg="
             ).build()
 
             okHttpClient.certificatePinner(certificatePinner)
@@ -580,6 +580,12 @@ class AppModule {
     @Provides
     fun provideAddRenewalRequest(neqabtyRepository: NeqabtyRepository): AddRenewalRequest {
         return AddRenewalRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCreateFawryTransaction(neqabtyRepository: NeqabtyRepository): CreateFawryTransaction {
+        return CreateFawryTransaction(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

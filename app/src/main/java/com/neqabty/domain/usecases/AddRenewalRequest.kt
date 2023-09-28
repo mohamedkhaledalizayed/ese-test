@@ -47,6 +47,6 @@ class AddRenewalRequest @Inject constructor(
         val deliveryType = data?.get(PARAM_DELIVERY_TYPE) as Int
         val address = data?.get(PARAM_ADDRESS) as String
         val mobile = data?.get(PARAM_MOBILE) as String
-        return neqabtyRepository.addRenewalRequest(mobileNumber, userNumber, userName, serviceID.toInt(), paymentType, paymentGatewayId, deliveryType, address, mobile)
+        return neqabtyRepository.addRenewalRequestNew(mobileNumber, userNumber, userName, serviceID.toInt(), paymentType, paymentGatewayId, deliveryType, address, mobile)
     }
 }

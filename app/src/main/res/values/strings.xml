@@ -1,5 +1,5 @@
 <resources>
-    <string name="my_app_name" translatable="false">NeQabty</string>
+    <string name="my_app_name" translatable="false">ESE Neqabty</string>
     <string name="capture">Capture Photo</string>
     <string name="history">Show History</string>
     <string name="turn_on_gps">Please turn on your GPS</string>
@@ -354,10 +354,11 @@
     <string name="delivery_info_title">بيانات التوصيل والاستلام</string>
     <string name="delivery_method">طريقة التوصيل</string>
     <string name="delivery_method_hint">التوصيل مقتصر علي المنازل لتلافي التجمعات وفقا لاجراءات التباعد الإجتماعي</string>
+    <string name="delivery_method_hint_for_others">لان عملية السداد خاصة بعضو اخر غير صاحب الحساب الاصلي، برجاء استلام كارنية العضوية من اقرب نقابة فرعية</string>
     <string name="delivery_mobile_title">رقم الموبايل</string>
     <string name="delivery_mobile_hint">رقم الهاتف الذي سيتم التواصل عليه عند الاستلام</string>
     <string name="home_delivery">توصيل للمنزل
-        (قيمة التوصيل :١٥ جنيه سيتم تحصيلها عند الاستلام)</string>
+        (قيمة التوصيل :١٨ جنيه سيتم تحصيلها عند الاستلام)</string>
     <string name="main_syndicate_delivery">إستلام من النقابة العامة
     (بدون مصاريف توصيل )</string>
     <string name="syndicate_delivery">إستلام من النقابة الفرعية
@@ -413,6 +414,7 @@
         كود الدفع:</string>
     <string name="payment_reference_without_code">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك</string>
     <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
+    <string name="copy">نسخ</string>
     <string name="payment_successful">تمت عملية الدفع بنجاح \n
 رقم العملية </string>
     <string name="medical_card_delivery">\nسيتم تسليم الكروت في خلال 15 يوم من تاريخ الاشتراك</string>
@@ -616,7 +618,7 @@
     <string name="vezeeta_details">
         ١- تغطي الخدمة محفاظات القاهرة والاسكندرية
         \n
-٢- خدمة توصيل ١٠ جنية
+٢- خدمة توصيل ١٣ جنية
         \n
 ٣- نسب مساهمة لمشتركي الرعاية الصحية 20٪ علي الادوية المحلية
  و 10٪ علي الادوية المستوردة

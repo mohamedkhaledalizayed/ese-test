@@ -63,6 +63,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        finish()
                     }
                 }
             }

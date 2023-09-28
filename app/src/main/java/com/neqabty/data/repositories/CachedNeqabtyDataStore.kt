@@ -21,6 +21,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun createFawryTransaction(refrenceId: String): Observable<FawryTransactionEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -186,6 +190,20 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
+    override fun addMedicalRenewalRequestNew(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
         TODO("Not yet implemented")
     }
@@ -321,6 +339,19 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         address: String,
         mobile: String
     ): Observable<SyndicateServicesPaymentRequestEntity> {
+        TODO("Not yet implemented")
+    }
+    override fun addRenewalRequestNew(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
         TODO("Not yet implemented")
     }
 

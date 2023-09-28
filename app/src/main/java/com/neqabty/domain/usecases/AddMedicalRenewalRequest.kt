@@ -47,6 +47,6 @@ class AddMedicalRenewalRequest @Inject constructor(
         val deliveryType = data?.get(PARAM_DELIVERY_TYPE) as Int
         val address = data?.get(PARAM_ADDRESS) as String
         val mobile = data?.get(PARAM_MOBILE) as String
-        return neqabtyRepository.addMedicalRenewalRequest(mobileNumber, userNumber, userName, serviceID.toInt(), paymentType, paymentGatewayId, deliveryType, address, mobile)
+        return neqabtyRepository.addMedicalRenewalRequestNew(mobileNumber, userNumber, userName, serviceID.toInt(), paymentType, paymentGatewayId, deliveryType, address, mobile)
     }
 }

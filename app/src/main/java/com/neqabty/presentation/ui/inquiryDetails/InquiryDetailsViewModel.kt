@@ -2,18 +2,16 @@ package com.neqabty.presentation.ui.inquiryDetails
 
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.data.api.WebService
-import com.neqabty.domain.usecases.AddRenewalRequest
-import com.neqabty.domain.usecases.EncryptData
-import com.neqabty.domain.usecases.SendDecryptionKey
+import com.neqabty.data.api.requests.SyndicateRequest
+import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.di.DI
-import com.neqabty.presentation.entities.DecryptionUI
-import com.neqabty.presentation.entities.EncryptionUI
-import com.neqabty.presentation.entities.PaymentRequestUI
-import com.neqabty.presentation.entities.RenewalPaymentUI
+import com.neqabty.presentation.entities.*
 import com.neqabty.presentation.mappers.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -21,11 +19,15 @@ import javax.inject.Named
 class InquiryDetailsViewModel @Inject constructor(
     private val sendDecryptionKey: SendDecryptionKey,
     private val encryptData: EncryptData,
+    private val paymentInquiry: PaymentInquiry,
     private val addRenewalRequest: AddRenewalRequest,
+    private val createFawryTransaction: CreateFawryTransaction,
     @Named(DI.authorized) private val api: WebService
 ) : BaseViewModel() {
 
     private val paymentRequestEntityUIMapper = PaymentRequestEntityUIMapper()
+    private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()
+    private val fawryTransactionEntityUIMapper = FawryTransactionEntityUIMapper()
     private val encryptionEntityUIMapper = EncryptionEntityUIMapper()
     private val decryptionEntityUIMapper = DecryptionEntityUIMapper()
 
@@ -68,12 +70,12 @@ class InquiryDetailsViewModel @Inject constructor(
                 )
     }
 
-    fun addRenewalRequest(mobileNumber: String, number: String, name: String, serviceID: Int, paymentType: String, paymentGatewayId: Int, deliveryType: Int, address: String, mobile: String) {
+    fun paymentInquiry(mobileNumber: String, number: String, serviceID: String, requestID: String, amount: String, deliveryType: Int, address: String, mobile: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(addRenewalRequest.addRenewalRequest(mobileNumber, number, name, serviceID, paymentType, paymentGatewayId, deliveryType, address, mobile)
+        addDisposable(paymentInquiry.paymentInquiry(false, mobileNumber, number, serviceID, requestID, amount, deliveryType, address, mobile)
                 .map {
                     it.let {
-                        paymentRequestEntityUIMapper.mapFrom(it)
+                        medicalRenewalPaymentEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
                         {
@@ -84,6 +86,44 @@ class InquiryDetailsViewModel @Inject constructor(
                             errorState.value = handleError(it)
                         }
                 )
+        )
+    }
+
+    fun addRenewalRequest(mobileNumber: String, number: String, name: String, serviceID: Int, paymentType: String, paymentGatewayId: Int, deliveryType: Int, address: String, mobile: String) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+        addDisposable(addRenewalRequest.addRenewalRequest(mobileNumber, number, name, serviceID, paymentType, paymentGatewayId, deliveryType, address, mobile)
+            .map {
+                it.let {
+                    paymentRequestEntityUIMapper.mapFrom(it)
+                }
+            }.subscribe(
+                {
+                    onAddRequestReceived(it)
+                },
+                {
+                    viewState.value = viewState.value?.copy(isLoading = false)
+                    errorState.value = handleError(it)
+                }
+            )
+        )
+    }
+
+    fun createFawryTransaction(refID: String) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+        addDisposable(createFawryTransaction.createFawryTransaction(refID)
+            .map {
+                it.let {
+                    fawryTransactionEntityUIMapper.mapFrom(it)
+                }
+            }.subscribe(
+                {
+                    onFawryCodeReceived(it)
+                },
+                {
+                    viewState.value = viewState.value?.copy(isLoading = false)
+                    errorState.value = handleError(it)
+                }
+            )
         )
     }
 
@@ -101,10 +141,24 @@ class InquiryDetailsViewModel @Inject constructor(
         viewState.value = newViewState
     }
 
-    private fun onInquiryReceived(paymentRequestUI: PaymentRequestUI) {
+    private fun onInquiryReceived(medicalRenewalPayment: MedicalRenewalPaymentUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
-                paymentRequestUI = paymentRequestUI)
+                medicalRenewalPayment = medicalRenewalPayment)
+        viewState.value = newViewState
+    }
+
+    private fun onAddRequestReceived(paymentRequestUI: PaymentRequestUI) {
+        val newViewState = viewState.value?.copy(
+            isLoading = false,
+            paymentRequestUI = paymentRequestUI)
+        viewState.value = newViewState
+    }
+
+    private fun onFawryCodeReceived(fawryTransactionUI: FawryTransactionUI) {
+        val newViewState = viewState.value?.copy(
+            isLoading = false,
+            fawryTransactionUI = fawryTransactionUI)
         viewState.value = newViewState
     }
 

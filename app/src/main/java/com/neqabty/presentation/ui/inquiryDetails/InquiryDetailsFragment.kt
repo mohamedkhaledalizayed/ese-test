@@ -1,6 +1,10 @@
 package com.neqabty.presentation.ui.inquiryDetails
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -20,8 +24,9 @@ import com.neqabty.databinding.InquiryDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.PaymentRequestUI
-import com.neqabty.presentation.entities.RenewalPaymentUI
+import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
@@ -36,7 +41,7 @@ class InquiryDetailsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    private var adapter by autoCleared<RenewPaymentItemsAdapter>()
+    private var adapter by autoCleared<MedicalRenewPaymentItemsAdapter>()
 
     private val inquiryDetailsViewModel: InquiryDetailsViewModel by viewModels()
 
@@ -44,7 +49,7 @@ class InquiryDetailsFragment : BaseFragment() {
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    lateinit var renewalPayment: RenewalPaymentUI
+    lateinit var medicalRenewalPayment: MedicalRenewalPaymentUI
     lateinit var paymentRequestUI: PaymentRequestUI
 
     lateinit var mechanismTypeButton: RadioButton
@@ -52,8 +57,8 @@ class InquiryDetailsFragment : BaseFragment() {
     lateinit var params: InquiryDetailsFragmentArgs
     var sendDecryptionKey = false
     var title = ""
-//    var commission: Double = 0.0
-    var newAmount: Float = 0.0F
+    var commission: Double = 0.0
+    var newAmount: Double = 0.0
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -79,36 +84,38 @@ class InquiryDetailsFragment : BaseFragment() {
         inquiryDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                addRenewalRequest()
+                paymentInquiry()
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 
         params = InquiryDetailsFragmentArgs.fromBundle(arguments!!)
+        medicalRenewalPayment = params.medicalRenewalPaymentUI
 
         initializeViews()
     }
 
     fun initializeViews() {
         llContent.visibility = View.VISIBLE
-        val adapter = RenewPaymentItemsAdapter(dataBindingComponent, appExecutors) { }
+        val adapter = MedicalRenewPaymentItemsAdapter(dataBindingComponent, appExecutors) { }
         this.adapter = adapter
 
-        renewalPayment = params.renewalPaymentUI
+        medicalRenewalPayment = params.medicalRenewalPaymentUI
         binding.title = params.title
         title = params.title
         binding.number = params.number
 
+//        if (params.number != sharedPref.user) {
+//            llDeliveryDetails.visibility = View.GONE
+//            tvDeliveryMethodHint.text = getString(R.string.delivery_method_hint_for_others)
+//        }
         calculateCommission(Constants.PaymentOption.OpayCredit)
-        renewalPayment?.let {
-            binding.renewalPayment = it
+        medicalRenewalPayment?.let {
+            binding.medicalRenewalPayment = it
         }
 
-        renewalPayment.paymentItem?.paymentDetailsItems?.let {
-            adapter.submitList(it)
-            binding.rvDetails.adapter = adapter
-        }
+        binding.rvDetails.adapter = adapter
 
         rb_home.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
@@ -172,7 +179,7 @@ class InquiryDetailsFragment : BaseFragment() {
                 return@setOnClickListener
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
-            addRenewalRequest()
+            if (rb_fawry.isChecked) addRenewalRequest() else paymentInquiry()
         }
     }
 
@@ -198,10 +205,13 @@ class InquiryDetailsFragment : BaseFragment() {
                 var PaymentGatewayReferenceId =
                         data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
                 responseMSG?.let {
-                    showAlert(if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(R.string.payment_successful) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.homeFragment)
-                    }
+                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+                        showAlert(getString(R.string.payment_successful) + PaymentGatewayReferenceId){
+                            navController().popBackStack()
+                            navController().navigate(R.id.homeFragment)
+                        }
+                    else
+                        showCopyAlertDialog(PaymentGatewayReferenceId!!)
                 }
             }
         }
@@ -210,21 +220,50 @@ class InquiryDetailsFragment : BaseFragment() {
     private fun handleViewState(state: InquiryDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
+            state.fawryTransactionUI?.let{
+                showCopyAlertDialog(it.referenceNumber)
+                return
+            }
             state.paymentRequestUI?.let {
                 paymentRequestUI = it
+                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_fawry)
+                    inquiryDetailsViewModel.createFawryTransaction(paymentRequestUI.refId)// cowPayPayment(false)
+            }
+
+            state.medicalRenewalPayment?.let {
+                medicalRenewalPayment = it
                 if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
                     oPayPayment(Constants.PaymentOption.OpayCredit)
                 else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
                     oPayPayment(Constants.PaymentOption.OpayPOS)
                 else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
                     oPayPayment(Constants.PaymentOption.MobileWallet)
-                else
-                    cowPayPayment(false)
-            }
+                }
         }
     }
 
     //region
+    private fun showCopyAlertDialog(paymentGatewayReferenceId: String) {
+        val alertDialog = AlertDialog.Builder(activity).create()
+        alertDialog.setTitle(getString(R.string.alert_title))
+        alertDialog.setMessage(getString(R.string.payment_reference) + paymentGatewayReferenceId)
+        alertDialog.setCancelable(false)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.copy)
+        ) { dialog, _ ->
+            copyText(paymentGatewayReferenceId)
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+        alertDialog.show()
+    }
+
+    private fun copyText(paymentGatewayReferenceId: String) {
+        val clipboard: ClipboardManager =
+            activity!!.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", paymentGatewayReferenceId)
+        clipboard.setPrimaryClip(clip)
+    }
 
     fun oPayPayment(paymentOption: Constants.PaymentOption) {
         val paymentType = when(paymentOption) {
@@ -234,14 +273,14 @@ class InquiryDetailsFragment : BaseFragment() {
             else -> ""
         }
         PaymentTask.sandBox = Constants.OPAY_MODE
-        val userInfo = UserInfo(paymentRequestUI.amount.toString(), binding.number, sharedPref.mobile, renewalPayment.paymentItem?.engName)
+        val userInfo = UserInfo(medicalRenewalPayment.paymentItem?.amount.toString(), binding.number, sharedPref.mobile, medicalRenewalPayment.paymentItem?.engName)
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
             merchantName = Constants.OPAY_MERCHANT_NAME,
-            reference = paymentRequestUI.refId,
+            reference = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
             countryCode = "EG", // uppercase
-            payAmount = (paymentRequestUI.amount?.times(100))?.toLong()!!,
+            payAmount = (newAmount * 100).toLong(),
             currency = "EGP", // uppercase
             productName = "annualSubscription",
             productDescription = "android",
@@ -294,16 +333,16 @@ class InquiryDetailsFragment : BaseFragment() {
                 "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
         )
         //order id
-        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, paymentRequestUI.refId)
+        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
         //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, paymentRequestUI.amount.toString())
+        intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.Description, paymentRequestUI.amount.toString())
+        intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPayment.paymentItem?.amount.toString())
         intent.putExtra(CowpayConstantKeys.CustomerName, params.number)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, sharedPref.mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
         //user id
-        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, paymentRequestUI.refId)
+        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
 
 
         startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
@@ -312,33 +351,26 @@ class InquiryDetailsFragment : BaseFragment() {
     //region
     private fun calculateCommission(paymentOption: Constants.PaymentOption) {
         when (paymentOption) {
-            Constants.PaymentOption.OpayCredit -> newAmount = renewalPayment.amounts?.get(1)?.cardAmount!!
-            Constants.PaymentOption.OpayPOS -> newAmount = renewalPayment.amounts?.get(1)?.posAmount!!
-            Constants.PaymentOption.Fawry -> newAmount = renewalPayment.amounts?.get(0)?.posAmount!!
-            else -> {}
+            Constants.PaymentOption.OpayCredit -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
+            Constants.PaymentOption.OpayPOS -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
+            Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
         }
+        commission = Math.round(commission * 10.0) / 10.0
+        newAmount = (medicalRenewalPayment.paymentItem?.amount ?: 0.0) + commission
         binding.newAmount = newAmount
-//        when (paymentOption) {
-//            Constants.PaymentOption.OpayCredit -> commission = if (renewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) renewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
-//            Constants.PaymentOption.OpayPOS -> commission = if (renewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) renewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
-//            Constants.PaymentOption.Fawry -> commission = if (renewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) renewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
-//        }
-//        commission = Math.round(commission * 10.0) / 10.0
-//        newAmount = (renewalPayment.paymentItem?.amount ?: 0) + commission
-//        binding.newAmount = newAmount
-//        updateCommissionInList()
+        updateCommissionInList()
     }
 
-//    private fun updateCommissionInList() {
-//        renewalPayment.paymentItem?.paymentDetailsItems?.let {
-//            it.let {
-//                val tmp = it.toMutableList()
-//                tmp.add(RenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
-//                adapter.submitList(tmp)
-//                rvDetails.adapter = adapter
-//            }
-//        }
-//    }
+    private fun updateCommissionInList() {
+        medicalRenewalPayment.paymentItem?.paymentDetailsItems?.let {
+            it.let {
+                val tmp = it.toMutableList()
+                tmp.add(MedicalRenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
+                adapter.submitList(tmp)
+                rvDetails.adapter = adapter
+            }
+        }
+    }
 
     private fun handlePaymentResponse(response: WebJsResponse?) {
         when (response?.orderStatus) {
@@ -352,15 +384,13 @@ class InquiryDetailsFragment : BaseFragment() {
                     }
             }
             PaymentStatus.SUCCESS -> {
-                showAlert(
-                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
-                        R.string.payment_successful
-                    ) + response.orderNo
-                    else getString(R.string.payment_reference) + response.referenceCode
-                ) {
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
+                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
+                    showAlert(getString(R.string.payment_successful) + response.orderNo) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.homeFragment)
+                    }
+                else
+                    showCopyAlertDialog(response.referenceCode!!)
             }
             PaymentStatus.FAIL -> {
                 showAlert(getString(R.string.payment_canceled)) {
@@ -386,15 +416,18 @@ class InquiryDetailsFragment : BaseFragment() {
         }
     }
 
+    fun paymentInquiry(){
+        inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString(), if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE, edAddress.text.toString(), edMobile.text.toString())
+    }
+
     fun addRenewalRequest(){
-        inquiryDetailsViewModel.addRenewalRequest(sharedPref.mobile, params.number, renewalPayment.paymentItem?.engName ?: "", params.serviceID,
+        inquiryDetailsViewModel.addRenewalRequest(sharedPref.mobile, params.number, medicalRenewalPayment.paymentItem?.engName ?: "", params.serviceID.toInt(),
             if (rb_card.isChecked) "card" else "pos",
-            if (rb_card.isChecked) 2 else if (rb_channel.isChecked) 2 else 1,
+            if (rb_card.isChecked) 3 else if (rb_channel.isChecked) 2 else 4,
             if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE,
             edAddress.text.toString(), edMobile.text.toString()
         )
     }
-
     //endregion
 
     fun navController() = findNavController()
