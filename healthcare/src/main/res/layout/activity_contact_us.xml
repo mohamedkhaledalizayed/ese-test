@@ -7,7 +7,7 @@
     android:background="#f0f5f7"
     android:paddingHorizontal="@dimen/margin_large"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".common.contactus.ContactUsActivity">
+    tools:context=".contactus.ContactUsActivity">
 
     <include
         android:id="@+id/toolbar"
