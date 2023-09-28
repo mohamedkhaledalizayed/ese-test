@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_item"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/chefaa_orders_bg">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_alignParentStart="true"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/chefaa_orders_bg">
+
+            <ImageView
+                android:id="@+id/medication_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/medicine_bg" />
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/image_progress"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminate="true"
+                android:theme="@style/AppTheme.Progressbar"
+                />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/medication_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toEndOf="@+id/frameLayout"
+            android:ellipsize="end"
+            android:gravity="right"
+            android:maxLines="1"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/_12ssp" />
+
+        <TextView
+            android:id="@+id/medication_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medication_title"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toEndOf="@+id/frameLayout"
+            android:textColor="#8f959e"
+            android:textSize="@dimen/_10ssp"/>
+
+        <TextView
+            android:id="@+id/medication_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medication_price"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toEndOf="@+id/frameLayout"
+            android:textColor="#8f959e"
+            android:textSize="@dimen/_10ssp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_below="@id/medication_price"
+            android:src="@drawable/delete_icon" />
+
+    </RelativeLayout>
+</layout>

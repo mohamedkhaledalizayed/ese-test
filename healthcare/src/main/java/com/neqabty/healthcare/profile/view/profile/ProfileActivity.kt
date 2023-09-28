@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.data.Constants.pharmacyMartCart
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.AuthDialog
@@ -135,6 +136,8 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
         binding.logout.setOnClickListener {
             Constants.cart.productList.clear()
             Constants.cart.imageList.clear()
+            pharmacyMartCart.pharmacyMartImageList.clear()
+            pharmacyMartCart.orderByText = ""
             Constants.cart.note = null
             if (sharedPreferences.isAuthenticated){
                 sharedPreferences.clearAll()

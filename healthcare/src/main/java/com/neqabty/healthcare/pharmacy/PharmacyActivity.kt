@@ -7,6 +7,7 @@ import com.neqabty.healthcare.chefaa.home.view.ChefaaHomeActivity
 import com.neqabty.healthcare.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityPharmacyBinding
+import com.neqabty.healthcare.pharmacymart.home.ui.PharmacyMartHomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +22,7 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
 
         binding.circularProgress.setProgress(60.0, 100.0)
         binding.backBtnHeader.setOnClickListener { finish() }
+
         binding.backBtn.setOnClickListener { finish() }
         binding.clinido.setOnClickListener {
             clickedItem = "clinido"
@@ -32,23 +34,35 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
             bottomSheetFragment = PharmacyTermsBottomSheet.newInstance(clickedItem)
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
+        binding.wlcare.setOnClickListener {
+            clickedItem = "mart"
+            bottomSheetFragment = PharmacyTermsBottomSheet.newInstance(clickedItem)
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+
+        }
     }
 
     override fun onAgreeClicked() {
-        if (clickedItem == "clinido") {
-            val intent = Intent(this, ClinidoActivity::class.java)
-            intent.putExtra("title", "pharmacy")
-            startActivity(intent)
-        } else {
-            val intent = Intent(this, ChefaaHomeActivity::class.java)
-            intent.putExtra("user_number", sharedPreferences.mobile)
-            intent.putExtra("mobile_number", sharedPreferences.mobile)
-            intent.putExtra("country_code", sharedPreferences.mobile.substring(0, 2))
-            intent.putExtra("national_id", sharedPreferences.nationalId)
-            intent.putExtra("name", sharedPreferences.name)
-            intent.putExtra("jwt", "")
-            startActivity(intent)
+        when (clickedItem) {
+            "clinido" -> {
+                val intent = Intent(this, ClinidoActivity::class.java)
+                intent.putExtra("title", "pharmacy")
+                startActivity(intent)
+            }
+            "mart" -> {
+                startActivity(Intent(this@PharmacyActivity, PharmacyMartHomeActivity::class.java))
+            }
+            else -> {
+                val intent = Intent(this, ChefaaHomeActivity::class.java)
+                intent.putExtra("user_number", sharedPreferences.mobile)
+                intent.putExtra("mobile_number", sharedPreferences.mobile)
+                intent.putExtra("country_code", sharedPreferences.mobile.substring(0, 2))
+                intent.putExtra("national_id", sharedPreferences.nationalId)
+                intent.putExtra("name", sharedPreferences.name)
+                intent.putExtra("jwt", "")
+                startActivity(intent)
 
+            }
         }
     }
 }

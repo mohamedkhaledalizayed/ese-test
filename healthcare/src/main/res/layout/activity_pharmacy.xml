@@ -83,6 +83,16 @@
     </FrameLayout>
 
 
+    <carbon.widget.ImageView
+        android:id="@+id/wlcare"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:src="@drawable/wlcare"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_container"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

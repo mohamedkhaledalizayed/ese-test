@@ -9,29 +9,30 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.orders.presentation.orderbynote.OrderByNoteActivity
-import com.neqabty.healthcare.contactus.NumbersDialog
 import com.neqabty.healthcare.databinding.FragmentPickUpImageBottomSheetBinding
+import com.neqabty.healthcare.pharmacymart.orders.ui.uploadprescription.PharmacyMartCartActivity
+import com.neqabty.healthcare.pharmacymart.home.ui.PharmacyMartHomeActivity
 
 
 class PickUpImageBottomSheet : BottomSheetDialogFragment() {
 
 
-    var fromHome = true
+    var from = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            fromHome = it.getBoolean("tag")
+            from = it.getInt("tag")
         }
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance(tag: Boolean) =
+        fun newInstance(tag: Int) =
             PickUpImageBottomSheet().apply {
                 arguments = Bundle().apply {
-                    putBoolean("tag", tag)
+                    putInt("tag", tag)
                 }
             }
     }
@@ -50,12 +51,21 @@ class PickUpImageBottomSheet : BottomSheetDialogFragment() {
 
         binding.closeBtn.setOnClickListener { dialog.dismiss() }
 
-
-        val activity = if(fromHome){
-            requireActivity() as ChefaaHomeActivity
-        }else{
-            requireActivity() as OrderByNoteActivity
+        var activity = when (from) {
+            0 -> {
+                requireActivity() as PharmacyMartHomeActivity
+            }
+            1 -> {
+                requireActivity() as OrderByNoteActivity
+            }
+            2 -> {
+                requireActivity() as PharmacyMartCartActivity
+            }
+            else -> {
+                requireActivity() as ChefaaHomeActivity
+            }
         }
+
         binding.cameraContainer.setOnClickListener { activity.onCameraSelected() }
         binding.galleryContainer.setOnClickListener { activity.onGallerySelected() }
 

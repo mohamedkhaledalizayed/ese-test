@@ -3,7 +3,7 @@ package com.neqabty.healthcare.core.di
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.neqabty.healthcare.BuildConfig
-import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO
+import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_STAGING
 import dagger.Module
 import dagger.Provides

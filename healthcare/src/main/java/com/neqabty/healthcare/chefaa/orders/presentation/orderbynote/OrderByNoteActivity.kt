@@ -124,7 +124,7 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>(), IMediaSe
     override fun getViewBinding() = ActivityOrderByNoteBinding.inflate(layoutInflater)
 
     private fun addPhoto() {
-        bottomSheetFragment = PickUpImageBottomSheet.newInstance(false)
+        bottomSheetFragment = PickUpImageBottomSheet.newInstance(1)
         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
     }
 

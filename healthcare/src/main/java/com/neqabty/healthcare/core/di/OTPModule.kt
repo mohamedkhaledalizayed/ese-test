@@ -3,6 +3,7 @@ package com.neqabty.healthcare.core.di
 
 import android.util.Log
 import com.neqabty.healthcare.BuildConfig
+import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV_OTP
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO_OTP
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_STAGING_OTP
 import dagger.Module

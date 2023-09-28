@@ -39,6 +39,7 @@ import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.onboarding.contact.view.ContactCheckMemberActivity
 import com.neqabty.healthcare.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.onboarding.signup.view.SignupActivity
+import com.neqabty.healthcare.pharmacymart.home.ui.PharmacyMartHomeActivity
 import javax.inject.Inject
 
 
@@ -251,6 +252,13 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    protected fun reLaunchHomeActivityPharmacyMart(context: Context){
+        val intent = Intent(context, PharmacyMartHomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+        finish()
+    }
     //region  onboarding router
     protected fun getTheNextActivityFromSplash(): Class<Activity> {
         if (!sharedPreferences.isIntroSkipped)
@@ -327,7 +335,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
                     // check for permanent denial of any permission
                     if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied) {
                         // permission is denied permanently, we will show user a dialog message.
-                        showSettingsDialog()
+                        showSettingsDialog("يحتاج هذا التطبيق الاذن للوصول الى موقعك الحالى. يمكنك منحهم في إعدادات التطبيق.")
                     }
                 }
 
@@ -345,11 +353,11 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             .onSameThread().check()
     }
 
-    private fun showSettingsDialog() {
+     fun showSettingsDialog(message: String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(this@BaseActivity)
         builder.setTitle("بحاجة إلى أذونات")
         builder.setCancelable(false)
-        builder.setMessage("يحتاج هذا التطبيق إلى إذن لاستخدام هذه الميزة. يمكنك منحهم في إعدادات التطبيق.")
+        builder.setMessage(message)
         builder.setPositiveButton("اذهب للاعدادات\n") { dialog: DialogInterface, which: Int ->
             dialog.cancel()
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
