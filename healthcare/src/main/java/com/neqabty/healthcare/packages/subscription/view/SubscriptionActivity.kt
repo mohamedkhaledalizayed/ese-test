@@ -71,6 +71,10 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             checkPermissionsAndOpenFilePicker()
         }
         binding.btnBackId.setOnClickListener {
+            if (nationalIdFrontUri == null){
+                Toast.makeText(this, "من فضلك اختر صورة البطاقة الامامية اولا.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             binding.ivFront.setImageResource(R.drawable.img_nat_id_front)
             binding.tvEnterNationalIdFront.text = resources.getString(R.string.enter_id_back)
             binding.btnBackId.visibility = View.GONE
@@ -83,6 +87,10 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         }
 
         binding.bPayNow.setOnClickListener {
+            if (nationalIdBackUri == null){
+                Toast.makeText(this, "من فضلك اختر صورة البطاقة الخلفية اولا.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             payNow()
         }
 
