@@ -33,9 +33,14 @@ class PackageDetailsActivity : BaseActivity<ActivityPackageDetailsBinding>() {
         binding.details.text = Html.fromHtml(details)
 
         binding.subscribeBtn.setOnClickListener {
-            val intent = Intent(this, UserDataActivity::class.java)
-            intent.putExtra("package", packageDetails)
-            startActivity(intent)
+            if (sharedPreferences.isAuthenticated){
+                val intent = Intent(this, UserDataActivity::class.java)
+                intent.putExtra("package", packageDetails)
+                startActivity(intent)
+            }else{
+                askForLogin()
+            }
+
         }
     }
 }
