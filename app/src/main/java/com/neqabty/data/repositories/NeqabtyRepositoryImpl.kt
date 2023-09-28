@@ -82,22 +82,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getMedicalRenewalData(mobileNumber, userNumber)
     }
 
-    override fun inquireMedicalRenewalPayment(userNumber: String): Observable<MedicalRenewalPaymentEntity> {
-        return remoteDataStore.inquireMedicalRenewalPayment(userNumber)
-    }
-
-    override fun addMedicalRenewalRequest(
-        mobileNumber: String,
-        userNumber: String,
-        userName: String,
-        serviceID: Int,
-        paymentType: String,
-        paymentGatewayId: Int,
-        locationType: Int,
-        address: String,
-        mobile: String
-    ): Observable<PaymentRequestEntity> {
-        return remoteDataStore.addMedicalRenewalRequest(mobileNumber, userNumber, userName, 3, paymentType, paymentGatewayId, locationType, address, mobile)
+    override fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+        return remoteDataStore.inquireMedicalRenewalPayment(isInquire, mobileNumber, userNumber, locationType, address, mobile)
     }
 
     override fun addMedicalRenewalRequestNew(
@@ -284,55 +270,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getAllServiceTypes()
     }
 
-    override fun getSyndicateServices(userNumber: String): Observable<SyndicateServicesEntity> {
-        return remoteDataStore.getSyndicateServices(userNumber)
-    }
-
-    override fun inquirePayment(userNumber: String): Observable<RenewalPaymentEntity> {
-        return remoteDataStore.inquirePayment(userNumber)
-    }
-
-    override fun addRenewalRequest(
-        mobileNumber: String,
-        userNumber: String,
-        userName: String,
-        serviceID: Int,
-        paymentType: String,
-        paymentGatewayId: Int,
-        locationType: Int,
-        address: String,
-        mobile: String
-    ): Observable<PaymentRequestEntity> {
-        return remoteDataStore.addRenewalRequest(mobileNumber, userNumber, userName, 1, paymentType, paymentGatewayId, locationType, address, mobile)
-    }
-
-    override fun inquireSyndicateServicesPayment(
-        mobileNumber: String,
-        userNumber: String,
-        userName: String,
-        serviceID: Int,
-        countryID: Int,
-        paymentType: String,
-        locationType: Int,
-        address: String,
-        mobile: String
-    ): Observable<SyndicateServicesPaymentEntity> {
-        return remoteDataStore.inquireSyndicateServicesPayment(mobileNumber, userNumber, userName, serviceID, countryID, paymentType, locationType, address, mobile)
-    }
-
-    override fun addSyndicateServicesPaymentRequest(
-        mobileNumber: String,
-        userNumber: String,
-        userName: String,
-        serviceID: Int,
-        countryID: Int,
-        paymentType: String,
-        paymentGatewayId: Int,
-        locationType: Int,
-        address: String,
-        mobile: String
-    ): Observable<SyndicateServicesPaymentRequestEntity> {
-        return remoteDataStore.addSyndicateServicesPaymentRequest(mobileNumber, userNumber, userName, serviceID, countryID, paymentType, paymentGatewayId, locationType, address, mobile)
+    override fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+        return remoteDataStore.inquirePayment(isInquire, mobileNumber, userNumber, serviceID, requestID, amount, locationType, address, mobile)
     }
 
     override fun addRenewalRequestNew(

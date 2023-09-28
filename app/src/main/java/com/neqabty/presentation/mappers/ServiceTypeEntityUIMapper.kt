@@ -16,5 +16,5 @@ class ServiceTypeEntityUIMapper @Inject constructor() : Mapper<ServiceTypeEntity
                 id = from.id,
                 type = from.type
         )
-    }
-}
+            }
+        }

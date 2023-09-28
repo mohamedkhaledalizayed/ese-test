@@ -78,6 +78,7 @@ class ProfileFragment : BaseFragment() {
             binding.tvNumber.text = sharedPref.user
             binding.tvSyndicate.text = state.profile!!.syndicate!!
             binding.tvSection.text = state.profile!!.section!!
+            binding.tvEPoints.setOnClickListener { navController().navigate(R.id.medicalBuyServiceFragment) }
             state.profile!!.invitations.toString().also { binding.tvInvitations.text = it }
             setupClub()
             return

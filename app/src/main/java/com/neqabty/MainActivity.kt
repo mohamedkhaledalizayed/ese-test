@@ -440,6 +440,11 @@ class MainActivity : AppCompatActivity() {
         })
         listDataHeader.add(medicalServicesItem)
 
+        val refundServicesItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.refund_title, {
+
+        })
+        listDataHeader.add(refundServicesItem)
+
         val newsItem = NavigationMenuItem(R.drawable.ic_menu_news, R.string.news_title, {
             navController().navigate(R.id.newsFragment)
         })
@@ -460,28 +465,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        val syndicateServicesItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.syndicate_services_title, {
-            if (sharedPref.isRegistered)
-                navController().navigate(R.id.syndicateServicesFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.SYNDICATE_SERVICES)
-                navController().navigate(R.id.signupFragment, bundle)
-            }
-        })
-        listDataHeader.add(syndicateServicesItem)
-
-        val refundItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.refund_title, {
-            if (sharedPref.isRegistered)
-                navController().navigate(R.id.refundFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.REFUND)
-                navController().navigate(R.id.signupFragment, bundle)
-            }
-        })
-        listDataHeader.add(refundItem)
-
         val engineeringRecordsItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.engineering_records_title, {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.engineeringRecordsDetailsFragment)
@@ -495,14 +478,14 @@ class MainActivity : AppCompatActivity() {
 
         val updateDataItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.update_data_title, {
             if (sharedPref.isRegistered)
-                navController().navigate(R.id.updateDataVerificationFragment)
+                navController().navigate(R.id.updateDataDetailsFragment)
             else {
                 val bundle: Bundle = Bundle()
                 bundle.putInt("type", Constants.UPDATE_DATA)
                 navController().navigate(R.id.signupFragment, bundle)
             }
         })
-//        listDataHeader.add(updateDataItem)
+        listDataHeader.add(updateDataItem)
 
         val complaintsItem = NavigationMenuItem(R.drawable.ic_menu_complaints, R.string.complaints_title, {
             if (sharedPref.isRegistered)
@@ -579,8 +562,32 @@ class MainActivity : AppCompatActivity() {
         listDataChild[userServicesItem] = userServicesList // Header, Child data
 
 
+        // Adding refundServicesList child data
+        val refundServicesList: MutableList<NavigationMenuItem> = mutableListOf()
 
-        // Adding medicalServicesList child data
+        val newRefundRequestItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.new_refund_request_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.refundFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.REFUND_REQUEST)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        refundServicesList.add(newRefundRequestItem)
+
+        val refundInquiryItem = NavigationMenuItem(R.drawable.ic_menu_help, R.string.inquire_refund_request_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.refundInquiryFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.REFUND_INQUIRY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        refundServicesList.add(refundInquiryItem)
+
+        listDataChild[refundServicesItem] = refundServicesList // Header, Child data// Adding refundServicesList child data
         val medicalServicesList: MutableList<NavigationMenuItem> = mutableListOf()
 
         val medicalRenewItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.medical_renew_title, {
@@ -665,6 +672,39 @@ class MainActivity : AppCompatActivity() {
         })
         medicalServicesList.add(medicalComplaintsItem)
 
+        val medicalSubventionInquiryItem = NavigationMenuItem(R.drawable.ic_menu_help, R.string.inquire_medical_subvention_request_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.medicalSubventionInquiryFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_SUBVENTION_INQUIRY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(medicalSubventionInquiryItem)
+
+        val buyMedicalServiceItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.buy_medical_service_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.medicalBuyServiceFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_BUY_SERVICE)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(buyMedicalServiceItem)
+
+        val medicalArchiveItem = NavigationMenuItem(R.drawable.ic_menu_news, R.string.medical_archive_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.medicalArchiveFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_ARCHIVE)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(medicalArchiveItem)
+
         val doctorsReservationItem = NavigationMenuItem(R.drawable.ic_menu_medical, R.string.doctors_reservation_title, {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.doctorsReservationFragment)
@@ -682,7 +722,7 @@ class MainActivity : AppCompatActivity() {
                 if(it.vezeetaConfig.status)
                     if(!medicalServicesList.contains(doctorsReservationItem)) medicalServicesList.add(doctorsReservationItem)
                 if(it.committeesStatus) {
-                    if (!listDataHeader.contains(committeesItem)) listDataHeader.add(4, committeesItem)
+                    if (!listDataHeader.contains(committeesItem)) listDataHeader.add(6, committeesItem)
                     mMenuAdapter.notifyDataSetChanged()
                 }
             }

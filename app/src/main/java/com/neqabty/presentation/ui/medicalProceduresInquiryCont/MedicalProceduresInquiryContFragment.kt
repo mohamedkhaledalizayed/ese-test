@@ -115,6 +115,19 @@ class MedicalProceduresInquiryContFragment : BaseFragment() {
             it.parentCategoryId == (binding.spProcedureCat.selectedItem as MedicalProceduresInquiryLookupsUI.ProcedureCategory).id
         }
 
+        if(filteredSubcategoriesList!!.isEmpty()) {
+            binding.tvProcedureSubCat.visibility = View.GONE
+            binding.spProcedureSubCat.visibility = View.GONE
+            binding.tvProcedure.visibility = View.GONE
+            binding.spProcedures.visibility = View.GONE
+        }
+        else {
+            binding.tvProcedureSubCat.visibility = View.VISIBLE
+            binding.spProcedureSubCat.visibility = View.VISIBLE
+            binding.tvProcedure.visibility = View.VISIBLE
+            binding.spProcedures.visibility = View.VISIBLE
+        }
+
         binding.spProcedureSubCat.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, filteredSubcategoriesList!!)
         binding.spProcedureSubCat.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}

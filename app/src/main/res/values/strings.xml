@@ -200,10 +200,14 @@
     <string name="medical_title">الدليل الطبي</string>
     <string name="inquiry_title">المدفوعات</string>
     <string name="profile_title">هويتك الإلكترونية</string>
-    <string name="medical_procedures_inquiry_title">الاستعلامات الطبية</string>
+    <string name="medical_procedures_inquiry_title">استعلام خدمة طبية</string>
     <string name="committees_title">اللجان</string>
     <string name="refund_title">طلبات الاسترداد</string>
-    <string name="syndicate_services_title">خدمات نقابية</string>
+    <string name="new_refund_request_title">تقديم طلب استرداد</string>
+    <string name="inquire_refund_request_title">استعلام عن طلب استرداد</string>
+    <string name="inquire_medical_subvention_request_title">استعلام عن طلب اعانة مرضية</string>
+    <string name="buy_medical_service_title">شراء خدمة طبية</string>
+    <string name="medical_archive_title">الأرشيف الطبي</string>
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
     <string name="complaints_title">خدمة العملاء والشكاوى</string>
@@ -546,6 +550,8 @@
     <string name="medical_complaint_title">الاستفسارات الطبية</string>
 
     <string name="club_invitations">التذاكر المتاحة</string>
+    <string name="epoints">رصيد نقاطك الإلكترونية: 120 نقطة</string>
+    <string name="buy">شراء</string>
     <string name="mobile">رقم الموبايل</string>
     <string name="member_number">رقم العضوية</string>
     <string name="subsyndicate">النقابة الفرعية</string>
@@ -587,6 +593,7 @@
     <string name="questionnaire_answered">لقد تمت الإجابة على هذا الاستطلاع من قبل</string>
     <string name="questionnaire_question">عرض السؤال</string>
 
+    <string name="medical_archive_category">نوع الملفات</string>
 
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
     <string name="app_version">Version %s</string>

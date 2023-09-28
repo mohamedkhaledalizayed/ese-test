@@ -13,16 +13,31 @@ class MedicalRenewPaymentInquiry @Inject constructor(
 
     companion object {
         private const val PARAM_USER_NUMBER = "param:userNumber"
+        private const val PARAM_DELIVERY_TYPE = "param:deliveryType"
+        private const val PARAM_ADDRESS = "param:address"
+        private const val PARAM_MOBILE = "param:mobile"
+        private const val PARAM_MOBILE_NUMBER = "param:mobileNumber"
+        private const val PARAM_IS_INQUIRE = "param:isInquire"
     }
 
-    fun paymentInquiry(userNumber: String): Observable<MedicalRenewalPaymentEntity> {
+    fun paymentInquiry(isInquire: Boolean, mobileNumber: String, userNumber: String, deliveryType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
         val data = HashMap<String, Any>()
         data[PARAM_USER_NUMBER] = userNumber
+        data[PARAM_DELIVERY_TYPE] = deliveryType
+        data[PARAM_ADDRESS] = address
+        data[PARAM_MOBILE] = mobile
+        data[PARAM_MOBILE_NUMBER] = mobileNumber
+        data[PARAM_IS_INQUIRE] = isInquire
         return observable(data)
     }
 
     override fun createObservable(data: Map<String, Any>?): Observable<MedicalRenewalPaymentEntity> {
         val userNumber = data?.get(PARAM_USER_NUMBER) as String
-        return neqabtyRepository.inquireMedicalRenewalPayment(userNumber)
+        val deliveryType = data?.get(PARAM_DELIVERY_TYPE) as Int
+        val address = data?.get(PARAM_ADDRESS) as String
+        val mobile = data?.get(PARAM_MOBILE) as String
+        val mobileNumber = data?.get(PARAM_MOBILE_NUMBER) as String
+        val isInquire = data?.get(PARAM_IS_INQUIRE) as Boolean
+        return neqabtyRepository.inquireMedicalRenewalPayment(isInquire, mobileNumber, userNumber, deliveryType, address, mobile)
     }
 }

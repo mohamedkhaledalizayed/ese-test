@@ -179,7 +179,7 @@ class SignupFragment : BaseFragment() {
             )
 
             Constants.UPDATE_DATA -> navController().navigate(
-                    SignupFragmentDirections.openUpdateDataVerification()
+                    SignupFragmentDirections.openUpdateDataDetails()
             )
 
             Constants.COMPLAINTS -> navController().navigate(
@@ -230,12 +230,24 @@ class SignupFragment : BaseFragment() {
                 SignupFragmentDirections.openMedicalProceduresInquiry()
             )
 
-            Constants.REFUND -> navController().navigate(
+            Constants.REFUND_REQUEST -> navController().navigate(
                 SignupFragmentDirections.openRefund()
             )
 
-            Constants.SYNDICATE_SERVICES -> navController().navigate(
-                SignupFragmentDirections.openSyndicateServices()
+            Constants.REFUND_INQUIRY -> navController().navigate(
+                SignupFragmentDirections.openRefundInquiry()
+            )
+
+            Constants.MEDICAL_SUBVENTION_INQUIRY -> navController().navigate(
+                SignupFragmentDirections.openMedicalSubventionInquiry()
+            )
+
+            Constants.MEDICAL_BUY_SERVICE -> navController().navigate(
+                SignupFragmentDirections.openMedicalBuyService()
+            )
+
+            Constants.MEDICAL_ARCHIVE -> navController().navigate(
+                SignupFragmentDirections.openMedicalArchive()
             )
 
             Constants.MEDICAL_COMPLAINTS -> navController().navigate(

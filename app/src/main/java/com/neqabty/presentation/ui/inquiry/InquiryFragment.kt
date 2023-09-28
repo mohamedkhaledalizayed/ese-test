@@ -18,7 +18,8 @@ import com.neqabty.databinding.InquiryFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.entities.RenewalPaymentUI
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
+import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.ServiceTypeUI
 import com.neqabty.presentation.entities.ServiceUI
 import com.neqabty.presentation.util.autoCleared
@@ -85,7 +86,7 @@ class InquiryFragment : BaseFragment() {
         llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
             if (isDataValid(binding.edMemberNumber.text.toString())) {
-                inquiryViewModel.paymentInquiry(binding.edMemberNumber.text.toString())
+                inquiryViewModel.paymentInquiry(sharedPref.mobile, binding.edMemberNumber.text.toString(), serviceID.toString())
             }
         }
     }
@@ -103,20 +104,20 @@ class InquiryFragment : BaseFragment() {
             renderServiceTypes()
             state.serviceTypes = null
             return
-        } else if (!state.isLoading && state.renewalPayment != null) {
-            if((state.renewalPayment as RenewalPaymentUI).resultType == "-2")
-                showAlert((state.renewalPayment as RenewalPaymentUI).msg)
-            else if((state.renewalPayment as RenewalPaymentUI).resultType == "-1")
-                showAlert((state.renewalPayment as RenewalPaymentUI).msg)
-            else if((state.renewalPayment as RenewalPaymentUI).resultType == "-3")
-                showAlert((state.renewalPayment as RenewalPaymentUI).msg)
-            else if((state.renewalPayment as RenewalPaymentUI).paymentItem != null)
+        } else if (!state.isLoading && state.medicalRenewalPayment != null) {
+            if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
+                showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg)
+            else if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-1")
+                showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg)
+            else if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-3")
+                showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg)
+            else if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).paymentItem != null)
                 navController().navigate(
-                        InquiryFragmentDirections.openInquiryDetails(edMemberNumber.text.toString(),0, spService.selectedItem.toString(), state.renewalPayment as RenewalPaymentUI, serviceID)
+                        InquiryFragmentDirections.openInquiryDetails(edMemberNumber.text.toString(),0, spService.selectedItem.toString(), state.medicalRenewalPayment as MedicalRenewalPaymentUI, serviceID.toString())
                 )
             else
                 showAlert(getString(R.string.error_msg))
-            state.renewalPayment = null
+            state.medicalRenewalPayment = null
         }
     }
 

@@ -94,7 +94,7 @@ class AppModule {
         if(!BuildConfig.DEBUG) {val certificatePinner : CertificatePinner = CertificatePinner.Builder()
             .add(
                 BuildConfig.URL,
-                "sha256/OHBR6iUv0VI2PGqJSnQGP8SiLphZ1zCJcpQC0Dis/8E="
+                "sha256/wXZC2ha/p2JrCefGhfb5AgcXlitrNJCs9rGINg16qGw="
             )
             .add(
                 "*.neqabty.com",
@@ -508,24 +508,6 @@ class AppModule {
     @Provides
     fun provideGetAllServiceTypes(neqabtyRepository: NeqabtyRepository): GetAllServiceTypes {
         return GetAllServiceTypes(ASyncTransformer(), neqabtyRepository)
-    }
-
-    @Singleton
-    @Provides
-    fun provideGetSyndicateServices(neqabtyRepository: NeqabtyRepository): GetSyndicateServices {
-        return GetSyndicateServices(ASyncTransformer(), neqabtyRepository)
-    }
-
-    @Singleton
-    @Provides
-    fun provideInquireSyndicateServicesPayment(neqabtyRepository: NeqabtyRepository): InquireSyndicateServicesPayment {
-        return InquireSyndicateServicesPayment(ASyncTransformer(), neqabtyRepository)
-    }
-
-    @Singleton
-    @Provides
-    fun provideAddSyndicateServicesPaymentRequest(neqabtyRepository: NeqabtyRepository): AddSyndicateServicesPaymentRequest {
-        return AddSyndicateServicesPaymentRequest(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

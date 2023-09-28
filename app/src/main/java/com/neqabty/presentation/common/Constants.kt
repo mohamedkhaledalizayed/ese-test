@@ -53,10 +53,13 @@ object Constants {
     var MEDICAL_LETTERS_INQUIRY = 13
     var DOCTORS_RESERVATION = 14
     var COMMITTEES = 15
-    var REFUND = 16
+    var REFUND_REQUEST = 16
     var MEDICAL_PROCEDURES_INQUIRY = 17
     var MEDICAL_COMPLAINTS = 18
-    var SYNDICATE_SERVICES = 19
+    var REFUND_INQUIRY = 19
+    var MEDICAL_SUBVENTION_INQUIRY = 20
+    var MEDICAL_BUY_SERVICE = 21
+    var MEDICAL_ARCHIVE = 22
 
     var AD_MEDICAL_RENEW = 1
     var AD_TRIPS = 2
@@ -73,9 +76,9 @@ object Constants {
     var DELIVERY_LOCATION_HOME = 2
     var DELIVERY_LOCATION_MAIN_SYNDICATE = 3
 
-    var PAYMENT_TYPE_TRIPS = 9991
-    var PAYMENT_TYPE_RECORDS = 9992
-    var PAYMENT_TYPE_MEDICAL_RENEW = 9993
+    var PAYMENT_TYPE_TRIPS = "9991"
+    var PAYMENT_TYPE_RECORDS = "9992"
+    var PAYMENT_TYPE_MEDICAL_RENEW = "9993"
 
     sealed class Mode {
         class Visitor : Mode() {

@@ -162,34 +162,34 @@ interface WebService {
         @Body refundRequest: RefundRequest
     ): Observable<ApiResponse<RefundData>>
 
-    @POST("api/v1/ese-services")
-    fun getSyndicateServices(@Body servicesRequest: SyndicateServicesRequest): Observable<ApiResponse<SyndicateServicesData>>
-
     @GET("api/v1/eseServicesTypes")
     fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
 
     @POST("api/v1/eseServices")
     fun getAllServices(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<List<ServiceData>>>
 
-    @POST("api/payment/renewal-inquiry")
+    @GET("api/apiPaymentRequest/RenewalInquiryDetails")
     fun paymentInquiry(
-        @Body inquiryRequest: InquiryRequest
-    ): Observable<ApiResponse<RenewalPaymentData>>
+            @Query("mobile_number") mobileNumber: String,
+            @Query("OldrefID") oldrefID: String,
+            @Query("serviceID") serviceID: Int,
+            @Query("requestID") requestID: String,
+            @Query("amount") amount: String,
+            @Query("server") server: String = ""
+    ): Observable<MedicalRenewalPaymentData>
 
-    @POST("api/payment/renewal-request")
+    @POST("api/apiPaymentRequest/AddRenewalRequest")
     fun addRenewalRequest(
-            @Body addInquiryRequest: AddInquiryRequest
-    ): Observable<ApiResponse<PaymentRequestData>>
-
-    @POST("api/payment/init")
-    fun inquireSyndicateServicesPayment(
-        @Body syndicateServicesInquiryRequest: SyndicateServicesInquiryRequest
-    ): Observable<ApiResponse<SyndicateServicesPaymentData>>
-
-    @POST("api/payment/init")
-    fun addSyndicateServicesPaymentRequest(
-        @Body syndicateServicesPaymentRequest: SyndicateServicesPaymentRequest
-    ): Observable<ApiResponse<SyndicateServicesPaymentRequestData>>
+            @Query("mobile_number") mobileNumber: String,
+            @Query("oldrefid") oldRefID: String,
+            @Query("serviceID") serviceID: Int,
+            @Query("requestID") requestID: String,
+            @Query("amount") amount: String,
+            @Query("deliveryLocation") locationType: Int,
+            @Query("deliveryAddress") address: String,
+            @Query("deliveryPhone") mobile: String,
+            @Query("server") server: String = ""
+    ): Observable<MedicalRenewalPaymentData>
 
     @POST("api/payment/renewal-request")
     fun addRenewalRequestNew(
@@ -235,15 +235,11 @@ interface WebService {
     @GET("api/ApiHealthCare/GetFollowersList")
     fun getMedicalRenewData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
 
-    @POST("api/payment/healthcare-inquiry")
-    fun inquireHealthCare(
-        @Body medicalInquiryRequest: MedicalInquiryRequest
-    ): Observable<ApiResponse<MedicalRenewalPaymentData>>
+    @GET("api/apiPaymentRequest/HealthCareInquiryDetails")
+    fun inquireHealthCare(@Query("mobile_number") mobileNumber: String, @Query("OldrefID") oldRefId: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
 
-    @POST("api/payment/healthcare-request")
-    fun getMedicalRenewPaymentData(
-        @Body addMedicalRenewalRequest: AddMedicalRenewalRequest
-    ): Observable<ApiResponse<PaymentRequestData>>
+    @POST("api/apiPaymentRequest/AddHealthCareRequest")
+    fun getMedicalRenewPaymentData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
 
     @POST("api/payment/healthcare-request")
     fun getMedicalRenewPaymentDataNew(

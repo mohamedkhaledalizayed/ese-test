@@ -114,7 +114,7 @@ class ActivateAccountFragment : BaseFragment() {
                 )
 
                 Constants.UPDATE_DATA -> navController().navigate(
-                        ActivateAccountFragmentDirections.openUpdateDataVerification()
+                        ActivateAccountFragmentDirections.openUpdateDataDetails()
                 )
 
                 Constants.COMPLAINTS -> navController().navigate(
@@ -165,13 +165,24 @@ class ActivateAccountFragment : BaseFragment() {
                     ActivateAccountFragmentDirections.openMedicalProceduresInquiry()
                 )
 
-                Constants.REFUND -> navController().navigate(
+                Constants.REFUND_REQUEST -> navController().navigate(
                     ActivateAccountFragmentDirections.openRefund()
                 )
 
+                Constants.REFUND_INQUIRY -> navController().navigate(
+                    ActivateAccountFragmentDirections.openRefundInquiry()
+                )
 
-                Constants.SYNDICATE_SERVICES -> navController().navigate(
-                    ActivateAccountFragmentDirections.openSyndicateServices()
+                Constants.MEDICAL_SUBVENTION_INQUIRY -> navController().navigate(
+                    ActivateAccountFragmentDirections.openMedicalSubventionInquiry()
+                )
+
+                Constants.MEDICAL_BUY_SERVICE -> navController().navigate(
+                    ActivateAccountFragmentDirections.openMedicalBuyService()
+                )
+
+                Constants.MEDICAL_ARCHIVE -> navController().navigate(
+                    ActivateAccountFragmentDirections.openMedicalArchive()
                 )
 
                 Constants.MEDICAL_COMPLAINTS -> navController().navigate(

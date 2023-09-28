@@ -153,8 +153,8 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/openUpdateDataVerification"
-            app:destination="@id/updateDataVerificationFragment"
+            android:id="@+id/openUpdateDataDetails"
+            app:destination="@id/updateDataDetailsFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
@@ -173,6 +173,26 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openRefundInquiry"
+            app:destination="@id/refundInquiryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalSubventionInquiry"
+            app:destination="@id/medicalSubventionInquiryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalBuyService"
+            app:destination="@id/medicalBuyServiceFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalArchive"
+            app:destination="@id/medicalArchiveFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openComplaints"
             app:destination="@id/complaintsFragment"
             app:popUpTo="@id/homeFragment"
@@ -185,11 +205,6 @@
         <action
             android:id="@+id/openMedicalComplaints"
             app:destination="@id/medicalComplaintsFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/openSyndicateServices"
-            app:destination="@id/syndicateServicesFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -267,8 +282,8 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/openUpdateDataVerification"
-            app:destination="@id/updateDataVerificationFragment"
+            android:id="@+id/openUpdateDataDetails"
+            app:destination="@id/updateDataDetailsFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
@@ -287,6 +302,26 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openRefundInquiry"
+            app:destination="@id/refundInquiryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalSubventionInquiry"
+            app:destination="@id/medicalSubventionInquiryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalBuyService"
+            app:destination="@id/medicalBuyServiceFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalArchive"
+            app:destination="@id/medicalArchiveFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openComplaints"
             app:destination="@id/complaintsFragment"
             app:popUpTo="@id/homeFragment"
@@ -294,11 +329,6 @@
         <action
             android:id="@+id/openQuestionnaire"
             app:destination="@id/questionnaireFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/openSyndicateServices"
-            app:destination="@id/syndicateServicesFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
@@ -376,8 +406,8 @@
             android:name="mobile"
             app:argType="java.lang.String" />
         <argument
-            android:name="medicalRenewalPaymentUI"
-            app:argType="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
+            android:name="medicalRenewalUI"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalUI" />
         <action
             android:id="@+id/openPayment"
             app:destination="@id/paymentFragment" />
@@ -821,45 +851,15 @@
 
 
         <argument
-            android:name="renewalPaymentUI"
-            app:argType="com.neqabty.presentation.entities.RenewalPaymentUI" />
+            android:name="medicalRenewalPaymentUI"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
         <argument
             android:name="serviceID"
-            app:argType="java.lang.Integer" />
+            app:argType="java.lang.String" />
 
         <action
             android:id="@+id/openPayment"
             app:destination="@id/paymentFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/syndicateServicesFragment"
-        android:name="com.neqabty.presentation.ui.syndicateServices.SyndicateServicesFragment"
-        android:label="@string/syndicate_services_title"
-        tools:layout="@layout/syndicate_services_fragment">
-        <action
-            android:id="@+id/openSyndicateServicesDetails"
-            app:destination="@id/syndicateServicesDetailsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/syndicateServicesDetailsFragment"
-        android:name="com.neqabty.presentation.ui.syndicateServicesDetails.SyndicateServicesDetailsFragment"
-        android:label="@string/syndicate_services_title"
-        tools:layout="@layout/syndicate_services_fragment">
-        <argument
-            android:name="title"
-            app:argType="java.lang.String" />
-
-        <argument
-            android:name="serviceID"
-            app:argType="java.lang.Integer" />
-
-        <argument
-            android:name="amount"
-            app:argType="java.lang.String" />
-
-        <argument
-            android:name="syndicateServicesPaymentUI"
-            app:argType="com.neqabty.presentation.entities.SyndicateServicesPaymentUI" />
     </fragment>
     <fragment
         android:id="@+id/medicalProceduresInquiryFragment"
@@ -916,7 +916,7 @@
     <fragment
         android:id="@+id/refundFragment"
         android:name="com.neqabty.presentation.ui.refund.RefundFragment"
-        android:label="@string/refund_title"
+        android:label="@string/new_refund_request_title"
         tools:layout="@layout/refund_fragment">
 
         <action
@@ -926,12 +926,40 @@
     <fragment
         android:id="@+id/refundRequestFragment"
         android:name="com.neqabty.presentation.ui.refundRequest.RefundRequestFragment"
-        android:label="@string/refund_title"
+        android:label="@string/new_refund_request_title"
         tools:layout="@layout/refund_request_fragment">
 
         <argument
             android:name="refundRequest"
             app:argType="com.neqabty.presentation.ui.refund.RefundRequest" />
+    </fragment>
+    <fragment
+        android:id="@+id/refundInquiryFragment"
+        android:name="com.neqabty.presentation.ui.refundInquiry.RefundInquiryFragment"
+        android:label="@string/inquire_refund_request_title"
+        tools:layout="@layout/refund_inquiry_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/medicalSubventionInquiryFragment"
+        android:name="com.neqabty.presentation.ui.medicalSubventionInquiry.MedicalSubventionInquiryFragment"
+        android:label="@string/inquire_medical_subvention_request_title"
+        tools:layout="@layout/medical_subvention_inquiry_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/medicalBuyServiceFragment"
+        android:name="com.neqabty.presentation.ui.medicalBuyService.MedicalBuyServiceFragment"
+        android:label="@string/buy_medical_service_title"
+        tools:layout="@layout/medical_buy_service_fragment">
+
+        <!--        <action-->
+        <!--            android:id="@+id/openRefundRequest"-->
+        <!--            app:destination="@id/refundRequestFragment" />-->
+    </fragment>
+    <fragment
+        android:id="@+id/medicalArchiveFragment"
+        android:name="com.neqabty.presentation.ui.medicalArchive.MedicalArchiveFragment"
+        android:label="@string/medical_archive_title"
+        tools:layout="@layout/medical_archive_fragment">
     </fragment>
     <fragment
         android:id="@+id/complaintsFragment"

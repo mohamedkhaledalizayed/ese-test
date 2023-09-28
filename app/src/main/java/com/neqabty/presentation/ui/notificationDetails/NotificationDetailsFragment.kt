@@ -16,8 +16,9 @@ import com.neqabty.databinding.NotificationDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
+import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.NotificationUI
-import com.neqabty.presentation.entities.RenewalPaymentUI
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -77,8 +78,7 @@ class NotificationDetailsFragment : BaseFragment() {
         }
         binding.bPay.setOnClickListener {
             navController().navigate(
-                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(notificationItem.userNumber!!, 1, notificationItem.notificationType!!, RenewalPaymentUI(
-                        requestID = notificationItem.approvalNumber!!, paymentItem = RenewalPaymentUI.PaymentItem(paymentRequestNumber = notificationItem.approvalNumber!!, amount = notificationItem.cost!!, engNumber = notificationItem.userNumber.toString(), engName = notificationItem.name!!, name = notificationItem.name!!)), if (notificationItem.notificationTypeID == 2) Constants.PAYMENT_TYPE_TRIPS else Constants.PAYMENT_TYPE_RECORDS) // TODO serviceID, 2 trips 3 records
+                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(notificationItem.userNumber!!, 1, notificationItem.notificationType!!, MedicalRenewalPaymentUI(requestID = notificationItem.approvalNumber!!, paymentItem = MedicalRenewalPaymentUI.PaymentItem(paymentRequestNumber = notificationItem.approvalNumber!!, amount = notificationItem.cost!!, engNumber = notificationItem.userNumber.toString(), engName = notificationItem.name!!, name = notificationItem.name!!)), if (notificationItem.notificationTypeID == 2) Constants.PAYMENT_TYPE_TRIPS else Constants.PAYMENT_TYPE_RECORDS) // TODO serviceID, 2 trips 3 records
             )
         }
     }

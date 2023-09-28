@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="loading"
+            type="boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_horizontal_large">
+
+        <ScrollView
+            android:id="@+id/svContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvBeneficiary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="start"
+                    android:text="@string/beneficiary_name"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeMedium"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spFollower"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/followers"
+                    android:textDirection="rtl"
+                    android:textSize="?textSizeMedium" />
+
+
+                <TextView
+                    android:id="@+id/tvNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="start"
+                    android:text="@string/cardNumber"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeMedium"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edCardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="@string/cardNumber"
+                    android:inputType="number"
+                    android:textColor="@android:color/black"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spGovern"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/governorate"
+                    android:textDirection="rtl"
+                    android:visibility="gone"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spArea"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/area"
+                    android:textDirection="rtl"
+                    android:visibility="gone"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spProviderType"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/serviceProviderType"
+                    android:textDirection="rtl"
+                    android:visibility="gone"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spProvider"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:hint="@string/serviceProvider"
+                    android:textDirection="rtl"
+                    android:visibility="gone"
+                    android:textSize="?textSizeMedium" />
+
+                <Button
+                    android:id="@+id/bNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_normal"
+                    android:background="@drawable/btn_green"
+                    android:elevation="@dimen/elevation_level_one"
+                    android:gravity="center"
+                    android:text="@string/next"
+                    android:textColor="@android:color/white"
+                    android:textSize="?textSizeMedium" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

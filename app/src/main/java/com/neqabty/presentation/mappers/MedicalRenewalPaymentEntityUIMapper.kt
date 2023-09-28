@@ -14,14 +14,6 @@ class MedicalRenewalPaymentEntityUIMapper @Inject constructor() : Mapper<Medical
                 resultType = from.resultType,
                 requestID = from.requestID,
                 msg = from.msg?: "",
-                amounts = from.amounts?.map { it ->
-                    MedicalRenewalPaymentUI.AmountItem(
-                        name = it.name,
-                        id = it.id,
-                        cardAmount = it.cardAmount,
-                        posAmount = it.posAmount
-                    )
-                },
                 paymentItem = from.paymentItem?.let { return@let MedicalRenewalPaymentUI.PaymentItem(paymentRequestNumber = it.paymentRequestNumber, amount = it.amount, name = it.name, engName = it.engName, engNumber = it.engNumber, paymentDetailsItems = it.paymentDetailsItems?.map { item -> MedicalRenewalPaymentUI.PaymentDetailsItem(item.name, item.totalAmount) }) }
         )
     }
