@@ -224,7 +224,8 @@ interface NeqabtyDataStore {
     fun getArchiveUploadCategories(): Observable<List<ArchiveUploadCategoryEntity>>
     fun getArchiveUploads(userNumber: String, categoryId: Int): Observable<List<ArchiveUploadItemEntity>>
     fun uploadToArchive(
-        name: String, description: String, catId: String, userNumber: String,
+        userNumber: String,
+        name: String, description: String, catId: String,
         docsNumber: Int,
         doc1: File?
     ): Observable<ArchiveUploadAcknowledgementEntity>

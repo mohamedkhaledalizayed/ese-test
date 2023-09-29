@@ -25,7 +25,7 @@ class UploadToArchive @Inject constructor(
         userNumber: String,
         name: String,
         description: String,
-        catId: Int,
+        catId: String,
         docsNumber: Int,
         doc1: File?
     ): Observable<ArchiveUploadAcknowledgementEntity> {

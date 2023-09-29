@@ -6,6 +6,7 @@
     <data>
 
         <import type="android.text.Html" />
+
         <variable
             name="item"
             type="com.neqabty.presentation.entities.ArchiveUploadItemUI" />
@@ -23,34 +24,36 @@
             android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_horizontal_normal"
             android:ellipsize="end"
             android:lineSpacingMultiplier="0.6"
             android:maxLines="2"
             android:text="@{item.name}"
             android:textColor="@color/colorPrimary"
             android:textSize="?textSizeMedium"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_horizontal_normal"
             android:ellipsize="end"
             android:lineSpacingMultiplier="0.6"
             android:maxLines="2"
             android:text="@{item.description}"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/text_dark"
             android:textSize="?textSizeMedium"
-            app:layout_constraintTop_toBottomOf="@id/tvName"/>
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
 
         <Button
             android:id="@+id/bDownload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_green"
             android:layout_margin="@dimen/margin_horizontal_normal"
+            android:background="@drawable/btn_green"
             android:text="@string/download"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription"/>
+            app:layout_constraintTop_toBottomOf="@id/tvDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

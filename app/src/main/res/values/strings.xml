@@ -595,6 +595,10 @@
     <string name="questionnaire_question">عرض السؤال</string>
 
     <string name="medical_archive_category">نوع الملفات</string>
+    <string name="medical_archive_file_category">نوع الملف</string>
+    <string name="medical_archive_add_file">إضافة ملف</string>
+    <string name="medical_archive_file_added">تم إضافة الملف بنجاح</string>
+    <string name="file_unsupported">صيغة الملف غير مدعومة</string>
 
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
     <string name="app_version">Version %s</string>

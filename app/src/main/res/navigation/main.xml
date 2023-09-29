@@ -960,6 +960,15 @@
         android:name="com.neqabty.presentation.ui.medicalArchive.MedicalArchiveFragment"
         android:label="@string/medical_archive_title"
         tools:layout="@layout/medical_archive_fragment">
+        <action
+            android:id="@+id/openArchiveAddFile"
+            app:destination="@id/medicalArchiveAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicalArchiveAddFragment"
+        android:name="com.neqabty.presentation.ui.medicalArchiveAddFile.MedicalArchiveAddFileFragment"
+        android:label="@string/medical_archive_title"
+        tools:layout="@layout/medical_archive_add_file_fragment">
     </fragment>
     <fragment
         android:id="@+id/complaintsFragment"

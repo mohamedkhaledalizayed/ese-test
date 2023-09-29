@@ -345,7 +345,7 @@ interface WebService {
         @Body archiveUploadsListRequest: ArchiveUploadsListRequest): Observable<ApiResponse<List<ArchiveUploadItemData>>>
 
     @Multipart
-    @POST("api/user/upload_categories")
+    @POST("api/user/profile/upload")
     fun uploadToArchive(
         @Part("json_request") archiveUploadRequest: ArchiveUploadRequest,
         @Part doc1: MultipartBody.Part?): Observable<ApiResponse<ArchiveUploadAcknowledgementData>>

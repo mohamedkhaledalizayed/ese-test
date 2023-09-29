@@ -463,10 +463,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     }
 
     override fun uploadToArchive(
+        userNumber: String,
         name: String,
         description: String,
         catId: String,
-        userNumber: String,
         docsNumber: Int,
         doc1: File?
     ): Observable<ArchiveUploadAcknowledgementEntity> {

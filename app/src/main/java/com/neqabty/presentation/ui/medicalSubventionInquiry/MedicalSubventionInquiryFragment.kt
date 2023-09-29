@@ -77,6 +77,10 @@ class MedicalSubventionInquiryFragment : BaseFragment() {
     private fun initializeViews() {
         initializeSpinners()
         binding.bNext.setOnClickListener{
+            showAlert(getString(R.string.request_sent)){
+                navController().popBackStack()
+                navController().navigate(R.id.homeFragment)
+            }
 //            navController().navigate(RefundFragmentDirections.openRefundRequest(RefundRequest(sharedPref.name, sharedPref.mobile, sharedPref.user, binding.edCardNumber.text.toString(), "", (binding.spProvider.selectedItem as ProviderUI).branchProfileId.toString(), (binding.spProvider.selectedItem as ProviderUI).providerId.toString(), "9", sharedPref.token, listOf())))
         }
     }

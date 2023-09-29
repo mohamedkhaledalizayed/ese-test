@@ -507,14 +507,14 @@ class NeqabtyRepositoryImpl @Inject constructor(
     }
 
     override fun uploadToArchive(
+        userNumber: String,
         name: String,
         description: String,
         catId: String,
-        userNumber: String,
         docsNumber: Int,
         doc1: File?
     ): Observable<ArchiveUploadAcknowledgementEntity> {
-        return remoteDataStore.uploadToArchive(name, description, catId, userNumber, docsNumber, doc1)
+        return remoteDataStore.uploadToArchive(userNumber, name, description, catId, docsNumber, doc1)
     }
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {

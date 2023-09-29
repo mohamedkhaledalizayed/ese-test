@@ -916,10 +916,10 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val archiveUploadAcknowledgementDataEntityMapper = ArchiveUploadAcknowledgementDataEntityMapper()
 
     override fun uploadToArchive(
+        userNumber: String,
         name: String,
         description: String,
         catId: String,
-        userNumber: String,
         docsNumber: Int,
         doc1: File?
     ): Observable<ArchiveUploadAcknowledgementEntity> {
@@ -930,7 +930,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
         }
 
-        return api.uploadToArchive(ArchiveUploadRequest(name, description, catId, userNumber, docsNumber), file1).map { response ->
+        return api.uploadToArchive(ArchiveUploadRequest(userNumber, name, description, catId, docsNumber), file1).map { response ->
             archiveUploadAcknowledgementDataEntityMapper.mapFrom(response.data!!)
         }
     }

@@ -73,7 +73,7 @@ class MedicalArchiveFragment : BaseFragment() {
     private fun initializeViews() {
         renderCategories()
         binding.fabAdd.setOnClickListener{
-//            navController().navigate(RefundFragmentDirections.openRefundRequest(RefundRequest(sharedPref.name, sharedPref.mobile, sharedPref.user, binding.edCardNumber.text.toString(), "", (binding.spProvider.selectedItem as ProviderUI).branchProfileId.toString(), (binding.spProvider.selectedItem as ProviderUI).providerId.toString(), "9", sharedPref.token, listOf())))
+            navController().navigate(MedicalArchiveFragmentDirections.openArchiveAddFile())
         }
     }
 
@@ -85,6 +85,7 @@ class MedicalArchiveFragment : BaseFragment() {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.doc1)))
             }
             (binding.rvFiles.adapter as MedicalArchiveAdapter).submitList(it)
+            state.archiveUploadItemUIList = null
             return
         }
 
@@ -95,14 +96,6 @@ class MedicalArchiveFragment : BaseFragment() {
             initializeViews()
         }
     }
-
-//    fun loadProviderTypes() {
-//        medicalSubventionInquiryViewModel.getProviderTypes(governID.toString(), areaID.toString())
-//    }
-//
-//    fun getProviders(providerTypeID: Int) {
-//        medicalSubventionInquiryViewModel.getProvidersByType(providerTypeID.toString(), governID.toString(), areaID.toString(), "")
-//    }
 
     //region
     fun renderCategories() {
@@ -116,15 +109,6 @@ class MedicalArchiveFragment : BaseFragment() {
         }
         binding.spCategoryType.setSelection(0)
     }
-
-//    fun renderProviders() {
-//        binding.spProvider.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, providersResultList!!)
-//        binding.spProvider.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(parent: AdapterView<*>?) {}
-//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//            }
-//        }
-//    }
 // endregion
 
     fun navController() = findNavController()
