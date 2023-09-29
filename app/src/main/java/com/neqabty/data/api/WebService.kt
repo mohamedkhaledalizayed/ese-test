@@ -336,4 +336,17 @@ interface WebService {
 
     @POST("api/v1/questionnaires/vote")
     fun voteQuestionnaire(@Body questionnaireVoteRequest: QuestionnaireVoteRequest): Observable<ApiResponse<QuestionnaireVoteData>>
+
+    @GET("api/user/upload_categories")
+    fun getArchiveUploadCategories(): Observable<ApiResponse<List<ArchiveUploadCategoryData>>>
+
+    @POST("api/user/profile/medical_upload_list")
+    fun getArchiveUploads(
+        @Body archiveUploadsListRequest: ArchiveUploadsListRequest): Observable<ApiResponse<List<ArchiveUploadItemData>>>
+
+    @Multipart
+    @POST("api/user/upload_categories")
+    fun uploadToArchive(
+        @Part("json_request") archiveUploadRequest: ArchiveUploadRequest,
+        @Part doc1: MultipartBody.Part?): Observable<ApiResponse<ArchiveUploadAcknowledgementData>>
 }

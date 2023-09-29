@@ -162,13 +162,6 @@ class InquiryDetailsViewModel @Inject constructor(
         viewState.value = newViewState
     }
 
-    private fun onFawryCodeReceived(fawryTransactionUI: FawryTransactionUI) {
-        val newViewState = viewState.value?.copy(
-            isLoading = false,
-            fawryTransactionUI = fawryTransactionUI)
-        viewState.value = newViewState
-    }
-
 //    fun setPaid(username: String) {
 //        api.setPaid(SyndicateRequest(username)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
 //                {

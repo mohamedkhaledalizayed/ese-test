@@ -620,6 +620,24 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetArchiveUploadCategories(neqabtyRepository: NeqabtyRepository): GetArchiveUploadCategories {
+        return GetArchiveUploadCategories(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetArchiveUploadsList(neqabtyRepository: NeqabtyRepository): GetArchiveUploadsList {
+        return GetArchiveUploadsList(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUploadToArchive(neqabtyRepository: NeqabtyRepository): UploadToArchive {
+        return UploadToArchive(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideAddFavorite(@Named(DI.roomCache) neqabtyCache: NeqabtyCache): AddFavorite {
         return AddFavorite(ASyncTransformer(), neqabtyCache)
     }

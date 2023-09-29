@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+        <variable
+            name="item"
+            type="com.neqabty.presentation.entities.ArchiveUploadItemUI" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_horizontal_small"
+        android:background="@drawable/bg"
+        android:elevation="@dimen/elevation_level_one"
+        android:padding="@dimen/margin_horizontal_normal">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="0.6"
+            android:maxLines="2"
+            android:text="@{item.name}"
+            android:textColor="@color/colorPrimary"
+            android:textSize="?textSizeMedium"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="0.6"
+            android:maxLines="2"
+            android:text="@{item.description}"
+            android:textColor="@color/colorPrimary"
+            android:textSize="?textSizeMedium"
+            app:layout_constraintTop_toBottomOf="@id/tvName"/>
+
+        <Button
+            android:id="@+id/bDownload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_green"
+            android:layout_margin="@dimen/margin_horizontal_normal"
+            android:text="@string/download"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

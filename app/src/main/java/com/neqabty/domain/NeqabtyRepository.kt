@@ -228,4 +228,12 @@ interface NeqabtyRepository {
             questionnaireId: Int,
             answerId: Int
     ): Observable<QuestionnaireVoteEntity>
+    fun getArchiveUploadCategories(): Observable<List<ArchiveUploadCategoryEntity>>
+    fun getArchiveUploads(userNumber: String, categoryId: Int): Observable<List<ArchiveUploadItemEntity>>
+    fun uploadToArchive(
+        name: String, description: String, catId: String, userNumber: String,
+        docsNumber: Int,
+        doc1: File?
+    ): Observable<ArchiveUploadAcknowledgementEntity>
+
 }

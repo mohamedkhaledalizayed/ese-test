@@ -451,6 +451,28 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
+    override fun getArchiveUploadCategories(): Observable<List<ArchiveUploadCategoryEntity>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getArchiveUploads(
+        userNumber: String,
+        categoryId: Int
+    ): Observable<List<ArchiveUploadItemEntity>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun uploadToArchive(
+        name: String,
+        description: String,
+        catId: String,
+        userNumber: String,
+        docsNumber: Int,
+        doc1: File?
+    ): Observable<ArchiveUploadAcknowledgementEntity> {
+        TODO("Not yet implemented")
+    }
+
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {
         return neqabtyCache.saveUser(userEntity)
     }

@@ -58,6 +58,7 @@
     <string name="help">مساعدة</string>
     <string name="aboutApp">عن التطبيق</string>
     <string name="loading">جاري التحميل</string>
+    <string name="download">تحميل</string>
     <string name="error">خطأ</string>
     <string name="error_msg">نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق</string>
     <string name="sharee">مشاركة</string>
@@ -547,7 +548,7 @@
     <string name="complaint_body">موضوع الشكوى</string>
     <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
 
-    <string name="medical_complaint_title">الاستفسارات الطبية</string>
+    <string name="medical_complaint_title">شكاوى الجهات العلاجية</string>
 
     <string name="club_invitations">التذاكر المتاحة</string>
     <string name="epoints">رصيد نقاطك الإلكترونية: 120 نقطة</string>

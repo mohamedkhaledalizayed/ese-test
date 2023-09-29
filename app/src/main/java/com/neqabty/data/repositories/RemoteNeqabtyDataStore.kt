@@ -893,4 +893,45 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             changeUserMobileDataEntityMapper.mapFrom(response.data!!)
         }
     }
+
+    private val archiveUploadCategoryDataEntityMapper = ArchiveUploadCategoryDataEntityMapper()
+
+    override fun getArchiveUploadCategories(): Observable<List<ArchiveUploadCategoryEntity>> {
+        return api.getArchiveUploadCategories().map { categories ->
+            categories.data!!.map { archiveUploadCategoryDataEntityMapper.mapFrom(it) }
+        }
+    }
+
+    private val archiveUploadItemsDataEntityMapper = ArchiveUploadItemsDataEntityMapper()
+
+    override fun getArchiveUploads(
+        userNumber: String,
+        categoryId: Int
+    ): Observable<List<ArchiveUploadItemEntity>> {
+        return api.getArchiveUploads(ArchiveUploadsListRequest(userNumber, categoryId)).map { uploadsList ->
+            uploadsList.data!!.map { archiveUploadItemsDataEntityMapper.mapFrom(it) }
+        }
+    }
+
+    private val archiveUploadAcknowledgementDataEntityMapper = ArchiveUploadAcknowledgementDataEntityMapper()
+
+    override fun uploadToArchive(
+        name: String,
+        description: String,
+        catId: String,
+        userNumber: String,
+        docsNumber: Int,
+        doc1: File?
+    ): Observable<ArchiveUploadAcknowledgementEntity> {
+        var file1: MultipartBody.Part? = null
+
+        doc1?.let {
+            val doc1RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc1)
+            file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
+        }
+
+        return api.uploadToArchive(ArchiveUploadRequest(name, description, catId, userNumber, docsNumber), file1).map { response ->
+            archiveUploadAcknowledgementDataEntityMapper.mapFrom(response.data!!)
+        }
+    }
 }
