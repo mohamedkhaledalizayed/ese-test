@@ -34,6 +34,7 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePaawordBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
+        binding.headerId.setOnClickListener { finish() }
         binding.password.loop(true)
         binding.changePassword.setOnClickListener {
 
