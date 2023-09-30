@@ -128,8 +128,12 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         }
 
         binding.ivProfileNav.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
+            if (sharedPreferences.isAuthenticated){
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+            }else{
+                askForLogin()
+            }
         }
 
         binding.bnvSyndicatesHome.setOnItemSelectedListener { menuItem ->
@@ -143,9 +147,14 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                     true
                 }
                 R.id.navigation_payments -> {
-                    val intent = Intent(this, InvoicesActivity::class.java)
-                    startActivity(intent)
-                    true
+                    if (sharedPreferences.isAuthenticated){
+                        val intent = Intent(this, InvoicesActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }else{
+                        askForLogin()
+                        false
+                    }
                 }
                 R.id.navigation_more -> {
                     val intent = Intent(this, MoreActivity::class.java)

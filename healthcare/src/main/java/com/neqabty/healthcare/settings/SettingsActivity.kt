@@ -39,7 +39,13 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 //            intent.putExtra("token", sharedPreferences.token)
 //            startActivity(intent)
 //        }
-            binding.changePasswordContainer.setOnClickListener { bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag) }
+            binding.changePasswordContainer.setOnClickListener {
+                if (sharedPreferences.isAuthenticated){
+                    bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                }else{
+                    askForLogin()
+                }
+            }
 
         binding.rate.setOnClickListener {
             val flow = manager.launchReviewFlow(this, reviewInfo)

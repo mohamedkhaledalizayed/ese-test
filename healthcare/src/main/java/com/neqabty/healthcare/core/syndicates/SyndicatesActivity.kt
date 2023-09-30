@@ -52,9 +52,13 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
         }
 
         binding.ivProfileNav.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-            finish()
+            if (sharedPreferences.isAuthenticated){
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                askForLogin()
+            }
         }
 
         binding.bnvSyndicatesHome.setOnItemSelectedListener { menuItem ->
@@ -67,10 +71,15 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
                     true
                 }
                 R.id.navigation_payments -> {
-                    val intent = Intent(this, InvoicesActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                    true
+                    if (sharedPreferences.isAuthenticated){
+                        val intent = Intent(this, InvoicesActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                        true
+                    }else{
+                        askForLogin()
+                        false
+                    }
                 }
                 R.id.navigation_more -> {
                     val intent = Intent(this, MoreActivity::class.java)

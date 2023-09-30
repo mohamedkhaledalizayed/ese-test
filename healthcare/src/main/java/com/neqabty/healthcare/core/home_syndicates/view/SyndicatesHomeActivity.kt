@@ -140,8 +140,12 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
         }
 
         binding.ivProfileNav.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
+            if (sharedPreferences.isAuthenticated){
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+            }else{
+                askForLogin()
+            }
         }
 
         syndicatesHomeViewModel.clinidoUrl.observe(this) {
@@ -176,9 +180,14 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
                     true
                 }
                 R.id.navigation_syndicates -> {
-                    val intent = Intent(this, SyndicatesActivity::class.java)
-                    startActivity(intent)
-                    true
+                    if (sharedPreferences.isAuthenticated){
+                        val intent = Intent(this, SyndicatesActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }else{
+                        askForLogin()
+                        false
+                    }
                 }
                 R.id.navigation_payments -> {
                     val intent = Intent(this, InvoicesActivity::class.java)
