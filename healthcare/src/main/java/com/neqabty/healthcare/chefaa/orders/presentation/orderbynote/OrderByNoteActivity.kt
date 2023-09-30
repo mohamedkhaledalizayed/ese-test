@@ -68,7 +68,6 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>(), IMediaSe
             }
             addNote()
             startActivity(Intent(this, AddressesActivity::class.java))
-            finish()
         }
 
         binding.addPrescription.setOnClickListener {
