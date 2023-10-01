@@ -20,10 +20,9 @@ object PermissionUtils {
                     callback.onPermissionRequest(granted = true)
                 }
 
-                override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?,
-                                                                token: PermissionToken?) {
+                override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {
                     // User previously denied the permission, request them again
-                    token?.continuePermissionRequest()
+                    token.continuePermissionRequest()
                 }
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse?) {

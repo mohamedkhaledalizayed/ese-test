@@ -1,6 +1,5 @@
 package com.neqabty.healthcare.pharmacymart.home.ui
 
-import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -17,20 +16,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.FileProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.PermissionListener
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.view.IMediaSelection
 import com.neqabty.healthcare.chefaa.home.view.PickUpImageBottomSheet
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.PhotoUI
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.healthcare.core.utils.*
 import com.neqabty.healthcare.databinding.ActivityPharmacyMartHomeBinding
 import com.neqabty.healthcare.pharmacymart.orders.domain.entity.orderslist.OrderEntity
 import com.neqabty.healthcare.pharmacymart.orders.ui.orderdetails.PharmacyMartOrderDetailsActivity
@@ -184,25 +175,16 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
     }
 
     private fun grantCameraPermission() {
-        Dexter.withContext(this)
-            .withPermission(Manifest.permission.CAMERA)
-            .withListener(object : PermissionListener {
-                override fun onPermissionGranted(response: PermissionGrantedResponse) {
+        PermissionUtils.requestCameraPermission(this, object : PermissionsCallback {
+            override fun onPermissionRequest(granted: Boolean) {
+                if (granted) {
                     cameraIntent()
-                }
-
-                override fun onPermissionDenied(response: PermissionDeniedResponse) {
+                } else {
                     dialog.dismiss()
                     showSettingsDialog("يحتاج هذا التطبيق الاذن للوصول الى الكاميرا. يمكنك منحهم في إعدادات التطبيق.")
                 }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    permission: PermissionRequest,
-                    token: PermissionToken
-                ) {
-                    token.continuePermissionRequest()
-                }
-            }).check()
+            }
+        })
     }
 
     private fun cameraIntent() {

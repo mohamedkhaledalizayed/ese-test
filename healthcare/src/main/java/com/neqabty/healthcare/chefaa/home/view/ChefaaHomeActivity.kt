@@ -2,12 +2,10 @@ package com.neqabty.healthcare.chefaa.home.view
 
 
 
-import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
@@ -18,7 +16,6 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.healthcare.R
@@ -37,9 +34,7 @@ import com.neqabty.healthcare.core.data.Constants.name
 import com.neqabty.healthcare.core.data.Constants.nationalID
 import com.neqabty.healthcare.core.data.Constants.userNumber
 import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.PhotoUI
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.healthcare.core.utils.*
 import com.neqabty.healthcare.databinding.ChefaaActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
@@ -243,18 +238,16 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
     }
 
     private fun grantCameraPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CAMERA)
-        } else {
-            cameraIntent()
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CAMERA) {
-            grantCameraPermission()
-        }
+        PermissionUtils.requestCameraPermission(this, object : PermissionsCallback {
+            override fun onPermissionRequest(granted: Boolean) {
+                if (granted) {
+                    cameraIntent()
+                } else {
+                    dialog.dismiss()
+                    showSettingsDialog("يحتاج هذا التطبيق الاذن للوصول الى الكاميرا. يمكنك منحهم في إعدادات التطبيق.")
+                }
+            }
+        })
     }
 
     private fun cameraIntent() {
