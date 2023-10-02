@@ -22,6 +22,8 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.selectedAddressPharmacyMart
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.PermissionUtils
+import com.neqabty.healthcare.core.utils.PermissionsCallback
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityAddressesBinding
 import com.neqabty.healthcare.pharmacymart.address.domain.entity.PharmacyMartAddressEntity
@@ -132,33 +134,18 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
     }
 
     private fun requestLocationPermissions() {
-        Dexter.withContext(this)
-            .withPermissions(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(multiplePermissionsReport: MultiplePermissionsReport) {
-                    if (multiplePermissionsReport.areAllPermissionsGranted()) {
-                        dialog.show()
-                        openMap()
-                    }
-                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied) {
-                        // permission is denied permanently, we will show user a dialog message.
-                        showSettingsDialog("يحتاج هذا التطبيق الاذن للوصول الى موقعك الحالى. يمكنك منحهم في إعدادات التطبيق.")
-                    }
-                }
 
-                override fun onPermissionRationaleShouldBeShown(
-                    list: List<PermissionRequest?>?,
-                    permissionToken: PermissionToken
-                ) {
-                    // this method is called when user grants some permission and denies some of them.
-                    permissionToken.continuePermissionRequest()
+        PermissionUtils.requestLocationPermissions(this, object : PermissionsCallback {
+            override fun onPermissionRequest(granted: Boolean) {
+                if (granted){
+                    dialog.show()
+                    openMap()
+                }else{
+                    showSettingsDialog("يحتاج هذا التطبيق الاذن للوصول الى موقعك الحالى. يمكنك منحهم في إعدادات التطبيق.")
                 }
-            }).withErrorListener {
-                Toast.makeText(applicationContext, "Error occurred! ", Toast.LENGTH_SHORT).show()
-            }.check()
+            }
+        })
+
     }
 
     @SuppressLint("MissingPermission")
