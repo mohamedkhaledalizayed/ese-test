@@ -54,17 +54,17 @@ public class SlideshowDialogFragment extends DialogFragment {
 
         @Override
         public void onPageSelected(int position) {
-            Log.e("onPageSelected", position + "");
+//            Log.e("onPageSelected", position + "");
         }
 
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
-            Log.e("onPageScrolled", arg2 + "");
+//            Log.e("onPageScrolled", arg2 + "");
         }
 
         @Override
         public void onPageScrollStateChanged(int arg0) {
-            Log.e("onScrollStateChanged", arg0 + "");
+//            Log.e("onScrollStateChanged", arg0 + "");
         }
     };
 

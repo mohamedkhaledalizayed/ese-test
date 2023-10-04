@@ -57,7 +57,7 @@ class MyPackagesActivity : BaseActivity<ActivityProfileBinding>() {
                 }
                 Status.ERROR ->{
                     binding.progressCircular.visibility = View.GONE
-                    Log.e("ghj", resource.message.toString())
+//                    Log.e("ghj", resource.message.toString())
                 }
             }
 

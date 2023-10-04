@@ -27,7 +27,7 @@ class NewsDetailsViewModel @Inject constructor(
                 }
             } catch (e: Throwable) {
                 newsDetails.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
-                Log.e("", e.toString())
+//                Log.e("", e.toString())
             }
         }
     }

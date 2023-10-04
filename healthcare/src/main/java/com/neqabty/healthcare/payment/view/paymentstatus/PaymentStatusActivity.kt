@@ -80,7 +80,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
                         binding.errorContainer.visibility = View.VISIBLE
-                        Log.e("test", resource.message.toString())
+//                        Log.e("test", resource.message.toString())
                         if (resource.message == "404"){
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
                         }

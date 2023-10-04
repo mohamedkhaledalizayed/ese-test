@@ -417,7 +417,7 @@ public class FileUtils {
             Log.d(TAG, "Attempting to get thumbnail");
 
         if (!isMediaUri(uri)) {
-            Log.e(TAG, "You can only retrieve thumbnails for images and videos.");
+//            Log.e(TAG, "You can only retrieve thumbnails for images and videos.");
             return null;
         }
 

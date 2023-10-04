@@ -69,7 +69,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
                 if (!it.equals(sharedPreferences.firebaseToken)) // Token has been changed
                 {
                     sharedPreferences.firebaseToken = it
-                    Log.i("toooooken", it)
+//                    Log.i("toooooken", it)
 //                    if (sharedPreferences.user.isNotBlank()) { // verified
 //                        mainViewModel.login(sharedPref.mobile, sharedPref.user, it, sharedPref)
 //                    }

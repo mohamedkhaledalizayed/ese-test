@@ -400,7 +400,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
                         val branchCode = dataObject.getString("branch_code")
                         val branchId = dataObject.getString("branch_id")
 
-                        Log.d("QR", data!!)
+//                        Log.d("QR", data!!)
 
                         val providersEntity = ProvidersEntity(address = address, email = email, id = id.toInt(), name = name, hasQR = true, mobile = mobile, area = null, degree = null , image = null, governorate = GovernorateEntity("", 0), notes = "", phone = mobile, price = null, profession = null, serviceProviderType = null)
                         val intent = Intent(this@SyndicatesHomeActivity, ProviderDetailsActivity::class.java)

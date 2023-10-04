@@ -31,7 +31,7 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding>(), IF
         setContentView(binding.root)
 
         phoneNumber = intent.getStringExtra("phone").toString()
-        Log.e("phoneNumber", phoneNumber)
+//        Log.e("phoneNumber", phoneNumber)
         loading = SpotsDialog.Builder()
             .setContext(this)
             .setMessage(getString(R.string.please_wait))

@@ -31,7 +31,7 @@ class GeneralHomeViewModel @Inject constructor(
                     ads.postValue(it)
                 }
             } catch (e: Throwable) {
-                Log.e("", e.toString())
+//                Log.e("", e.toString())
             }
         }
     }

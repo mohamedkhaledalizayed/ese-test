@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(private val registerUseCase: RegisterUse
                     userRegistered.postValue(Resource.success(it))
                 }
             }catch (e:Throwable){
-                Log.e("error Register",e.toString())
+//                Log.e("error Register",e.toString())
                 userRegistered.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
@@ -45,7 +45,7 @@ class HomeViewModel @Inject constructor(private val registerUseCase: RegisterUse
                     orders.postValue(Resource.success(data = it))
                 }
             } catch (exception:Throwable){
-                Log.e("Ordersssss",exception.toString())
+//                Log.e("Ordersssss",exception.toString())
                 orders.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
         }

@@ -34,7 +34,7 @@ class EmploymentDetailsViewModel @Inject constructor(
                 }
             } catch (e: Throwable) {
                 govList.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
-                Log.e("", e.toString())
+//                Log.e("", e.toString())
             }
         }
     }
