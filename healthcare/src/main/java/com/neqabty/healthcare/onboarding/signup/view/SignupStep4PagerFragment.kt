@@ -74,7 +74,6 @@ class SignupStep4PagerFragment : Fragment() {
             binding.clPasswordConfirmation.visibility = View.VISIBLE
             binding.ivPasswordRules.visibility = View.VISIBLE
             binding.tvPasswordRules.visibility = View.VISIBLE
-            binding.tvPasswordReset.visibility = View.VISIBLE
         }
         val entityValidationsList =
             SignupData.syndicatesList.findLast { it.code == SignupData.syndicateID }?.entityValidations
@@ -98,7 +97,6 @@ class SignupStep4PagerFragment : Fragment() {
         if (entityValidationsList?.find { it.validationName == "password" }?.value == true) {
             binding.clPassword.visibility = View.VISIBLE
             binding.clPasswordConfirmation.visibility = View.VISIBLE
-            binding.tvPasswordReset.visibility = View.VISIBLE
             binding.ivPasswordRules.visibility = View.VISIBLE
             binding.tvPasswordRules.visibility = View.VISIBLE
         }
@@ -106,11 +104,6 @@ class SignupStep4PagerFragment : Fragment() {
         binding.tvPasswordRules.setOnClickListener {
             Toast.makeText(activity, getString(R.string.password_conditions), Toast.LENGTH_LONG)
                 .show()
-        }
-
-        binding.tvPasswordReset.setOnClickListener {
-            binding.etPassword.setText("")
-            binding.etPasswordConfirmation.setText("")
         }
 
         binding.ivPassword.setOnClickListener {
@@ -136,7 +129,6 @@ class SignupStep4PagerFragment : Fragment() {
         if(activity.intent.getBooleanExtra("isSyndicate",false)){
             binding.clPassword.visibility = View.GONE
             binding.clPasswordConfirmation.visibility = View.GONE
-            binding.tvPasswordReset.visibility = View.GONE
             binding.ivPasswordRules.visibility = View.GONE
             binding.tvPasswordRules.visibility = View.GONE
         }
@@ -151,7 +143,6 @@ class SignupStep4PagerFragment : Fragment() {
         binding.clPasswordConfirmation.visibility = View.GONE
         binding.ivPasswordRules.visibility = View.GONE
         binding.tvPasswordRules.visibility = View.GONE
-        binding.tvPasswordReset.visibility = View.GONE
     }
 
     private fun initializeObservers() {
