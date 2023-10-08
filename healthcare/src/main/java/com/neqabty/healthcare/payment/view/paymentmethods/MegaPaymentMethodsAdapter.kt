@@ -32,7 +32,7 @@ open class MegaPaymentMethodsAdapter : RecyclerView.Adapter<MegaPaymentMethodsAd
         )
     }
 
-    private var selectedPosition = 0
+    private var selectedPosition = -1
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]

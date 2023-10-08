@@ -33,7 +33,6 @@ import team.opay.business.cashier.sdk.pay.PaymentTask
 @AndroidEntryPoint
 class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), CallbackPaymentInterface {
     private var paymentMethod = ""
-    private var productNme = ""
     private var deliveryMethod = 0
     private var deliveryFees = 0.0
     private var totalAmount = 0
@@ -51,7 +50,6 @@ class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Call
 
         setupToolbar(title = "دفع الاشتراك")
 
-        productNme = intent.getStringExtra("name") ?: "باقة"
         totalAmount = intent.getDoubleExtra("price", 0.0).toInt()
         vat = intent.getDoubleExtra("vat", 0.0).toInt()
         total = intent.getDoubleExtra("total", 0.0).toInt()
@@ -192,8 +190,8 @@ class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Call
             countryCode = "EG", // uppercase
             currency = "EGP", // uppercase
             payAmount = (paymentEntity.total_amount!!.toDouble() * 100).toLong(),
-            productName = productNme,
-            productDescription = productNme,
+            productName = paymentEntity.service,
+            productDescription = paymentEntity.service_action,
             callbackUrl = paymentEntity.callBackURL ?: "",
             userClientIP = "110.246.160.183",
             expireAt = (paymentEntity.expireAt ?: "30").toInt(),

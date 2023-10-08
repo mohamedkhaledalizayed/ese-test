@@ -163,6 +163,11 @@ class PaymentMethodsActivity : BaseActivity<ActivityPaymentMethodsBinding>(), Ca
 
         binding.btnNext.setOnClickListener {
 
+            if (paymentMethod.isEmpty()){
+                Toast.makeText(this, "من فضلك اختر طريقة الدفع.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             if (deliveryMethod == "Home" && binding.address.text.toString().isEmpty()){
                 Toast.makeText(this@PaymentMethodsActivity, "من فضلك ادخل العنوان.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener

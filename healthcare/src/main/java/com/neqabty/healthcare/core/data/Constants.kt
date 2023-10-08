@@ -45,7 +45,7 @@ object Constants {
     //Main
     const val BASE_URL_Main = BASE_URL_STAGING_SYNDICATE
     // for payment true for testing false for production
-    const val SANDBOX = false
+    const val SANDBOX = true
     // End
 
     var isFirebaseTokenUpdated: MutableLiveData<String> = MutableLiveData("")
