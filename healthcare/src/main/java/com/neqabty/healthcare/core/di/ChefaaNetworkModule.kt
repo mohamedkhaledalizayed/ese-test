@@ -3,7 +3,7 @@ package com.neqabty.healthcare.core.di
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.neqabty.healthcare.BuildConfig
-import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.data.Constants.BASE_URL_Main
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +24,7 @@ class ChefaaNetworkModule {
     @Provides
     @Named("chefaa")
     fun providesBaseUrl(): String {
-        return Constants.BASE_URL_STAGING_CHEFAA
+        return BASE_URL_Main
     }
 
     @Provides

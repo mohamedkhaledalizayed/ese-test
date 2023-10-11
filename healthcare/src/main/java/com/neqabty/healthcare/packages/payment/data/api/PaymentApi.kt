@@ -8,11 +8,11 @@ import retrofit2.http.*
 
 interface PaymentApi {
 
-    @POST("payment/paymentV2/")
+    @POST("healthcare/api/v1/payment/paymentV2/")
     suspend fun payment(@Body paymentBody: SehaPaymentBody,
                         @Header("Authorization") token: String): Response<SehaPaymentResponse>
 
-    @GET("payment/get_gateway_parameter")
+    @GET("healthcare/api/v1/payment/get_gateway_parameter")
     suspend fun getPaymentMethods(@Header("Authorization") token: String, @Query("service_code") code: String): PaymentMethodsResponse
 
 

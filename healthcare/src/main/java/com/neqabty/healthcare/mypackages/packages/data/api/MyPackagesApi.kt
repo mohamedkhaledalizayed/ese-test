@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface MyPackagesApi {
 
-    @POST("client/profile")
+    @POST("healthcare/api/v1/client/profile")
     suspend fun getMyPackages(
         @Header("Authorization") token: String,
         @Body body: PackagesBody

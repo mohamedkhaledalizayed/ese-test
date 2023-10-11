@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface AddFollowerApi {
 
-    @POST("vendor/subscribtions/follower-request")
+    @POST("healthcare/api/v1/vendor/subscribtions/follower-request")
     suspend fun addFollower(@Header("Authorization") token: String, @Body addFollowerBody: AddFollowerBody): AddFollowerModel
 
 }

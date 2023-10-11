@@ -3,9 +3,7 @@ package com.neqabty.healthcare.core.di
 
 import android.util.Log
 import com.neqabty.healthcare.BuildConfig
-import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV_OTP
-import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO_OTP
-import com.neqabty.healthcare.core.data.Constants.BASE_URL_STAGING_OTP
+import com.neqabty.healthcare.core.data.Constants.BASE_URL_Main
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +24,7 @@ class OTPModule {
     @Provides
     @Named("otp")
     fun providesBaseUrl(): String {
-        return BASE_URL_STAGING_OTP
+        return BASE_URL_Main
     }
 
     @Provides

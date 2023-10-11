@@ -12,18 +12,18 @@ import retrofit2.http.Path
 
 interface SearchApi {
 
-    @GET("medicalProviders/{id}")
+    @GET("healthcare/api/v1/medicalProviders/{id}")
     suspend fun getMedicalProviderDetails(@Path("id") id: String): Response<ProvidersModel>
 
-    @GET("medicalProviders")
+    @GET("healthcare/api/v1/medicalProviders")
     suspend fun getMedicalProviders(): Response<MedicalProvidersResponse>
 
-    @POST("medicalProviders/search")
+    @POST("healthcare/api/v1/medicalProviders/search")
     suspend fun searchMedicalProviders(@Body body: SearchBody): ProvidersResponse
 
-    @GET("medicalProviders/getLockups")
+    @GET("healthcare/api/v1/medicalProviders/getLockups")
     suspend fun getFilters(): FiltersListModel
 
-    @POST("medicalProviders/getAreasByGov")
+    @POST("healthcare/api/v1/medicalProviders/getAreasByGov")
     suspend fun getAreasByGov(@Body body: AreaBody): AreaListModel
 }

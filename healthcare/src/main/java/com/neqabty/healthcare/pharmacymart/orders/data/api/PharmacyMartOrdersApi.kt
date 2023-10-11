@@ -13,22 +13,22 @@ import retrofit2.http.POST
 
 interface PharmacyMartOrdersApi {
 
-    @POST("pharmacy/orders")
+    @POST("healthcare/api/v1/pharmacy/orders")
     suspend fun getOrdersList(
         @Body orderListRequestBody: OrderListRequestBody
     ): OrdersListModel
 
-    @POST("pharmacy/orders")
+    @POST("healthcare/api/v1/pharmacy/orders")
     suspend fun getOrder(@Body orderRequestBody: OrderRequestBody): OrderDetailsModel
 
 
-    @POST("pharmacy/add-order")
+    @POST("healthcare/api/v1/pharmacy/add-order")
     suspend fun placeOrder(@Body placeOrderBody: AddOrderBody): AddOrderModel
 
-    @POST("pharmacy/cancel-order")
+    @POST("healthcare/api/v1/pharmacy/cancel-order")
     suspend fun cancelOrder(@Body cancelOrderBody: CancelOrderBody): CancelOrderModel
 
-    @POST("pharmacy/confirm-order")
+    @POST("healthcare/api/v1/pharmacy/confirm-order")
     suspend fun confirmOrder(@Body confirmOrderBody: ConfirmOrderBody): ConfirmOrderModel
 
 }

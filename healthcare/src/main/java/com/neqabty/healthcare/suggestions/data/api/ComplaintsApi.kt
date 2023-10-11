@@ -11,10 +11,10 @@ import retrofit2.http.POST
 
 interface ComplaintsApi {
 
-    @POST("complaints/addComplaint")
+    @POST("healthcare/api/v1/complaints/addComplaint")
     suspend fun addComplaint(@Body complaintBody: ComplaintBody): ComplaintModel
 
-    @GET("complaints/packageLockups")
+    @GET("healthcare/api/v1/complaints/packageLockups")
     suspend fun getComplaintsCategories(): CategoriesModel
 
 }

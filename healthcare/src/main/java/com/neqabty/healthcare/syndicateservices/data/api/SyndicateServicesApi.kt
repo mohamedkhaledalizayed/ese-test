@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface SyndicateServicesApi {
 
-    @GET("services")
+    @GET("api/services")
     suspend fun getSyndicateServices(@Query("filter{entity.code}") entityCode: String): SyndicateServicesResponse //@Query("filter{service_category.name}") serviceCategory: String
 
 }

@@ -122,7 +122,7 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
                     if (it.data!!.status){
 
                     }else{
-                        Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "حدث خطاء اثناء الحصول على بيانات العيل", Toast.LENGTH_LONG).show()
                         finish()
                     }
                 }

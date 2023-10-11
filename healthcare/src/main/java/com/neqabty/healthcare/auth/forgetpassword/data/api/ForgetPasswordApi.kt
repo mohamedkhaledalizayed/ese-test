@@ -8,13 +8,13 @@ import retrofit2.http.POST
 
 interface ForgetPasswordApi {
 
-    @POST("accounts/forget_password")
+    @POST("api/accounts/forget_password")
     suspend fun sendOTP(@Body body: SendOTPBody): SendOTPModel
 
-    @POST("accounts/forget_password")
+    @POST("api/accounts/forget_password")
     suspend fun checkOTP(@Body body: CheckOTPBody): CheckOTPModel
 
-    @POST("accounts/reset_password")
+    @POST("api/accounts/reset_password")
     suspend fun changePassword(@Header("Authorization") token: String, @Body body: ChangePasswordBody): ChangePasswordModel
 
 }

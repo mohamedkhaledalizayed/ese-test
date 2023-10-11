@@ -5,10 +5,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsApi {
-    @GET("news")
+    @GET("api/news")
     suspend fun getNews(@Query("filter{author.code}") syndicateId: String): NewsModel
 
-    @GET("news")
+    @GET("api/news")
     suspend fun getNewsDetails(@Query("filter{id}") newsId: Int): NewsModel
 
 }

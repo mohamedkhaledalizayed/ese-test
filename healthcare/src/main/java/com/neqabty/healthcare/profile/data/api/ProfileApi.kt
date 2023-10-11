@@ -14,17 +14,17 @@ import retrofit2.http.*
 
 interface ProfileApi {
 
-    @GET("accounts/profile")
+    @GET("api/accounts/profile")
     suspend fun getUserProfile(@Header("Authorization") token: String, @Query("special-format") platform: String = "android"): ProfileModel
 
-    @GET("membership_card_requests/check_request_status")
+    @GET("api/membership_card_requests/check_request_status")
     suspend fun membershipCardStatus(@Header("Authorization") token: String) : MemberShipCardStatus
 
-    @GET("license_requests/check_request_status")
+    @GET("api/license_requests/check_request_status")
     suspend fun licenseStatus(@Header("Authorization") token: String) : LicenceStatusModel
 
     @Multipart
-    @POST("membership_card_requests")
+    @POST("api/membership_card_requests")
     suspend fun uploadMembershipCard(@Header("Authorization") token: String,
                                      @Part("mobile") mobile: String,
                                      @Part("address") address: String,
@@ -33,10 +33,10 @@ interface ProfileApi {
     ): CardRequestModel
 
     @Multipart
-    @POST("license_requests")
+    @POST("api/license_requests")
     suspend fun uploadMinistryLicense(@Header("Authorization") token: String, @Part license: MultipartBody.Part?): MinistryLicenseModel
 
-    @POST("accounts/change_password")
+    @POST("api/accounts/change_password")
     suspend fun updatePassword(@Header("Authorization") token: String, @Body body: UpdatePasswordBody): Response<UpdatePasswordModel>
 
 }

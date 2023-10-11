@@ -12,13 +12,13 @@ import retrofit2.http.POST
 
 interface PharmacyMartAddressApi {
 
-    @POST("pharmacy/list-addresses")
+    @POST("healthcare/api/v1/pharmacy/list-addresses")
     suspend fun getAddresses(@Body getAddressesBody: GetAddressesBody): PharmacyMartAddressesModel
 
-    @POST("pharmacy/add-address")
+    @POST("healthcare/api/v1/pharmacy/add-address")
     suspend fun addAddress(@Body addAddressBody: AddAddressBody): AddAddressModel
 
-    @POST("pharmacy/delete-address")
+    @POST("healthcare/api/v1/pharmacy/delete-address")
     suspend fun deleteAddress(@Body deleteAddressBody: DeleteAddressBody): DeleteAddressModel
 
 }

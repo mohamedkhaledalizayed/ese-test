@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface SubscriptionDetailsApi {
 
-    @POST("vendor/subscribtions/follower-delete")
+    @POST("healthcare/api/v1/vendor/subscribtions/follower-delete")
     suspend fun deleteFollower(@Header("Authorization") token: String, @Body deleteFollowerBody: DeleteFollowerBody): DeleteFollowerModel
 
 }

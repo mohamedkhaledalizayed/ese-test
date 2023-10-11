@@ -2,8 +2,7 @@ package com.neqabty.healthcare.core.di
 
 import android.util.Log
 import com.neqabty.healthcare.BuildConfig
-import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO_NEWS
-import com.neqabty.healthcare.core.data.Constants.BASE_URL_STAGING_NEWS
+import com.neqabty.healthcare.core.data.Constants.BASE_URL_Main
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +23,7 @@ class NewsModule {
     @Provides
     @Named("newsModule")
     fun providesBaseUrl(): String {
-        return BASE_URL_STAGING_NEWS
+        return BASE_URL_Main
     }
 
     @Provides

@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface PackagesApi {
 
-    @GET("packages")
+    @GET("healthcare/api/v1/packages")
     suspend fun getPackages(@Query("entity_code") code: String): PackagesListModel
 
 }

@@ -7,14 +7,14 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface OrdersApi {
-    @POST("get-orders")
+    @POST("healthcare/api/v1/chefaa/get-orders")
     suspend fun getOrdersList(
         @Body orderListRequestBody: OrderListRequestBody
     ): OrdersListModel
 
-    @POST("get-order-items")
+    @POST("healthcare/api/v1/chefaa/get-order-items")
     suspend fun getOrder(@Body orderRequestBody: OrderRequestBody): ChefaaResponse<OrdersWrapperModel<List<OrderItem>>>
 
-    @POST("add-order")
+    @POST("healthcare/api/v1/chefaa/add-order")
     suspend fun placeOrder(@Body placeOrderBody: PlaceOrderBody): ChefaaResponse<PlaceOrderResponse>
 }

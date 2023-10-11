@@ -7,7 +7,7 @@ import retrofit2.http.GET
 
 interface AdsApi {
 
-    @GET("announcments")
+    @GET("api/announcments")
     suspend fun getAllAds(): AdsResponse
 
 }

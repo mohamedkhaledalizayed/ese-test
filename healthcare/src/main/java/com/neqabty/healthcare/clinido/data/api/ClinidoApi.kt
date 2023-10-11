@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface ClinidoApi {
 
-    @POST("clinido/register")
+    @POST("healthcare/api/v1/clinido/register")
     suspend fun register(@Body body: ClinidoBody): ClinidoModel
 
 }

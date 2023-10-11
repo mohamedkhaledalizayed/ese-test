@@ -8,10 +8,10 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AddressApi {
-    @POST("list-addresses")
+    @POST("healthcare/api/v1/chefaa/list-addresses")
     suspend fun getAllUserAddress(@Body getUserAddressBody: GetUserAddressBody): ChefaaResponse<List<AddressModel>>
 
-    @POST("create-address")
+    @POST("healthcare/api/v1/chefaa/create-address")
     suspend fun addUserAddress(@Body addUserAddressBody: AddUserAddressBody): ChefaaResponse<AddressModel>
 
 }

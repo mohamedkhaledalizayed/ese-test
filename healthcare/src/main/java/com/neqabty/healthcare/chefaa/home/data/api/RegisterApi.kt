@@ -10,7 +10,7 @@ import retrofit2.http.POST
 interface RegisterApi {
 
     @FormUrlEncoded
-    @POST("register")
+    @POST("healthcare/api/v1/chefaa/register")
     suspend fun register(
         @Field("mobile") mobile: String,
         @Field("user_number") userId: String,

@@ -12,13 +12,13 @@ import retrofit2.http.*
 
 interface SignupApi {
 
-    @POST("accounts/swap")
+    @POST("api/accounts/swap")
     suspend fun upgradeMember(@Header("Authorization") token: String, @Body upgradeMemberBody: UpgradeMemberBody): ApiResponse<NeqabtyMemberModel>
 
-    @POST("accounts/register")
+    @POST("api/accounts/register")
     suspend fun signupMember(@Body neqabtySignupBody: NeqabtySignupBody): ApiResponse<NeqabtyMemberModel>
 
-    @GET("entities?special-format=android")
+    @GET("api/entities?special-format=android")
     suspend fun getSyndicates(@Query("filter{type.name}") type: String = "syndicate"): SyndicateListModel
 
 }

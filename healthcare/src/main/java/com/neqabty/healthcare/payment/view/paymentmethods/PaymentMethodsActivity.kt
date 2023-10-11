@@ -15,11 +15,13 @@ import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.AGRI_CODE
 import com.neqabty.healthcare.core.data.Constants.MORSHEDIN_CODE
+import com.neqabty.healthcare.core.data.Constants.VAT_CODE
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityPaymentMethodsBinding
 import com.neqabty.healthcare.payment.data.model.PaymentAgriBody
 import com.neqabty.healthcare.payment.data.model.PaymentMorshedinBody
 import com.neqabty.healthcare.payment.data.model.PaymentNaturalBody
+import com.neqabty.healthcare.payment.data.model.PaymentVatBody
 import com.neqabty.healthcare.payment.data.model.inquiryresponse.GatewaysData
 import com.neqabty.healthcare.payment.data.model.inquiryresponse.InquiryModel
 import com.neqabty.healthcare.payment.domain.entity.branches.BranchesEntity
@@ -200,6 +202,21 @@ class PaymentMethodsActivity : BaseActivity<ActivityPaymentMethodsBinding>(), Ca
                                 serviceCode = serviceCode,
                                 serviceActionCode = serviceActionCode,
                                 paymentMethod = paymentMethod,
+                                deliveryMethod = if (deliveryMethodsEnabled) deliveryMethodId else null,
+                                membershipId = sharedPreferences.membershipId.toInt(),
+                                deliveryMobile = binding.mobile.text.toString(),
+                                deliveryNotes = binding.notes.text.toString()
+                            )
+                        )
+                    }
+                    VAT_CODE -> {
+                        paymentViewModel.getPaymentInfo(
+                            PaymentVatBody(
+                                serviceCode = serviceCode,
+                                serviceActionCode = serviceActionCode,
+                                paymentMethod = paymentMethod,
+                                address = binding.address.text.toString(),
+                                branch = entityBranch,
                                 deliveryMethod = if (deliveryMethodsEnabled) deliveryMethodId else null,
                                 membershipId = sharedPreferences.membershipId.toInt(),
                                 deliveryMobile = binding.mobile.text.toString(),

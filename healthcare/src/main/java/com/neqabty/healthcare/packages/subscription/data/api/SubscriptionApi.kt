@@ -8,7 +8,7 @@ import retrofit2.http.POST
 
 interface SubscriptionApi {
 
-    @POST("vendor/subscribtions/request")
+    @POST("healthcare/api/v1/vendor/subscribtions/request")
     suspend fun addSubscription(
         @Header("Authorization") token: String,
         @Body subscribePostBodyRequest: SubscribePostBodyRequest

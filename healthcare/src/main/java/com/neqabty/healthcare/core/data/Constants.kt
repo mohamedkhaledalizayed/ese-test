@@ -14,39 +14,16 @@ object Constants {
     const val forTesting = false
 
     //TODO move this to gradle
-    //Very Important Before Publishing
-    //Seha
-    const val BASE_URL_DEV = "https://dev-community.neqabty.com/healthcare/api/v1/"
-    const val BASE_URL_STAGING = "https://staging-community.neqabty.com/healthcare/api/v1/"
-    const val BASE_URL_PRO = "https://community.neqabty.com/healthcare/api/v1/"
-
-    //Chefaa
-    const val BASE_URL_DEV_CHEFAA = "https://dev-community.neqabty.com/healthcare/api/v1/chefaa/"
-    const val BASE_URL_STAGING_CHEFAA = "https://staging-community.neqabty.com/healthcare/api/v1/chefaa/"
-    const val BASE_URL_PRO_CHEFAA = "https://community.neqabty.com/healthcare/api/v1/chefaa/"
-
-    //Syndicates
-    const val BASE_URL_DEV_SYNDICATE = "https://dev-community.neqabty.com/api/"
-    private const val BASE_URL_STAGING_SYNDICATE = "https://staging-community.neqabty.com/api/"
-    private const val BASE_URL_PRO_SYNDICATE = "https://community.neqabty.com/api/"
+    //Base url
+    private const val BASE_URL_Main_DEV = "https://dev-community.neqabty.com/"
+    private const val BASE_URL_Main_STAGING = "https://staging-community.neqabty.com/"
+    private const val BASE_URL_Main_PRO = "https://community.neqabty.com/"
 
     //Retirement
     const val BASE_URL_RETIREMENT = "https://edupen.neqabty.com/api/"
-    //News
-    const val BASE_URL_DEV_NEWS = "https://dev-community.neqabty.com/api/"
-    const val BASE_URL_STAGING_NEWS = "https://staging-community.neqabty.com/api/"
-    const val BASE_URL_PRO_NEWS = "https://community.neqabty.com/api/"
 
-    //OTP
-    const val BASE_URL_DEV_OTP = "https://dev-community.neqabty.com/"
-    const val BASE_URL_STAGING_OTP = "https://staging-community.neqabty.com/"
-    const val BASE_URL_PRO_OTP = "https://community.neqabty.com/"
-
-    //Main
-    const val BASE_URL_Main = BASE_URL_STAGING_SYNDICATE
-    // for payment true for testing false for production
+    const val BASE_URL_Main = BASE_URL_Main_STAGING
     const val SANDBOX = true
-    // End
 
     var isFirebaseTokenUpdated: MutableLiveData<String> = MutableLiveData("")
 
@@ -54,26 +31,13 @@ object Constants {
     const val MORSHEDIN_CODE = "e01"
     const val NATURAL_THERAPY_CODE = "e02"
     const val AGRI_CODE = "e05"
+    const val VAT_CODE = "e03"
     const val VISA = "visa"
     const val BANK = "bank"
     var isSyndicateMember = false
     var selectedSyndicateCode = ""
     var selectedSyndicatePosition = 0
-    const val ENCRYPT_KEY = "neqabty@seha$"
     const val PREFS_FILE  = "neqabty_prefs"
-    //Tour Guide
-    const val TOUR_GUIDE_SYNDICATE_EMAIL = "gts@neqabty.com"
-    const val TOUR_GUIDE_SYNDICATE_LAT = 0.0
-    const val TOUR_GUIDE_SYNDICATE_LONG = 0.0
-    const val TOUR_GUIDE_SYNDICATE_PHONE = "25899882 -25890438 - 01144300335"
-    const val TOUR_GUIDE_SYNDICATE_ADDRESS = ""
-
-    //Neqabty
-    const val NEQABTY_EMAIL = "medical@neqabty.com"
-    const val NEQABTY_LAT = 30.0413513
-    const val NEQABTY_LONG = 31.2005282
-    const val NEQABTY_PHONE = "٠٢٣٥٣٥٦٨٦٨"
-    const val NEQABTY_ADDRESS = "٥٤ محي الدين ابو العز الدقي الجيزة"
 
     var DOCTORS_RESERVATION_URL = ""
     var MEDICINE_URL = ""

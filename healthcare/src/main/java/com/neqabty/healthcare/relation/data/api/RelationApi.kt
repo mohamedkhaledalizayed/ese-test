@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface RelationApi {
 
-    @GET("general-Lockups")
+    @GET("healthcare/api/v1/general-Lockups")
     suspend fun getRelations(): RelationsTypesModel
 
 }

@@ -11,7 +11,7 @@ import retrofit2.http.POST
 interface PharmacyMartRegisterApi {
 
     @FormUrlEncoded
-    @POST("pharmacy/register")
+    @POST("healthcare/api/v1/pharmacy/register")
     suspend fun register(
         @Field("mobile") mobile: String,
         @Field("name") name: String,

@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -51,7 +52,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         setupToolbar(title = "بيانات الحساب")
         packageDetails = intent.extras?.getParcelable<PackagesEntity>("package")!!
 
-
         binding.followersRecycler.adapter = mAdapter
 
         mAdapter.onItemClickListener = object : FollowerAdapter.OnItemClickListener{
@@ -78,7 +78,9 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             binding.ivFront.setImageResource(R.drawable.img_nat_id_front)
             binding.tvEnterNationalIdFront.text = resources.getString(R.string.enter_id_back)
             binding.btnBackId.visibility = View.GONE
-            binding.addFollowerBtn.visibility = View.VISIBLE
+            if (packageDetails.maxFollower != 0){
+                binding.addFollowerBtn.visibility = View.VISIBLE
+            }
             binding.bPayNow.visibility = View.VISIBLE
         }
 
@@ -105,6 +107,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                     Status.SUCCESS -> {
                         hideProgressDialog()
                         if (resource.data!!.status){
+                            listOfFollowers.clear()
                             Toast.makeText(this, "تم الأشتراك بنجاح.", Toast.LENGTH_LONG).show()
                             val intent = Intent(this, PackagesPaymentActivity::class.java)
                             intent.putExtra("name", packageDetails.name)
@@ -169,6 +172,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         } else {
             getImage()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        listOfFollowers.clear()
     }
 
     override fun onResume() {

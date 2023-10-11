@@ -6,7 +6,7 @@ import retrofit2.http.Header
 
 interface InvoicesApi {
 
-    @GET("payment/list_payment_invoices")
+    @GET("api/payment/list_payment_invoices")
     suspend fun getAllInvoices(@Header("Authorization") token: String): List<InvoicesModel>
 
 }
