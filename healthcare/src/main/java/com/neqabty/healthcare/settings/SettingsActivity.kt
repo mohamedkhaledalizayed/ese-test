@@ -6,7 +6,10 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.app.NotificationManagerCompat
+import androidx.fragment.app.viewModels
 import com.google.android.play.core.review.ReviewException
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
@@ -15,13 +18,16 @@ import com.google.android.play.core.review.model.ReviewErrorCode
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.aboutapp.AboutAppActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySettingsBinding
+import com.neqabty.healthcare.profile.data.model.UpdatePasswordBody
+import com.neqabty.healthcare.profile.view.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
+class SettingsActivity : BaseActivity<ActivitySettingsBinding>(), IChangePassword {
 
-
+    private val profileViewModel: ProfileViewModel by viewModels()
     lateinit var reviewInfo: ReviewInfo
     override fun getViewBinding() = ActivitySettingsBinding.inflate(layoutInflater)
     private val  bottomSheetFragment: ChangePasswordBottomSheet by lazy { ChangePasswordBottomSheet() }
@@ -30,6 +36,26 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.settings_title)
+
+        profileViewModel.password.observe(this) {
+            it.let { resource ->
+                when (resource.status) {
+
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        Toast.makeText(this, resource.data, Toast.LENGTH_LONG).show()
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        Toast.makeText(this, "حدث خطاء اثناء تغيير كلمة المرور.", Toast.LENGTH_LONG).show()
+                    }
+
+                }
+            }
+        }
 
         binding.aboutContainer.setOnClickListener { startActivity(Intent(this, AboutAppActivity::class.java)) }
         binding.backBtn.setOnClickListener { finish() }
@@ -191,6 +217,15 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
                 @ReviewErrorCode val reviewErrorCode = (task.exception as ReviewException).errorCode
             }
         }
+    }
+
+    override fun onChangeClicked(oldPassword: String, newPassword: String) {
+        profileViewModel.updatePassword(
+            UpdatePasswordBody(
+            newPassword = newPassword,
+            oldPassword = oldPassword
+        )
+        )
     }
 
 

@@ -5,14 +5,10 @@ import android.app.Dialog
 import android.text.method.PasswordTransformationMethod
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.FragmentChangePasswordBottomSheetBinding
-import com.neqabty.healthcare.profile.data.model.UpdatePasswordBody
-import com.neqabty.healthcare.profile.view.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -25,7 +21,6 @@ class ChangePasswordBottomSheet : BottomSheetDialogFragment() {
     private var isHiddenNew = true
     private var isHiddenConfirm = true
     private lateinit var binding: FragmentChangePasswordBottomSheetBinding
-    private val profileViewModel: ProfileViewModel by viewModels()
     @SuppressLint("RestrictedApi")
     override fun setupDialog(dialog: Dialog, style: Int) {
         val bottomSheetDialog = dialog as BottomSheetDialog
@@ -65,39 +60,15 @@ class ChangePasswordBottomSheet : BottomSheetDialogFragment() {
                 return@setOnClickListener
             }
 
-            profileViewModel.updatePassword(UpdatePasswordBody(
+            val activity = requireActivity() as SettingsActivity
+            activity.onChangeClicked(
                 newPassword = binding.newPassword.text.toString(),
-                oldPassword = binding.oldPassword.text.toString()
-            ))
-
+                oldPassword = binding.oldPassword.text.toString())
+            dismiss()
         }
 
-        profileViewModel.password.observe(this) {
-            it.let { resource ->
-                when (resource.status) {
-
-                    Status.LOADING -> {
-                        binding.progressCircular.visibility = View.VISIBLE
-                        binding.layoutContainer.visibility = View.GONE
-                    }
-                    Status.SUCCESS -> {
-                        binding.progressCircular.visibility = View.GONE
-                        binding.layoutContainer.visibility = View.VISIBLE
-                        dialog.dismiss()
-                        Toast.makeText(requireContext(), resource.data, Toast.LENGTH_LONG).show()
-                    }
-                    Status.ERROR -> {
-                        binding.progressCircular.visibility = View.GONE
-                        dialog.dismiss()
-                        Toast.makeText(requireContext(), "حدث خطاء اثناء تغيير كلمة المرور.", Toast.LENGTH_LONG).show()
-                    }
-
-                }
-            }
-        }
-
-        binding.closeBtn.setOnClickListener { dialog.dismiss() }
-        binding.backBtn.setOnClickListener { dialog.dismiss() }
+        binding.closeBtn.setOnClickListener { dismiss() }
+        binding.backBtn.setOnClickListener { dismiss() }
         binding.newPassword.customSelectionActionModeCallback = actionMode
         binding.confirmPassword.customSelectionActionModeCallback = actionMode
 

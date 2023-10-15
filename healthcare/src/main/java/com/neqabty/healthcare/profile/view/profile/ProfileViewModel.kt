@@ -3,7 +3,9 @@ package com.neqabty.healthcare.profile.view.profile
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.healthcare.payment.data.model.ErrorBody
 import com.neqabty.healthcare.profile.data.model.UpdatePasswordBody
 import com.neqabty.healthcare.profile.domain.entity.licencestatus.LicenceStatusEntity
 import com.neqabty.healthcare.profile.domain.entity.membershipcardstatus.CardStatusEntity
@@ -61,7 +63,7 @@ class ProfileViewModel @Inject constructor(private val profileUseCase: ProfileUs
         }
     }
 
-    val password = MutableLiveData<Resource<String>>()
+    val password = MutableLiveData<Resource<String?>>()
     fun updatePassword(body: UpdatePasswordBody) {
         password.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
@@ -71,7 +73,8 @@ class ProfileViewModel @Inject constructor(private val profileUseCase: ProfileUs
                         password.postValue(Resource.success(data = it.body()!!.message))
                     }else{
                         val jObjError = JSONObject(it.errorBody()!!.string()).toString()
-                        password.postValue(Resource.error(data = null, message = jObjError))
+                        val error = Gson().fromJson(jObjError, ErrorBody::class.java)
+                        password.postValue(Resource.success(data = error.error))
                     }
                 }
             }catch (exception:Throwable){
