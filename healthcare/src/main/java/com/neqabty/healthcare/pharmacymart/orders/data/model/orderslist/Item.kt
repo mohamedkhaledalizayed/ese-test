@@ -12,7 +12,7 @@ data class Item(
     val name: String,
     val order_id: Int,
     val price: Double,
-    val price_before_discount: Int,
+    val price_before_discount: String?,
     val product_image: Any,
     val quantity: String,
     val updated_at: String

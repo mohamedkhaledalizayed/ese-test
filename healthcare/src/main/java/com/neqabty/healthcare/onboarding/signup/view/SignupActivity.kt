@@ -194,30 +194,6 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
 //        signupViewModel.sendOTP(SendOTPBody(phoneNumber = sharedPreferences.mobile_without_cc))
 //    }
 
-//    private fun observeOnSendOTP(){
-//        signupViewModel.otp.observe(this) {
-//            it.let { resource ->
-//                when (resource.status) {
-//                    Status.LOADING -> {
-//                        showProgressDialog()
-//                    }
-//                    Status.SUCCESS -> {
-//                        hideProgressDialog()
-//
-//                        Toast.makeText(
-//                            this@SignupActivity,
-//                            getString(R.string.otp_sent),
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//                    }
-//                    Status.ERROR -> {
-//                        hideProgressDialog()
-//                    }
-//                }
-//            }
-//        }
-//    }
-
 //    private fun checkOTP(otp: String) {
 //        signupViewModel.checkOTP(
 //            CheckOTPBody(

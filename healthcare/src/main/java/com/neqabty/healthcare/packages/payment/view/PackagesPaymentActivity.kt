@@ -105,10 +105,10 @@ class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Call
                                 oPayPayment(resource.data)
                             }
                             "Opay Code" -> {
-                                showAlertDialog(resource.data.payment_gateway_transaction_num ?: "")
+                                showAlertDialog(resource.data.referenceCode ?: "")
                             }
                             "Fawry Code" -> {
-                                showAlertDialog(resource.data.payment_gateway_transaction_num ?: "")
+                                showAlertDialog(resource.data.referenceCode ?: "")
                             }
                             else -> {
 

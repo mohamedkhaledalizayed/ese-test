@@ -65,7 +65,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
             .build()
 
         photoAdapter = CheckoutPhotosAdapter(this)
-        updateView()
 
         binding.productRecyclerView.adapter = mAdapter
         placeOrderViewModel.placeImagesResult.observe(this){
@@ -132,38 +131,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
         binding.total.text = "$totalPrice جنيه"
     }
 
-    private fun updateView() {
-        ///// checkout btn and Empty view
-//        if (cart.size == 0){
-//            binding.clEmptyCart.visibility = View.VISIBLE
-//        }else{
-//            binding.clEmptyCart.visibility = View.GONE
-//        }
-//
-//        /////Images recyclerView
-//        if (cart.imageList.isNotEmpty()) {
-//            binding.photosRv.visibility = View.VISIBLE
-//            photoAdapter.submitList()
-//        } else {
-//            binding.llPhotos.visibility = View.GONE
-//        }
-//
-//        /////Products recyclerView
-//        if(cart.productList.isNotEmpty()) {
-//            binding.productRv.visibility = View.VISIBLE
-//            mAdapter.submitList()
-//        } else {
-//            binding.llProducts.visibility = View.GONE
-//        }
-//
-//        if(cart.note != null){
-//            binding.noteTv.visibility = View.VISIBLE
-//            binding.noteTv.setText(cart.note!!.note)
-//        } else {
-//            binding.clNote.visibility = View.GONE
-//        }
-    }
-
     override fun onResume() {
         super.onResume()
         binding.completeBtn.visibility = View.VISIBLE
@@ -180,7 +147,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
             lifecycleScope.launch(Dispatchers.IO) {
                 cart.imageList.map {
                     it.image = "data:image/png;base64," + Base64.encodeToString(
-                        File(it.imageUri!!.path).readBytes(),
+                        File(it.image).readBytes(),
                         Base64.DEFAULT
                     )
                 }

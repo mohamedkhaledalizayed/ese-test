@@ -182,6 +182,16 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/cancellation_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:background="@drawable/chefaa_orders_bg"/>
+
+            <TextView
                 android:id="@+id/confirm_btn"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_36sdp"

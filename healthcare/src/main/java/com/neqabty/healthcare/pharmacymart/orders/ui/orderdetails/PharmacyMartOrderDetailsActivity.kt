@@ -69,6 +69,11 @@ class PharmacyMartOrderDetailsActivity : BaseActivity<ActivityPharmacyMartOrderD
                     if (it.data.data[0].orderText.isEmpty()){
                         binding.writeOrder.visibility = View.GONE
                     }
+                    if (it.data.data[0].cancellationReason.isEmpty()){
+                        binding.cancellationReason.visibility = View.GONE
+                    }else{
+                        binding.cancellationReason.text = it.data.data[0].cancellationReason
+                    }
                     binding.orderStatus.text = it.data.data[0].orderStatusTitle
                     binding.writeOrder.text = it.data.data[0].orderText
                     binding.total.text = "${it.data.data[0].priceBeforeDiscount} جنيه"

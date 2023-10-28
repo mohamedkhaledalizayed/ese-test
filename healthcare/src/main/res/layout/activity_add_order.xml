@@ -102,7 +102,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:padding="@dimen/_10sdp"
                 android:hint="@string/delivery_phone"
-                android:inputType="number"
+                android:inputType="phone"
+                android:digits="0123456789"
                 android:textAlignment="center"
                 android:textSize="@dimen/_10ssp"/>
 

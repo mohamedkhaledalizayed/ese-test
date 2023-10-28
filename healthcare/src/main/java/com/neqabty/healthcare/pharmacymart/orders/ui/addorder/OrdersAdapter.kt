@@ -38,7 +38,7 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         viewHolder.binding.delete.visibility = View.GONE
-        viewHolder.binding.image.setImageURI(pharmacyMartCart.pharmacyMartImageList[position])
+        viewHolder.binding.image.setImageURI(pharmacyMartCart.pharmacyMartImageList[position]?.uri)
 
     }
 

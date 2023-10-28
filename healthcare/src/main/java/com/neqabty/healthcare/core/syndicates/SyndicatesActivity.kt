@@ -3,10 +3,14 @@ package com.neqabty.healthcare.core.syndicates
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.more.view.MoreActivity
+import com.neqabty.healthcare.core.ui.AuthDialog
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.ui.ChangeAccountDialog
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySyndicatesBinding
 import com.neqabty.healthcare.invoices.view.InvoicesActivity
@@ -116,26 +120,20 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
         }
     }
 
-    //region
     override fun onResume() {
         super.onResume()
 
         binding.bnvSyndicatesHome.selectedItemId = R.id.navigation_syndicates
     }
 
-    override fun onSignUpClicked() {
-        if (sharedPreferences.isSyndicateMember){
-            sharedPreferences.clearAll()
-            startActivity(Intent(this, SplashActivity::class.java))
-            finishAffinity()
-        }else{
-            sharedPreferences.isSkippedToHome = false
-            val intent = Intent(this, SignupActivity::class.java)
-            if(!sharedPreferences.mobile.isNullOrBlank())
-                intent.putExtra("isSyndicate", true)
-            startActivity(intent)
-            finishAffinity()
-        }
+    private fun changeAccount() {
+        val fm: FragmentManager = supportFragmentManager
+        val dialog = ChangeAccountDialog()
+        dialog.show(fm, "")
+        dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
     }
-    //endregion
+
+    override fun onSignUpClicked() {
+        changeAccount()
+    }
 }

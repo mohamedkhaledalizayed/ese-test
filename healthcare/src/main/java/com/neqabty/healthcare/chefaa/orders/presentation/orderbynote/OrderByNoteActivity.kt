@@ -40,6 +40,7 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>(), IMediaSe
     private val SELECT_FILE = 1
     private var photoFileName = ""
     lateinit var photoFileURI: Uri
+    lateinit var photoPath: String
     private lateinit var  bottomSheetFragment: PickUpImageBottomSheet
     private val mAdapter = PrescriptionsAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -159,6 +160,7 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>(), IMediaSe
                     // Error occurred while creating the File
                     null
                 }
+                photoPath = photoFile?.path ?: ""
                 // Continue only if the File was successfully created
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
@@ -205,7 +207,7 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>(), IMediaSe
         bos.write(bytes.toByteArray())
         bos.flush()
         bos.close()
-        addImageToCart(PhotoUI(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName, photoFileURI))
+        addImageToCart(PhotoUI(photoPath, photoFileName, photoFileURI))
     }
 
     private fun saveImage(myBitmap: Bitmap): PhotoUI {
@@ -224,7 +226,7 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>(), IMediaSe
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(this, arrayOf(f.path), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name, Uri.parse(path + "/" + name))
+            return PhotoUI(f.path, name, Uri.parse(path + "/" + name))
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
@@ -274,7 +276,7 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>(), IMediaSe
     private fun addImageToCart(photoUI: PhotoUI){
         cart.imageList.add(
             OrderItemsEntity(
-                image = photoUI.uri?.path!!,
+                image = photoUI.path!!,
                 quantity = 1,
                 type = Constants.ITEMTYPES.IMAGE.typeName,
                 note = "",

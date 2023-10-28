@@ -13,6 +13,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
@@ -20,7 +21,6 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.view.IMediaSelection
 import com.neqabty.healthcare.chefaa.home.view.PickUpImageBottomSheet
-import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.pharmacyMartCart
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.PhotoUI
@@ -40,6 +40,7 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
     private val SELECT_FILE = 1
     private var photoFileName = ""
     lateinit var photoFileURI: Uri
+    lateinit var photoPath: String
     private lateinit var  bottomSheetFragment: PickUpImageBottomSheet
     private val mAdapter = PrescriptionsAdapter()
     override fun getViewBinding() = ActivityPharmacyMartCartBinding.inflate(layoutInflater)
@@ -89,15 +90,6 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
 
     private fun addNote(){
         pharmacyMartCart.orderByText = binding.noteTv.text.toString()
-//        Constants.cart.note = OrderItemsEntity(
-//            type = Constants.ITEMTYPES.NOTE.typeName,
-//            quantity = 1,
-//            image = "",
-//            note = binding.noteTv.text.toString(),
-//            productId = -1,
-//            productEntity = null,
-//            imageUri = null
-//        )
     }
 
     private fun addPhoto() {
@@ -137,6 +129,7 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
                     // Error occurred while creating the File
                     null
                 }
+                photoPath = photoFile?.path ?: ""
                 // Continue only if the File was successfully created
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
@@ -183,7 +176,7 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
         bos.write(bytes.toByteArray())
         bos.flush()
         bos.close()
-        addImageToCart(PhotoUI(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName, photoFileURI))
+        addImageToCart(PhotoUI(photoPath, photoFileName, photoFileURI))
     }
 
     private fun saveImage(myBitmap: Bitmap): PhotoUI {
@@ -202,7 +195,7 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(this, arrayOf(f.path), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name, Uri.parse(path + "/" + name))
+            return PhotoUI(f.path, name, Uri.parse(path + "/" + name))
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
@@ -250,7 +243,7 @@ class PharmacyMartCartActivity : BaseActivity<ActivityPharmacyMartCartBinding>()
     }
 
     private fun addImageToCart(photoUI: PhotoUI){
-        pharmacyMartCart.pharmacyMartImageList.add(photoUI.uri)
+        pharmacyMartCart.pharmacyMartImageList.add(photoUI)
         mAdapter.clear()
         mAdapter.submitList(pharmacyMartCart.pharmacyMartImageList)
     }

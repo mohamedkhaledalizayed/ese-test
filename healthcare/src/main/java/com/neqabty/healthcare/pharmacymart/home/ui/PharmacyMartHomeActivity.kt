@@ -40,6 +40,7 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
     private var photoFileName = ""
     private val REQUEST_CAMERA = 0
     lateinit var photoFileURI: Uri
+    lateinit var photoPath: String
     private lateinit var dialog: AlertDialog
     private val viewModel: PharmacyMartHomeViewModel by viewModels()
     private lateinit var  bottomSheetFragment: PickUpImageBottomSheet
@@ -158,7 +159,7 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
     }
 
     private fun addImageToCart(photoUI: PhotoUI){
-        Constants.pharmacyMartCart.pharmacyMartImageList.add(photoUI.uri)
+        Constants.pharmacyMartCart.pharmacyMartImageList.add(photoUI)
         startActivity(Intent(this, PharmacyMartCartActivity::class.java))
     }
 
@@ -197,6 +198,7 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
                     // Error occurred while creating the File
                     null
                 }
+                photoPath = photoFile?.path ?: ""
                 // Continue only if the File was successfully created
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
@@ -243,7 +245,7 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
         bos.write(bytes.toByteArray())
         bos.flush()
         bos.close()
-        addImageToCart(PhotoUI(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName, photoFileURI))
+        addImageToCart(PhotoUI(photoPath, photoFileName, photoFileURI))
     }
 
     private fun saveImage(myBitmap: Bitmap): PhotoUI {
@@ -262,7 +264,7 @@ class PharmacyMartHomeActivity : BaseActivity<ActivityPharmacyMartHomeBinding>()
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(this, arrayOf(f.path), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name, Uri.parse(path + "/" + name))
+            return PhotoUI(f.path, name, Uri.parse(path + "/" + name))
         } catch (e1: IOException) {
             e1.printStackTrace()
         }

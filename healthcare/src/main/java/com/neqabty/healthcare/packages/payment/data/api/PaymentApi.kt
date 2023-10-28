@@ -12,7 +12,7 @@ interface PaymentApi {
     suspend fun payment(@Body paymentBody: SehaPaymentBody,
                         @Header("Authorization") token: String): Response<SehaPaymentResponse>
 
-    @GET("healthcare/api/v1/payment/get_gateway_parameter")
+    @GET("api/payment/get_gateway_parameter")
     suspend fun getPaymentMethods(@Header("Authorization") token: String, @Query("service_code") code: String): PaymentMethodsResponse
 
 

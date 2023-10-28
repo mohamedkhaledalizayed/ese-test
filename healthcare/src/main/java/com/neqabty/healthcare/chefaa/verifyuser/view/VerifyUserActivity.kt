@@ -34,7 +34,7 @@ class VerifyUserActivity : BaseActivity<ActivityVerifyUserBinding>() {
                 Toast.makeText(this@VerifyUserActivity, "من فضلك ادخل الكود.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            verifyUserViewModel.verifyUser(mobile = mobileNumber, code = binding.code.text.toString())
+            verifyUserViewModel.verifyUser(mobile = sharedPreferences.mobile, code = binding.code.text.toString())
         }
 
         verifyUserViewModel.status.observe(this){

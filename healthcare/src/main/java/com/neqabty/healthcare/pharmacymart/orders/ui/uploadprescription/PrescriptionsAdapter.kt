@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.utils.PhotoUI
 import com.neqabty.healthcare.databinding.PrescriptionLayoutItemBinding
 import java.util.*
 
 
 class PrescriptionsAdapter : RecyclerView.Adapter<PrescriptionsAdapter.ViewHolder>() {
 
-    private val items: MutableList<Uri?> = ArrayList()
+    private val items: MutableList<PhotoUI?> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -37,12 +38,12 @@ class PrescriptionsAdapter : RecyclerView.Adapter<PrescriptionsAdapter.ViewHolde
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.delete.setOnClickListener { onItemClickListener?.setOnDeleteClickListener(position) }
-        viewHolder.binding.image.setImageURI(Constants.pharmacyMartCart.pharmacyMartImageList[position])
+        viewHolder.binding.image.setImageURI(Constants.pharmacyMartCart.pharmacyMartImageList[position]?.uri)
     }
 
     override fun getItemCount() = Constants.pharmacyMartCart.pharmacyMartImageList.size
 
-    fun submitList(newItems: List<Uri?>?) {
+    fun submitList(newItems: List<PhotoUI?>?) {
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()

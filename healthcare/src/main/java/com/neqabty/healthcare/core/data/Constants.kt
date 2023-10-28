@@ -1,10 +1,10 @@
 package com.neqabty.healthcare.core.data
 
 
-import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.healthcare.chefaa.address.domain.entities.AddressEntity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
+import com.neqabty.healthcare.core.utils.PhotoUI
 import com.neqabty.healthcare.packages.subscription.data.model.Followers
 import com.neqabty.healthcare.pharmacymart.address.domain.entity.PharmacyMartAddressEntity
 
@@ -22,8 +22,8 @@ object Constants {
     //Retirement
     const val BASE_URL_RETIREMENT = "https://edupen.neqabty.com/api/"
 
-    const val BASE_URL_Main = BASE_URL_Main_PRO
-    const val SANDBOX = false
+    const val BASE_URL_Main = BASE_URL_Main_STAGING
+    const val SANDBOX = true
 
     var isFirebaseTokenUpdated: MutableLiveData<String> = MutableLiveData("")
 
@@ -72,7 +72,7 @@ object Constants {
 }
 
 data class PharmacyMartCart(
-    val pharmacyMartImageList: MutableList<Uri?> = mutableListOf(),
+    val pharmacyMartImageList: MutableList<PhotoUI?> = mutableListOf(),
     var orderByText: String = ""
 )
 
