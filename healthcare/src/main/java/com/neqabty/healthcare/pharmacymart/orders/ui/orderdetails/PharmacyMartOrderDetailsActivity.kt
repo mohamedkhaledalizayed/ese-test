@@ -74,9 +74,29 @@ class PharmacyMartOrderDetailsActivity : BaseActivity<ActivityPharmacyMartOrderD
                     }else{
                         binding.cancellationReason.text = it.data.data[0].cancellationReason
                     }
+                    if (it.data.data[0].priceBeforeDiscount.isEmpty()){
+                        binding.priceBeforeDiscount.visibility = View.GONE
+                    }else{
+                        binding.priceBeforeDiscount.text = "السعر قبل الخصم : ${it.data.data[0].priceBeforeDiscount} جنيه"
+                    }
+                    if (it.data.data[0].priceAfterDiscount.isEmpty()){
+                        binding.priceAfterDiscount.visibility = View.GONE
+                    }else{
+                        binding.priceAfterDiscount.text = "السعر بعد الخصم : ${it.data.data[0].priceAfterDiscount} جنيه"
+                    }
+                    if (it.data.data[0].deliveryFees.isEmpty()){
+                        binding.deliveryFees.visibility = View.GONE
+                    }else{
+                        binding.deliveryFees.text = "مصاريف التوصيل : ${it.data.data[0].deliveryFees} جنيه"
+                    }
+                    if (it.data.data[0].totalPrice.isEmpty()){
+                        binding.totalPrice.visibility = View.GONE
+                    }else{
+                        binding.totalPrice.text = "الاجمالى : ${it.data.data[0].totalPrice} جنيه"
+                    }
                     binding.orderStatus.text = it.data.data[0].orderStatusTitle
                     binding.writeOrder.text = it.data.data[0].orderText
-                    binding.total.text = "${it.data.data[0].priceBeforeDiscount} جنيه"
+
                     binding.address.text = it.data.data[0].address.let {item->
                         "شارع ${item.streetName}, مبنى رقم ${item.buildingNo}, رقم الطابق ${item.floor}, شقة رقم ${item.apartment}"
                     }

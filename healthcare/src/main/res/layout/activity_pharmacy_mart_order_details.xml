@@ -130,25 +130,41 @@
                     android:background="@drawable/total_bg">
 
                     <TextView
-                        android:id="@+id/total"
-                        android:fontFamily="@font/hanimation_arabic_medium"
+                        android:id="@+id/priceBeforeDiscount"
+                        android:fontFamily="@font/hanimation_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="EGP 0.00"
-                        android:layout_gravity="center"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_16ssp"
+                        android:textSize="@dimen/_14ssp"
                         />
 
                     <TextView
-                        android:fontFamily="@font/hanimation_arabic_medium"
+                        android:id="@+id/priceAfterDiscount"
+                        android:fontFamily="@font/hanimation_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="الاجمالي"
-                        android:textColor="#6e7389"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
                         />
+
+                    <TextView
+                        android:id="@+id/deliveryFees"
+                        android:fontFamily="@font/hanimation_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp"
+                        />
+
+                    <TextView
+                        android:id="@+id/totalPrice"
+                        android:fontFamily="@font/hanimation_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp"
+                        />
+
 
                 </LinearLayout>
 
