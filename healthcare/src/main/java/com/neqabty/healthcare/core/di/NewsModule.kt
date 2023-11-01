@@ -29,15 +29,9 @@ class NewsModule {
     @Provides
     @Named("newsModule")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        val logging = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
-            override fun log(message: String) {
-//                Timber.tag("OkHttp").d(message)
-                if(BuildConfig.DEBUG)
-                Log.d("OkHttp" ,message)
-                else{}
-            }
-        })
-        logging.level = HttpLoggingInterceptor.Level.BODY
+        val logging = HttpLoggingInterceptor()
+        logging.level =
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         return logging
     }
 

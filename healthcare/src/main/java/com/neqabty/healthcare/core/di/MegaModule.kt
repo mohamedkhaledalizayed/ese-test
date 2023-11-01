@@ -30,17 +30,12 @@ class MegaModule {
     @Provides
     @Named("mega")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        val logging = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
-            override fun log(message: String) {
-//                Timber.tag("OkHttp").d(message)
-                if(BuildConfig.DEBUG)
-                Log.d("OkHttp" ,message)
-                else{}
-            }
-        })
-        logging.level = HttpLoggingInterceptor.Level.BODY
+        val logging = HttpLoggingInterceptor()
+        logging.level =
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         return logging
     }
+
     private val interceptor = Interceptor {
         var original = it.request()
         val originalHttpUrl = original.url
