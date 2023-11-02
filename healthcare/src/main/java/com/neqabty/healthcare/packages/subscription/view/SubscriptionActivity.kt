@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -144,7 +143,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                 mobile = sharedPreferences.mobile,
                 nationalId = intent.getStringExtra("nationalId")!!,
                 entityCode = sharedPreferences.code,
-                serviceActionCode = packageDetails.serviceActionCode!!,
+                serviceActionCode = packageDetails.serviceActionCode ?: "",
                 referralNumber = "",
                 personalImage = userImageUri!!,
                 frontIdImage = nationalIdFrontUri!!,

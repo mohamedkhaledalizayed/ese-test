@@ -22,9 +22,9 @@ object Constants {
     //Retirement
     const val BASE_URL_RETIREMENT = "https://edupen.neqabty.com/api/"
 
-    const val BASE_URL_Main = BASE_URL_Main_STAGING
+    const val BASE_URL_Main = BASE_URL_Main_PRO
     //true for testing false for production
-    const val SANDBOX = true
+    const val SANDBOX = false
 
     var isFirebaseTokenUpdated: MutableLiveData<String> = MutableLiveData("")
 

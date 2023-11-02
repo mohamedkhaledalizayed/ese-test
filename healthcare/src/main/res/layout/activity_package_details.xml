@@ -88,39 +88,83 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-<ScrollView
+    <ScrollView
     android:layout_width="match_parent"
     android:layout_height="0dp"
+    android:id="@+id/container"
     app:layout_constraintTop_toBottomOf="@id/cv_package"
-    app:layout_constraintBottom_toTopOf="@id/back_btn"
+    app:layout_constraintBottom_toTopOf="@id/subscribe_btn"
     android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/details"
-        android:fontFamily="@font/hanimation_arabic_medium"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_12ssp"
-        android:paddingTop="@dimen/_10sdp"
-        android:layout_margin="@dimen/_10sdp"
-        android:textColor="@color/black"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/details"
+            android:fontFamily="@font/hanimation_arabic_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="@dimen/_12ssp"
+            android:paddingTop="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:textColor="@color/black"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_docs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/details"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/rv_docs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:id="@+id/terms_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="اؤكد اني قرأت جميع الشروط والأحكام الخاصة بوثيقة الحوادث وثيقة العلاج الطبي بعناية و أوافق عليها"
+                android:textSize="@dimen/_10ssp"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
-
-
-    <TextView
-        android:id="@+id/back_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/back_btn_bg"
-        app:layout_constraintBottom_toTopOf="@id/subscribe_btn"
-        android:padding="@dimen/_10sdp"
-        android:text="رجوع"
-        android:layout_margin="@dimen/_10sdp"
-        android:textAlignment="center"
-        android:textColor="#5D81D4"
-        />
 
     <TextView
         android:id="@+id/subscribe_btn"
@@ -130,6 +174,7 @@
         android:layout_marginBottom="@dimen/_20sdp"
         android:background="@drawable/select_btn_bg"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container"
         android:text="اشتراك"
         android:layout_margin="@dimen/_10sdp"
         android:textAlignment="center"
@@ -137,6 +182,5 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_12ssp"
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

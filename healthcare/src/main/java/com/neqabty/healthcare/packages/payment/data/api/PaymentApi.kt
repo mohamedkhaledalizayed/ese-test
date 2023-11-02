@@ -8,7 +8,7 @@ import retrofit2.http.*
 
 interface PaymentApi {
 
-    @POST("healthcare/api/v1/payment/paymentV2/")
+    @POST("api/payment/paymentV2/")
     suspend fun payment(@Body paymentBody: SehaPaymentBody,
                         @Header("Authorization") token: String): Response<SehaPaymentResponse>
 
