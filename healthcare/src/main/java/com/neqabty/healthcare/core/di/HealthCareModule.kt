@@ -53,19 +53,7 @@ class HealthCareModule {
         okHttpClient.writeTimeout(90, TimeUnit.SECONDS)
 //        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
-        if (!BuildConfig.DEBUG) {
-            val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-                .add(
-                    "seha.neqabty.com",
-                    "sha256/C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M="
-                )
-                .add(
-                    "*.neqabty.com",
-                    "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
-                ).build()
 
-//            okHttpClient.certificatePinner(certificatePinner)
-        }
         return okHttpClient.build()
     }
 

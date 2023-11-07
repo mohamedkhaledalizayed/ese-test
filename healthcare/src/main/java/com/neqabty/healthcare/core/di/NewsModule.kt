@@ -53,15 +53,7 @@ class NewsModule {
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.addInterceptor(interceptor)
-        if (!BuildConfig.DEBUG) {
-            val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-                .add(
-                    "news.neqabty.com",
-                    "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
-                ).build()
 
-//            okHttpClient.certificatePinner(certificatePinner)
-        }
         return okHttpClient.build()
     }
 

@@ -63,19 +63,6 @@ class ChefaaNetworkModule {
 
             })
         okHttpClient.addInterceptor(loggingInterceptor)
-        if (!BuildConfig.DEBUG) {
-            val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-            .add(
-                "seha.neqabty.com",
-                "sha256/C5+lpZ7tcVwmwQIMcRtPbsQ0wHFr8M="
-            )
-            .add(
-                "*.neqabty.com",
-                "sha256/8Rw90Ej3Ttt8RRkrgbjP/UXPtaY8="
-            ).build()
-
-//            okHttpClient.certificatePinner(certificatePinner)
-        }
         return okHttpClient.build()
     }
 

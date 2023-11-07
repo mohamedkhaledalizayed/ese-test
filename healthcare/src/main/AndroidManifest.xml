@@ -47,6 +47,7 @@
         android:preserveLegacyExternalStorage="true"
         android:theme="@style/MyAppTheme.NoActionBar"
         android:usesCleartextTraffic="false"
+        android:networkSecurityConfig="@xml/network_security_confing"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
             android:name=".pharmacymart.orders.ui.addorder.AddOrderActivity"
