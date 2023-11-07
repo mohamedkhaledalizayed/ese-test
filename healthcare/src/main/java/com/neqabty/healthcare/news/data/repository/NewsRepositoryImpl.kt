@@ -3,6 +3,7 @@ package com.neqabty.healthcare.news.data.repository
 
 import com.neqabty.healthcare.news.data.model.NewsItem
 import com.neqabty.healthcare.news.data.model.NewsModel
+import com.neqabty.healthcare.news.data.model.newslist.New
 import com.neqabty.healthcare.news.data.source.NewsDS
 import com.neqabty.healthcare.news.domain.entity.NewsEntity
 import com.neqabty.healthcare.news.domain.repository.NewsRepository
@@ -24,13 +25,13 @@ class NewsRepositoryImpl @Inject constructor(private val newsDS: NewsDS) : NewsR
     }
 }
 
-private fun NewsItem.toNewsEntity(): NewsEntity {
+private fun New.toNewsEntity(): NewsEntity {
     return NewsEntity(
         authorId = author.id,
         authorCode = author.code,
-        content = content,
+        content = content ?: "",
         createdAt = "",
-        headline = headline,
+        headline = headline ?: "",
         id = id,
         image = image,
         source = source ?: "",

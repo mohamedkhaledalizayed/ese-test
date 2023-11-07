@@ -5,7 +5,7 @@ import androidx.annotation.Keep
 
 @Keep
 data class OrderDetailsModel(
-    val `data`: List<OrderItemModel>,
+    val `data`: OrderDetailsObject,
     val message: String,
     val status: Boolean,
     val status_code: Int

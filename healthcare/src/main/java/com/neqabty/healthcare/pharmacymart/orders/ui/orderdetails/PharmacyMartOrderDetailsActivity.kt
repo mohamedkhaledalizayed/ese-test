@@ -144,6 +144,7 @@ class PharmacyMartOrderDetailsActivity : BaseActivity<ActivityPharmacyMartOrderD
                 Status.SUCCESS ->{
                     dialog.dismiss()
                     if (it.data!!.status){
+                        binding.cancelBtn.visibility = View.GONE
                         binding.confirmBtn.visibility = View.GONE
                         Toast.makeText(this@PharmacyMartOrderDetailsActivity, it.data.data, Toast.LENGTH_LONG).show()
                     }else{
