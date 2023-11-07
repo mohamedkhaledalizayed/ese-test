@@ -67,14 +67,14 @@ class ChefaaNetworkModule {
             val certificatePinner : CertificatePinner = CertificatePinner.Builder()
             .add(
                 "seha.neqabty.com",
-                "sha256/C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M="
+                "sha256/C5+lpZ7tcVwmwQIMcRtPbsQ0wHFr8M="
             )
             .add(
                 "*.neqabty.com",
-                "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
+                "sha256/8Rw90Ej3Ttt8RRkrgbjP/UXPtaY8="
             ).build()
 
-            okHttpClient.certificatePinner(certificatePinner)
+//            okHttpClient.certificatePinner(certificatePinner)
         }
         return okHttpClient.build()
     }

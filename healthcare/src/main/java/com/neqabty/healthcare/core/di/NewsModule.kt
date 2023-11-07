@@ -60,7 +60,7 @@ class NewsModule {
                     "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
                 ).build()
 
-            okHttpClient.certificatePinner(certificatePinner)
+//            okHttpClient.certificatePinner(certificatePinner)
         }
         return okHttpClient.build()
     }
