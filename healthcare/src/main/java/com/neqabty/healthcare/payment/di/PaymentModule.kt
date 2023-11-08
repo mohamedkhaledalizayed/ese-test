@@ -16,7 +16,7 @@ import javax.inject.Named
 abstract class PaymentModule {
     companion object {
         @Provides
-        fun providesPaymentApiService(@Named("mega")retrofit: Retrofit) = retrofit.create(PaymentApi::class.java)
+        fun providesPaymentApiService(@Named("healthcare")retrofit: Retrofit) = retrofit.create(PaymentApi::class.java)
     }
     @Binds
     internal abstract fun bindsPaymentRepository(paymentRepositoryImpl: PaymentRepositoryImpl): PaymentRepository

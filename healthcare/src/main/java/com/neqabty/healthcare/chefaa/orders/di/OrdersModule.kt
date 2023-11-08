@@ -18,7 +18,7 @@ abstract class OrdersModule {
     companion object {
         @Provides
         fun providesOrdersApiService(
-            @Named("chefaa") retrofit: Retrofit
+            @Named("healthcare") retrofit: Retrofit
         ) = retrofit.create(OrdersApi::class.java)
     }
 

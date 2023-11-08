@@ -18,7 +18,7 @@ abstract class ForgetPasswordModule {
     companion object {
         @Provides
         fun providesForgetPasswordApiService(
-            @Named("mega")
+            @Named("healthcare")
             retrofit: Retrofit
         ) = retrofit.create(ForgetPasswordApi::class.java)
     }

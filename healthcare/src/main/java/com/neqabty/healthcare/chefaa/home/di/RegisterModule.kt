@@ -19,7 +19,7 @@ abstract class RegisterModule {
     companion object {
         @Provides
         fun providesRegisterApiService(
-            @Named("chefaa") retrofit: Retrofit
+            @Named("healthcare") retrofit: Retrofit
         ) = retrofit.create(RegisterApi::class.java)
     }
     @Binds

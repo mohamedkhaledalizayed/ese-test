@@ -17,7 +17,7 @@ abstract class HomeModule {
     companion object {
         @Provides
         fun providesSignupApiService(
-            @Named("mega")
+            @Named("healthcare")
             retrofit: Retrofit
         ) = retrofit.create(SignupApi::class.java)
     }

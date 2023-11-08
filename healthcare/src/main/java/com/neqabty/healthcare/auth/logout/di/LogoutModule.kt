@@ -17,7 +17,7 @@ abstract class LogoutModule {
     companion object {
         @Provides
         fun providesLogoutApiService(
-            @Named("mega")
+            @Named("healthcare")
             retrofit: Retrofit
         ) = retrofit.create(LogoutApi::class.java)
     }

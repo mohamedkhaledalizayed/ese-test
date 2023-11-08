@@ -16,7 +16,7 @@ import javax.inject.Named
 abstract class VerifyPhoneModule {
     companion object {
         @Provides
-        fun providesCheckAccountApi(@Named("mega")retrofit: Retrofit) = retrofit.create(CheckAccountApi::class.java)
+        fun providesCheckAccountApi(@Named("healthcare")retrofit: Retrofit) = retrofit.create(CheckAccountApi::class.java)
     }
     @Binds
     internal abstract fun bindsCheckAccountRepository(verifyPhoneRepositoryImpl: CheckAccountRepositoryImpl): CheckAccountRepository

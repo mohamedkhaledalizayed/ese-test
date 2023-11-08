@@ -18,7 +18,7 @@ import javax.inject.Named
 abstract class VerifyPhoneModule {
     companion object {
         @Provides
-        fun providesVerifyPhoneApi(@Named("otp")retrofit: Retrofit) = retrofit.create(
+        fun providesVerifyPhoneApi(@Named("healthcare")retrofit: Retrofit) = retrofit.create(
             VerifyPhoneApi::class.java)
     }
     @Binds

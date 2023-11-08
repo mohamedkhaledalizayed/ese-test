@@ -18,7 +18,7 @@ abstract class LoginModule {
     companion object {
         @Provides
         fun providesAuthApiService(
-            @Named("mega")
+            @Named("healthcare")
             retrofit: Retrofit
         ) = retrofit.create(AuthApi::class.java)
     }

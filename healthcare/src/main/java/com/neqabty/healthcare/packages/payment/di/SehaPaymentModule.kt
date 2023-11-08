@@ -16,7 +16,7 @@ import javax.inject.Named
 abstract class SehaPaymentModule {
     companion object {
         @Provides
-        fun providesPaymentApiService(@Named("mega")retrofit: Retrofit) = retrofit.create(
+        fun providesPaymentApiService(@Named("healthcare")retrofit: Retrofit) = retrofit.create(
             PaymentApi::class.java)
     }
     @Binds

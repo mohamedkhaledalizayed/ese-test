@@ -18,7 +18,7 @@ abstract class InvoicesModule {
     companion object {
         @Provides
         fun providesInvoicesApi(
-            @Named("mega")
+            @Named("healthcare")
             retrofit: Retrofit
         ) = retrofit.create(InvoicesApi::class.java)
     }

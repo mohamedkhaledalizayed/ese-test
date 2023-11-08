@@ -17,7 +17,7 @@ abstract class AdsModule {
     companion object {
         @Provides
         fun providesAdsApi(
-            @Named("mega")
+            @Named("healthcare")
             retrofit: Retrofit
         ) = retrofit.create(AdsApi::class.java)
     }

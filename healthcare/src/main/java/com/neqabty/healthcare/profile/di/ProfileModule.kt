@@ -18,7 +18,7 @@ import javax.inject.Named
 abstract class ProfileModule {
     companion object {
         @Provides
-        fun providesProfileApi(@Named("mega")retrofit: Retrofit) = retrofit.create(ProfileApi::class.java)
+        fun providesProfileApi(@Named("healthcare")retrofit: Retrofit) = retrofit.create(ProfileApi::class.java)
     }
     @Binds
     internal abstract fun bindsProfileRepository(profileRepositoryImpl: ProfileRepositoryImpl): ProfileRepository

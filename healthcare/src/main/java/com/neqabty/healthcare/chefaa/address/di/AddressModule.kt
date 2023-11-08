@@ -17,7 +17,7 @@ abstract class AddressModule {
     companion object {
         @Provides
         fun providesAddressApiService(
-            @Named("chefaa") retrofit: Retrofit
+            @Named("healthcare") retrofit: Retrofit
         ) = retrofit.create(AddressApi::class.java)
     }
     @Binds

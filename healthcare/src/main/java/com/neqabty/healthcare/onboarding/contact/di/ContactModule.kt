@@ -17,7 +17,7 @@ import javax.inject.Named
 abstract class ContactModule {
     companion object {
         @Provides
-        fun providesContactApiService(@Named("mega")retrofit: Retrofit) = retrofit.create(
+        fun providesContactApiService(@Named("healthcare")retrofit: Retrofit) = retrofit.create(
             ContactApi::class.java)
     }
     @Binds

@@ -17,7 +17,7 @@ import javax.inject.Named
 abstract class HomeModule {
     companion object {
         @Provides
-        fun providesNewsApiService(@Named("newsModule")retrofit: Retrofit) = retrofit.create(NewsApi::class.java)
+        fun providesNewsApiService(@Named("healthcare")retrofit: Retrofit) = retrofit.create(NewsApi::class.java)
     }
     @Binds
     internal abstract fun bindsCoursesRepository(newsRepositoryImpl: NewsRepositoryImpl): NewsRepository

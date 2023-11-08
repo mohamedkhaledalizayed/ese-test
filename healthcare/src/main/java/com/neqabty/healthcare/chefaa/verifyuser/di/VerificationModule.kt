@@ -19,7 +19,7 @@ abstract class VerificationModule {
     companion object {
         @Provides
         fun providesVerifyApiService(
-            @Named("chefaa") retrofit: Retrofit
+            @Named("healthcare") retrofit: Retrofit
         ) = retrofit.create(VerifyApi::class.java)
     }
 

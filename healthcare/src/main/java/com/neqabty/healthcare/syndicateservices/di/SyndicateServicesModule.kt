@@ -17,7 +17,7 @@ abstract class SyndicateServicesModule {
     companion object {
         @Provides
         fun providesSyndicateServicesApi(
-            @Named("mega")
+            @Named("healthcare")
             retrofit: Retrofit
         ) = retrofit.create(SyndicateServicesApi::class.java)
     }

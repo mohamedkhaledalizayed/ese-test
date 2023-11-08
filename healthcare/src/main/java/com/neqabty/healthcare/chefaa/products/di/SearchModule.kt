@@ -19,7 +19,7 @@ abstract class SearchModule {
     companion object {
         @Provides
         fun providesSearchApiService(
-            @Named("chefaa") retrofit: Retrofit
+            @Named("healthcare") retrofit: Retrofit
         ) = retrofit.create(SearchApi::class.java)
     }
 
