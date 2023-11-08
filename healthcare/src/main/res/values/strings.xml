@@ -130,7 +130,6 @@
     <string name="image_uploaded">تم تحميل الصورة بنجاح.</string>
     <string name="share">مشاركة</string>
     <string name="print">طباعة</string>
-    <string name="api_key">AIzaSyBOZv4riqvG1mthHKFZ5jUkdvLMzin4Bns</string>
     <string name="packa">باقاتى</string>
     <string name="telephone">التليفون</string>
     <string name="our_location">موقعنا علي الخريطة</string>
@@ -338,8 +337,6 @@
     <!--    <string name="please_wait">من فضلك انتظر</string>-->
     <!--    <string name="order_status">حالة الطلب</string>-->
     <string name="order_by_note">الطلب بالكتابة</string>
-    <string name="facebook_app_id">2276751609173055</string>
-    <string name="facebook_client_token">6ca398d94761e4f93afefb0ce6e88a90</string>
     <!--    <string name="select">اكمل بإستخدام..</string>-->
     <string name="select_file">اختار صورة</string>
     <string name="add_to_cart">أضف الى العربة</string>

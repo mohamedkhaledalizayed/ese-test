@@ -12,6 +12,13 @@ if (getGradle().getStartParameter().getTaskRequests().toString().contains("Hms")
     apply plugin: 'com.google.firebase.crashlytics'
 }
 
+
+def secretProperties = new Properties()
+def secretPropertiesFile = rootProject.file('local.properties')
+if (secretPropertiesFile.exists()) {
+    secretProperties.load(new FileInputStream(secretPropertiesFile))
+}
+
 android {
     compileSdk 33
 
@@ -34,21 +41,17 @@ android {
         versionName "10.6"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue "string", "MAPS_API_KEY", secretProperties['maps_api_key']
+        resValue "string", "facebookAppId", secretProperties['facebook_app_id']
+        resValue "string", "facebookAppToken", secretProperties['facebook_client_token']
+//        manifestPlaceholders = [facebookAppToken:secretProperties['facebook_client_token']]
+
     }
 
     buildTypes {
         debug {
             debuggable = true
-//            minifyEnabled true
-//            shrinkResources true
-//            zipAlignEnabled true
-//            testCoverageEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//
-//            debuggable = false
-//            jniDebuggable false
-//            renderscriptDebuggable false
-//            pseudoLocalesEnabled false
         }
         release {
             minifyEnabled true
