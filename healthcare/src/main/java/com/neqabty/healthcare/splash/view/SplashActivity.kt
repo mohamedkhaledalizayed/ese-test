@@ -34,7 +34,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        if (DeviceUtils().isDeviceRooted() && !BuildConfig.DEBUG)
+        if (DeviceUtils().isDeviceRooted(this))
             showAlertDialogAndExitApp(getString(R.string.rooted))
         else
             splashViewModel.appConfig()

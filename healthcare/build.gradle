@@ -51,6 +51,8 @@ android {
 //            pseudoLocalesEnabled false
         }
         release {
+            minifyEnabled true
+            shrinkResources true
             zipAlignEnabled true
             testCoverageEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
