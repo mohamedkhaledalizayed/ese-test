@@ -25,7 +25,7 @@ class NetworkModule {
     @Provides
     @Named("healthcare")
     fun providesBaseUrl(): String {
-        return Constants.BASE_URL_Main
+        return BuildConfig.URL
     }
 
     @Provides

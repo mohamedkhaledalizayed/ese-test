@@ -13,18 +13,9 @@ object Constants {
 
     const val forTesting = false
 
-    //TODO move this to gradle
-    //Base url
-    private const val BASE_URL_Main_DEV = "https://dev-community.neqabty.com/"
-    private const val BASE_URL_Main_STAGING = "https://staging-community.neqabty.com/"
-    private const val BASE_URL_Main_PRO = "https://community.neqabty.com/"
-
     //Retirement
     const val BASE_URL_RETIREMENT = "https://edupen.neqabty.com/api/"
 
-    const val BASE_URL_Main = BASE_URL_Main_PRO
-    //true for testing false for production
-    const val SANDBOX = false
 
     var isFirebaseTokenUpdated: MutableLiveData<String> = MutableLiveData("")
 

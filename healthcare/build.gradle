@@ -69,15 +69,20 @@ android {
     flavorDimensions "mode", "services"
 
     productFlavors {
-        tst {
+        dev {
             dimension "mode"
-//            minSdkVersion 21
-//            resConfigs "en", "hdpi"
-//            buildConfigField "String", "URL", '"http://3.131.229.146:44392"'
+            buildConfigField "String", "URL", '"https://dev-community.neqabty.com/"'
+            buildConfigField "Boolean", "SANDBOX", 'true'
+        }
+        staging {
+            dimension "mode"
+            buildConfigField "String", "URL", '"https://staging-community.neqabty.com/"'
+            buildConfigField "Boolean", "SANDBOX", 'true'
         }
         prod {
             dimension "mode"
-//            buildConfigField "String", "URL", '"front.neqabty.com"'
+            buildConfigField "String", "URL", '"https://community.neqabty.com/"'
+            buildConfigField "Boolean", "SANDBOX", 'false'
         }
 
         gms {

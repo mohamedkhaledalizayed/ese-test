@@ -9,9 +9,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
-import com.neqabty.healthcare.core.data.Constants.SANDBOX
 import com.neqabty.healthcare.core.data.Constants.listOfFollowers
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySehaPaymentBinding
@@ -181,7 +181,7 @@ class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Call
     var referenceCode = ""
     private fun oPayPayment(paymentEntity: SehaPaymentResponse) {
         referenceCode = paymentEntity.reference ?: ""
-        PaymentTask.sandBox = SANDBOX
+        PaymentTask.sandBox = BuildConfig.SANDBOX
         val payInput = PayInput(
             publickey = paymentEntity.public_key ?: "",
             merchantId = paymentEntity.merchant_id ?: "",

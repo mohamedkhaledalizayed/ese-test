@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.core.data.Constants
@@ -315,7 +316,7 @@ class PaymentMethodsActivity : BaseActivity<ActivityPaymentMethodsBinding>(), Ca
 
     private fun oPayPayment(paymentEntity: PaymentEntity) {
         referenceCode = paymentEntity.id
-        PaymentTask.sandBox = Constants.SANDBOX
+        PaymentTask.sandBox = BuildConfig.SANDBOX
         val payInput = PayInput(
             publickey = paymentEntity.publicKey,
             merchantId = paymentEntity.merchantId,
