@@ -5,25 +5,22 @@ import com.neqabty.healthcare.medicalnetwork.data.model.area.AreaListModel
 import com.neqabty.healthcare.medicalnetwork.data.model.filter.FiltersListModel
 import com.neqabty.healthcare.medicalnetwork.data.model.search.ProvidersModel
 import com.neqabty.healthcare.medicalnetwork.data.model.search.ProvidersResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface SearchApi {
 
     @GET("healthcare/api/v1/medicalProviders/{id}")
-    suspend fun getMedicalProviderDetails(@Path("id") id: String): Response<ProvidersModel>
+    suspend fun getMedicalProviderDetails(@Header("Authorization") token: String, @Path("id") id: String): Response<ProvidersModel>
 
     @GET("healthcare/api/v1/medicalProviders")
-    suspend fun getMedicalProviders(): Response<MedicalProvidersResponse>
+    suspend fun getMedicalProviders(@Header("Authorization") token: String): Response<MedicalProvidersResponse>
 
     @POST("healthcare/api/v1/medicalProviders/search")
-    suspend fun searchMedicalProviders(@Body body: SearchBody): ProvidersResponse
+    suspend fun searchMedicalProviders(@Header("Authorization") token: String, @Body body: SearchBody): ProvidersResponse
 
     @GET("healthcare/api/v1/medicalProviders/getLockups")
-    suspend fun getFilters(): FiltersListModel
+    suspend fun getFilters(@Header("Authorization") token: String): FiltersListModel
 
     @POST("healthcare/api/v1/medicalProviders/getAreasByGov")
-    suspend fun getAreasByGov(@Body body: AreaBody): AreaListModel
+    suspend fun getAreasByGov(@Header("Authorization") token: String, @Body body: AreaBody): AreaListModel
 }

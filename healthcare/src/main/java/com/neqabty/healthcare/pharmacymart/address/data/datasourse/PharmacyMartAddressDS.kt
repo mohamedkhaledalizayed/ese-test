@@ -16,7 +16,7 @@ class PharmacyMartAddressDS @Inject constructor(private val addressApi: Pharmacy
                                                 private val sharedPreferencesHelper: PreferencesHelper) {
 
     suspend fun getAddresses(): PharmacyMartAddressesModel {
-        return addressApi.getAddresses(GetAddressesBody(sharedPreferencesHelper.mobile))
+        return addressApi.getAddresses(token = sharedPreferencesHelper.token, GetAddressesBody(sharedPreferencesHelper.mobile))
     }
 
     suspend fun addAddress(
@@ -24,6 +24,7 @@ class PharmacyMartAddressDS @Inject constructor(private val addressApi: Pharmacy
         long: String, phone: String, streetName: String, title: String
     ): Boolean {
         return addressApi.addAddress(
+            token = sharedPreferencesHelper.token,
             AddAddressBody(
                 apartment = apartment,
                 buildingNo = buildingNo,
@@ -39,6 +40,6 @@ class PharmacyMartAddressDS @Inject constructor(private val addressApi: Pharmacy
     }
 
     suspend fun deleteAddress(addressId: String): DeleteAddressModel {
-        return addressApi.deleteAddress(DeleteAddressBody(addressId = addressId))
+        return addressApi.deleteAddress(token = sharedPreferencesHelper.token, DeleteAddressBody(addressId = addressId))
     }
 }

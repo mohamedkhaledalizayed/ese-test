@@ -8,6 +8,7 @@ import com.neqabty.healthcare.pharmacymart.orders.data.model.confirmorder.Confir
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderdetails.OrderDetailsModel
 import com.neqabty.healthcare.pharmacymart.orders.data.model.orderslist.OrdersListModel
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 
@@ -15,20 +16,21 @@ interface PharmacyMartOrdersApi {
 
     @POST("healthcare/api/v1/pharmacy/orders")
     suspend fun getOrdersList(
+        @Header("Authorization") token: String,
         @Body orderListRequestBody: OrderListRequestBody
     ): OrdersListModel
 
     @POST("healthcare/api/v1/pharmacy/orders")
-    suspend fun getOrder(@Body orderRequestBody: OrderRequestBody): OrderDetailsModel
+    suspend fun getOrder(@Header("Authorization") token: String, @Body orderRequestBody: OrderRequestBody): OrderDetailsModel
 
 
     @POST("healthcare/api/v1/pharmacy/add-order")
-    suspend fun placeOrder(@Body placeOrderBody: AddOrderBody): AddOrderModel
+    suspend fun placeOrder(@Header("Authorization") token: String, @Body placeOrderBody: AddOrderBody): AddOrderModel
 
     @POST("healthcare/api/v1/pharmacy/cancel-order")
-    suspend fun cancelOrder(@Body cancelOrderBody: CancelOrderBody): CancelOrderModel
+    suspend fun cancelOrder(@Header("Authorization") token: String, @Body cancelOrderBody: CancelOrderBody): CancelOrderModel
 
     @POST("healthcare/api/v1/pharmacy/confirm-order")
-    suspend fun confirmOrder(@Body confirmOrderBody: ConfirmOrderBody): ConfirmOrderModel
+    suspend fun confirmOrder(@Header("Authorization") token: String, @Body confirmOrderBody: ConfirmOrderBody): ConfirmOrderModel
 
 }

@@ -11,7 +11,9 @@ class RegisterDS @Inject constructor(private val registerApi: PharmacyMartRegist
                                      private val sharedPreferencesHelper: PreferencesHelper) {
 
     suspend fun registerUser(): RegisterModel {
-        return registerApi.register(mobile = sharedPreferencesHelper.mobile,
+        return registerApi.register(
+            token = sharedPreferencesHelper.token,
+            mobile = sharedPreferencesHelper.mobile,
             name = sharedPreferencesHelper.name,
             entityCode = sharedPreferencesHelper.code)
     }

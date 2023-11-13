@@ -4,6 +4,7 @@ import com.neqabty.healthcare.chefaa.ChefaaResponse
 import com.neqabty.healthcare.chefaa.orders.data.model.*
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 
@@ -12,6 +13,7 @@ interface RegisterApi {
     @FormUrlEncoded
     @POST("healthcare/api/v1/chefaa/register")
     suspend fun register(
+        @Header("Authorization") token: String,
         @Field("mobile") mobile: String,
         @Field("user_number") userId: String,
         @Field("country_code") countryCode: String,

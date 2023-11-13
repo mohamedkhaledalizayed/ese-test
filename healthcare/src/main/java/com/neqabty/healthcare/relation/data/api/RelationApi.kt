@@ -7,6 +7,5 @@ import retrofit2.http.*
 interface RelationApi {
 
     @GET("healthcare/api/v1/general-Lockups")
-    suspend fun getRelations(): RelationsTypesModel
-
+    suspend fun getRelations(@Header("Authorization") token: String): RelationsTypesModel
 }

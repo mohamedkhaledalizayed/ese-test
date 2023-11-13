@@ -17,11 +17,13 @@ class PharmacyMartOrdersDS @Inject constructor(
 ) {
 
     suspend fun getOrderList(): OrdersListModel {
-        return ordersApi.getOrdersList(OrderListRequestBody(userNumber = preferencesHelper.mobile))
+        return ordersApi.getOrdersList(token = preferencesHelper.token, OrderListRequestBody(userNumber = preferencesHelper.mobile))
     }
 
     suspend fun getOrder(orderId: String): OrderDetailsModel {
-        return ordersApi.getOrder(orderRequestBody = OrderRequestBody
+        return ordersApi.getOrder(
+            token = preferencesHelper.token,
+            orderRequestBody = OrderRequestBody
             (userNumber = preferencesHelper.mobile,
             orderId = orderId))
     }
@@ -45,11 +47,12 @@ class PharmacyMartOrdersDS @Inject constructor(
             currentLocation = currentLocation,
             deviceInfo = deviceInfo
         )
-        return ordersApi.placeOrder(body)
+        return ordersApi.placeOrder(token = preferencesHelper.token, body)
     }
 
     suspend fun cancelOrder(orderId: String, cancellationReason: String): CancelOrderModel {
         return ordersApi.cancelOrder(
+            token = preferencesHelper.token,
             cancelOrderBody = CancelOrderBody(
                 mobile = preferencesHelper.mobile,
                 order_id = orderId,
@@ -60,6 +63,7 @@ class PharmacyMartOrdersDS @Inject constructor(
 
     suspend fun confirmOrder(orderId: String): ConfirmOrderModel {
         return ordersApi.confirmOrder(
+            token = preferencesHelper.token,
             confirmOrderBody = ConfirmOrderBody(
                 mobile = preferencesHelper.mobile,
                 order_id = orderId

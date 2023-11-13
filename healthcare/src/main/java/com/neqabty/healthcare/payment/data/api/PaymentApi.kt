@@ -13,7 +13,7 @@ import retrofit2.http.*
 interface PaymentApi {
 
     @GET("api/services/")
-    suspend fun getServices(@Query("filter{entity.code}") entity: String): ServicesListModel
+    suspend fun getServices(@Header("Authorization") token: String, @Query("filter{entity.code}") entity: String): ServicesListModel
 
     @GET("api/service_actions/")
     suspend fun getServiceActions(@Query("filter{service.code}") service: String,
@@ -33,7 +33,7 @@ interface PaymentApi {
     suspend fun getPaymentStatus(@Header("Authorization") token: String, @Query("transactionId") transaction_id: String): PaymentStatusModel
 
     @GET("api/entity_branches")
-    suspend fun getBranches(@Query("special-format") platform: String = "android",
+    suspend fun getBranches(@Header("Authorization") token: String, @Query("special-format") platform: String = "android",
                             @Query("filter{entity.code}") code: String): BranchesListModel
 
 }

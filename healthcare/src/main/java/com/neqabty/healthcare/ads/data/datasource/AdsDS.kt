@@ -9,7 +9,7 @@ import javax.inject.Inject
 class AdsDS @Inject constructor(private val adsApi: AdsApi, private val preferencesHelper: PreferencesHelper) {
 
     suspend fun getAllAds(): List<Ad> {
-        return adsApi.getAllAds().ads
+        return adsApi.getAllAds(token = preferencesHelper.token).ads
     }
 
 }

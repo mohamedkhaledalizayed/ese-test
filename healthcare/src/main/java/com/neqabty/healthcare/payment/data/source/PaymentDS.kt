@@ -14,7 +14,7 @@ import javax.inject.Inject
 class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private val sharedPreferences: PreferencesHelper) {
 
     suspend fun getServices(): List<ServiceModel> {
-        return paymentApi.getServices(sharedPreferences.code).services
+        return paymentApi.getServices(token = sharedPreferences.token, sharedPreferences.code).services
     }
 
     suspend fun getServiceActions(code: String): List<ServiceAction> {
@@ -34,7 +34,7 @@ class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private 
     }
 
     suspend fun getBranches(): List<EntityBranche> {
-        return paymentApi.getBranches(code = sharedPreferences.code).data.entityBranches
+        return paymentApi.getBranches(token = sharedPreferences.token, code = sharedPreferences.code).data.entityBranches
     }
 
 }
