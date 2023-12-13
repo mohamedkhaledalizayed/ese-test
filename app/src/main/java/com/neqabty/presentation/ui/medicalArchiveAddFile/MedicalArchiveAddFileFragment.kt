@@ -96,7 +96,7 @@ class MedicalArchiveAddFileFragment : BaseFragment() {
     }
 
     private fun handleViewState(state: MedicalArchiveAddFileViewState) {
-        sharedPref.user = "94"
+//        sharedPref.user = "94"
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
         if (state.archiveUploadAcknowledgementUI != null) {

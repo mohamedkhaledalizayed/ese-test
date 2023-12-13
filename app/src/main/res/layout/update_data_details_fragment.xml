@@ -29,7 +29,7 @@
                 android:background="@drawable/rounded_bg"
                 android:padding="@dimen/margin_horizontal_normal"
                 android:scrollbars="none"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

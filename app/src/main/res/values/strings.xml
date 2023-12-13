@@ -204,7 +204,7 @@
     <string name="medical_procedures_inquiry_title">استعلام خدمة طبية</string>
     <string name="committees_title">اللجان</string>
     <string name="refund_title">طلبات الاسترداد</string>
-    <string name="new_refund_request_title">تقديم طلب استرداد</string>
+    <string name="new_refund_request_title">صحة مستندات طلبات الإسترداد</string>
     <string name="inquire_refund_request_title">استعلام عن طلب استرداد</string>
     <string name="inquire_medical_subvention_request_title">استعلام عن طلب اعانة مرضية</string>
     <string name="buy_medical_service_title">شراء خدمة طبية</string>

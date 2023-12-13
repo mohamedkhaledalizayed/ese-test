@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -90,7 +91,8 @@ class UpdateDataDetailsFragment : BaseFragment() {
                 dialog?.dismiss()
             }, message = error?.message)
         })
-        updateDataDetailsViewModel.inquireUpdateUserData(sharedPref.user)
+//        updateDataDetailsViewModel.inquireUpdateUserData(sharedPref.user)
+        initializeViews()
     }
 
     private fun handleViewState(state: UpdateDataDetailsViewState) {
@@ -155,8 +157,13 @@ class UpdateDataDetailsFragment : BaseFragment() {
 //        }
 //
         bUpdate.setOnClickListener {
+            binding.tvName.text = Html.fromHtml(getString(R.string.name_title,sharedPref.name))
+            binding.tvMemberNumber.text =  Html.fromHtml(getString(R.string.user_number_title,sharedPref.user))
+            binding.edMobileNumber.setText(sharedPref.mobile)
+            return@setOnClickListener
             submitRequest()
         }
+
     }
 
     fun submitRequest() {

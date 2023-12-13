@@ -55,7 +55,7 @@ class UpdateDataDetailsViewModel @Inject constructor(
         doc2: File?,
         doc3: File?
     ) {
-        viewState.value = viewState.value?.copy(isLoading = true)
+        viewState.value = viewState.value?.copy(isLoading = false)
         addDisposable(updateUserData.updateUserData(userNumber, fullName, nationalID, mobile, docsNumber, doc1, doc2, doc3)
                 .map {
                     it.let {

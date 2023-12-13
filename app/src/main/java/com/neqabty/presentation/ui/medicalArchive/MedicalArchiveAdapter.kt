@@ -37,7 +37,7 @@ class MedicalArchiveAdapter(
                         false,
                         dataBindingComponent
                 )
-        binding.root.setOnClickListener {
+        binding.bDownload.setOnClickListener {
             binding.item?.let {
                 callback?.invoke(it)
             }
